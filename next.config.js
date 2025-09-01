@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Railway optimizations
+  output: 'standalone',
   experimental: {
     appDir: true,
   },
