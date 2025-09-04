@@ -30,7 +30,7 @@ const NewsletterSignup = () => {
   ]
 
   return (
-    <section className="py-20 bg-gradient-to-br from-smiely-mango/10 via-smiely-strawberry/10 to-smiely-yuzu/10">
+    <section className="py-20 bg-gradient-to-br from-smiely-mango/15 via-smiely-strawberry/15 to-smiely-yuzu/15">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -51,9 +51,9 @@ const NewsletterSignup = () => {
               <span className="text-6xl">📧</span>
             </motion.div>
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Stay <span className="bg-gradient-to-r from-smiely-mango to-smiely-strawberry bg-clip-text text-transparent">Smiley</span> with Us!
+              Stay <span className="text-sunset">Smiley</span> with Us!
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-700 max-w-2xl mx-auto">
               Join our community and be the first to discover new flavors, exclusive offers, 
               and oral care tips that will make you smile!
             </p>

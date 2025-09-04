@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Star, Shield, Zap } from 'lucide-react'
 
@@ -19,7 +20,7 @@ const Hero = () => {
   ]
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-white via-blue-50 to-purple-50 pt-16">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-smiely-mango/10 via-smiely-strawberry/10 to-smiely-yuzu/10 pt-16">
       {/* Floating Fruit Background */}
       {floatingFruits.map((fruit, index) => (
         <motion.div
@@ -58,7 +59,7 @@ const Hero = () => {
             >
               <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
                 Make Brushing{' '}
-                <span className="bg-gradient-to-r from-smiely-mango to-smiely-strawberry bg-clip-text text-transparent">
+                <span className="text-rainbow">
                   Fun Again!
                 </span>
               </h1>
@@ -81,7 +82,7 @@ const Hero = () => {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.6 + index * 0.1, duration: 0.5 }}
-                  className="flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm"
+                  className="flex items-center space-x-2 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-md"
                 >
                   <feature.icon className={`w-5 h-5 ${feature.color}`} />
                   <span className="text-sm font-medium text-gray-700">{feature.text}</span>
@@ -89,21 +90,25 @@ const Hero = () => {
               ))}
             </motion.div>
 
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-            >
-              <Button size="xl" variant="smiley" className="group">
-                Shop Now
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button size="xl" variant="smileyOutline">
-                Learn More
-              </Button>
-            </motion.div>
+                         {/* CTA Buttons */}
+             <motion.div
+               initial={{ opacity: 0, y: 20 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ delay: 0.6, duration: 0.8 }}
+               className="flex flex-col sm:flex-row gap-4 justify-center"
+             >
+               <Link href="/shop">
+                 <Button size="xl" variant="smiley" className="group">
+                   Shop Now
+                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                 </Button>
+               </Link>
+               <Link href="/about">
+                 <Button size="xl" variant="smileyOutline">
+                   Learn More
+                 </Button>
+               </Link>
+             </motion.div>
           </motion.div>
 
           {/* Right Content - Animated Toothpaste */}

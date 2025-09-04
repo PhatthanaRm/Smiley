@@ -65,7 +65,7 @@ const Footer = () => {
                 <div className="w-10 h-10 bg-gradient-to-br from-smiely-mango to-smiely-strawberry rounded-full flex items-center justify-center">
                   <span className="text-white text-xl font-bold">😊</span>
                 </div>
-                <span className="text-2xl font-bold bg-gradient-to-r from-smiely-mango to-smiely-strawberry bg-clip-text text-transparent">
+                <span className="text-2xl font-bold text-rainbow">
                   SMILEY
                 </span>
               </Link>

@@ -19,9 +19,9 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         // SMILEY brand variants
-        smiley: "bg-gradient-to-r from-smiely-mango to-smiely-strawberry text-white hover:shadow-lg hover:scale-105",
+        smiley: "bg-gradient-to-r from-smiely-mango to-smiely-strawberry text-white hover:shadow-lg hover:scale-105 !text-white",
         smileyOutline: "bg-white text-smiely-mango border-2 border-smiely-mango hover:bg-smiely-mango hover:text-white",
-        smileyAccent: "bg-smiely-yuzu text-white hover:bg-smiely-yuzu/90 hover:scale-105",
+        smileyAccent: "bg-smiely-yuzu text-white hover:bg-smiely-yuzu/90 hover:scale-105 !text-white",
       },
       size: {
         default: "h-10 px-4 py-2",

@@ -58,7 +58,7 @@
   }
 }
 
-/* Custom SMILEY brand styles */
+/* Custom SMILEY brand styles - Enhanced colorful theme */
 @layer components {
   .btn-primary {
     @apply bg-gradient-to-r from-smiely-mango to-smiely-strawberry text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105;
@@ -74,6 +74,53 @@
   
   .floating-animation {
     animation: float 6s ease-in-out infinite;
+  }
+
+  /* Enhanced colorful backgrounds - More subtle and formal */
+  .bg-rainbow-gradient {
+    background: linear-gradient(135deg, #FF8C42, #FF6B9D, #FFD700, #00D4AA, #4A90E2, #B19CD9);
+  }
+
+  .bg-sunset-gradient {
+    background: linear-gradient(135deg, #FF8C42, #FF6B9D, #FFD700);
+  }
+
+  .bg-ocean-gradient {
+    background: linear-gradient(135deg, #00D4AA, #4A90E2, #B19CD9);
+  }
+
+  .bg-tropical-gradient {
+    background: linear-gradient(135deg, #FF8C42, #32CD32, #00FFFF);
+  }
+
+  /* Colorful text gradients - More subtle and formal */
+  .text-rainbow {
+    background: linear-gradient(135deg, #FF8C42, #FF6B9D, #FFD700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-sunset {
+    background: linear-gradient(135deg, #FF8C42, #FF6B9D, #FFD700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Enhanced colorful shadows - More subtle and formal */
+  .shadow-rainbow {
+    box-shadow: 0 10px 25px rgba(255, 140, 66, 0.2), 0 0 0 1px rgba(255, 107, 157, 0.1);
+  }
+
+  .shadow-sunset {
+    box-shadow: 0 10px 25px rgba(255, 140, 66, 0.25), 0 0 0 1px rgba(255, 107, 157, 0.15);
+  }
+
+  /* Colorful borders - More subtle and formal */
+  .border-rainbow {
+    border: 2px solid;
+    border-image: linear-gradient(135deg, #FF8C42, #FF6B9D, #FFD700) 1;
   }
 }
 

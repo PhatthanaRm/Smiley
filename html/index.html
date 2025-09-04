@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMILEY - Premium Oral Care Products</title>
+    <meta name="description" content="Discover our playful yet premium oral care products with fruit-inspired flavors. Dentist-approved, fun, and effective for the whole family.">
+    <meta name="keywords" content="oral care, toothpaste, dental hygiene, fruit flavors, premium dental products">
+    <meta name="author" content="SMILEY Team">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="SMILEY - Premium Oral Care Products">
+    <meta property="og:description" content="Discover our playful yet premium oral care products with fruit-inspired flavors.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <span class="logo-emoji">😊</span>
+                    </div>
+                    <span class="logo-text">SMILEY</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="nav-desktop">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="shop.html" class="nav-link">Shop</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="blog.html" class="nav-link">Blog</a>
+                    <a href="faq.html" class="nav-link">FAQ</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </nav>
+
+                <!-- Right side actions -->
+                <div class="header-actions">
+                    <!-- Search -->
+                    <button class="btn-icon" id="searchBtn">
+                        <i data-lucide="search"></i>
+                    </button>
+
+                    <!-- User Account -->
+                    <button class="btn-icon" id="accountBtn">
+                        <i data-lucide="user"></i>
+                    </button>
+
+                    <!-- Theme Toggle -->
+                    <button class="btn-icon" id="themeToggle">
+                        <i data-lucide="sun" class="theme-icon"></i>
+                    </button>
+
+                    <!-- Cart -->
+                    <button class="btn-icon cart-btn" id="cartBtn">
+                        <i data-lucide="shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">3</span>
+                    </button>
+
+                    <!-- Mobile menu button -->
+                    <button class="btn-icon mobile-menu-btn" id="mobileMenuBtn">
+                        <i data-lucide="menu" class="menu-icon"></i>
+                        <i data-lucide="x" class="close-icon hidden"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div class="nav-mobile" id="mobileNav">
+                <div class="nav-mobile-content">
+                    <a href="index.html" class="nav-mobile-link">Home</a>
+                    <a href="shop.html" class="nav-mobile-link">Shop</a>
+                    <a href="about.html" class="nav-mobile-link">About</a>
+                    <a href="blog.html" class="nav-mobile-link">Blog</a>
+                    <a href="faq.html" class="nav-mobile-link">FAQ</a>
+                    <a href="contact.html" class="nav-mobile-link">Contact</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="hero">
+            <!-- Floating Fruit Background -->
+            <div class="floating-fruits">
+                <div class="floating-fruit fruit-1" data-emoji="🥭"></div>
+                <div class="floating-fruit fruit-2" data-emoji="🍓"></div>
+                <div class="floating-fruit fruit-3" data-emoji="🍋"></div>
+                <div class="floating-fruit fruit-4" data-emoji="🫐"></div>
+            </div>
+
+            <div class="container">
+                <div class="hero-content">
+                    <!-- Left Content -->
+                    <div class="hero-left">
+                        <h1 class="hero-title">
+                            Make Brushing <span class="text-rainbow">Fun Again!</span>
+                        </h1>
+                        <p class="hero-description">
+                            Discover our playful yet premium oral care products with fruit-inspired flavors. 
+                            Dentist-approved, fun, and effective for the whole family.
+                        </p>
+
+                        <!-- Features -->
+                        <div class="hero-features">
+                            <div class="feature-item">
+                                <i data-lucide="star" class="feature-icon"></i>
+                                <span>Dentist Approved</span>
+                            </div>
+                            <div class="feature-item">
+                                <i data-lucide="shield" class="feature-icon"></i>
+                                <span>100% Natural</span>
+                            </div>
+                            <div class="feature-item">
+                                <i data-lucide="zap" class="feature-icon"></i>
+                                <span>Long Lasting</span>
+                            </div>
+                        </div>
+
+                        <!-- CTA Buttons -->
+                        <div class="hero-cta">
+                            <a href="shop.html" class="btn btn-primary btn-lg">
+                                Shop Now
+                                <i data-lucide="arrow-right" class="btn-icon"></i>
+                            </a>
+                            <a href="about.html" class="btn btn-secondary btn-lg">
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right Content - Animated Toothpaste -->
+                    <div class="hero-right">
+                        <div class="toothpaste-container">
+                            <!-- Main Toothpaste Tube -->
+                            <div class="toothpaste-tube">
+                                <!-- Cap -->
+                                <div class="tube-cap"></div>
+                                
+                                <!-- Product Label -->
+                                <div class="tube-label">
+                                    <span class="label-text">SMILEY</span>
+                                </div>
+                                
+                                <!-- Flavor Badge -->
+                                <div class="flavor-badge">
+                                    🍓 Strawberry
+                                </div>
+                            </div>
+
+                            <!-- Floating Bubbles -->
+                            <div class="bubbles">
+                                <div class="bubble bubble-1"></div>
+                                <div class="bubble bubble-2"></div>
+                                <div class="bubble bubble-3"></div>
+                                <div class="bubble bubble-4"></div>
+                                <div class="bubble bubble-5"></div>
+                                <div class="bubble bubble-6"></div>
+                            </div>
+
+                            <!-- Success Checkmark -->
+                            <div class="success-checkmark">
+                                <i data-lucide="check"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator">
+                <div class="scroll-mouse">
+                    <div class="scroll-wheel"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products Section -->
+        <section class="featured-products">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Featured Products</h2>
+                    <p class="section-description">Discover our most popular oral care essentials</p>
+                </div>
+
+                <div class="products-grid" id="featuredProducts">
+                    <!-- Products will be loaded here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Brand Story Section -->
+        <section class="brand-story">
+            <div class="container">
+                <div class="brand-story-content">
+                    <div class="brand-story-left">
+                        <h2 class="brand-story-title">Our Story</h2>
+                        <p class="brand-story-text">
+                            At SMILEY, we believe that oral care should be fun, effective, and accessible to everyone. 
+                            Our journey began with a simple idea: what if brushing your teeth could be as enjoyable 
+                            as eating your favorite fruit?
+                        </p>
+                        <p class="brand-story-text">
+                            We've carefully crafted each product with natural ingredients, vibrant flavors, 
+                            and the highest quality standards. Every smile matters, and we're here to make 
+                            yours brighter.
+                        </p>
+                        <a href="about.html" class="btn btn-primary">
+                            Learn More About Us
+                            <i data-lucide="arrow-right" class="btn-icon"></i>
+                        </a>
+                    </div>
+                    <div class="brand-story-right">
+                        <div class="brand-story-image">
+                            <div class="story-emoji">🌟</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Signup Section -->
+        <section class="newsletter-signup">
+            <div class="container">
+                <div class="newsletter-content">
+                    <h2 class="newsletter-title">Stay in the Loop</h2>
+                    <p class="newsletter-description">
+                        Get the latest updates on new flavors, special offers, and oral care tips.
+                    </p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <div class="form-group">
+                            <input type="email" placeholder="Enter your email" class="form-input" required>
+                            <button type="submit" class="btn btn-primary">
+                                Subscribe
+                                <i data-lucide="mail" class="btn-icon"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div class="logo-icon">
+                            <span class="logo-emoji">😊</span>
+                        </div>
+                        <span class="logo-text">SMILEY</span>
+                    </div>
+                    <p class="footer-description">
+                        Making oral care fun, effective, and accessible for everyone.
+                    </p>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-title">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="shipping.html">Shipping</a></li>
+                        <li><a href="returns.html">Returns</a></li>
+                        <li><a href="privacy.html">Privacy</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-title">Connect</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i data-lucide="facebook"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i data-lucide="instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i data-lucide="twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i data-lucide="youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 SMILEY. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- JavaScript -->
+    <script>
+        // Error handling for debugging
+        window.addEventListener('error', function(e) {
+            console.error('JavaScript Error:', e.error);
+            document.body.innerHTML = '<div style="padding: 20px; background: #ffebee; color: #c62828; font-family: Arial, sans-serif;"><h1>JavaScript Error Detected</h1><p>Error: ' + e.message + '</p><p>File: ' + e.filename + '</p><p>Line: ' + e.lineno + '</p><p>Please check the browser console for more details.</p></div>';
+        });
+        
+        // Test if page is loading
+        console.log('SMILEY: Page loading started...');
+    </script>
+    <script src="js/data.js" onerror="console.error('Failed to load data.js')"></script>
+    <script src="js/utils.js" onerror="console.error('Failed to load utils.js')"></script>
+    <script src="js/components.js" onerror="console.error('Failed to load components.js')"></script>
+    <script src="js/main.js" onerror="console.error('Failed to load main.js')"></script>
+    <script>
+        // Test if all scripts loaded
+        window.addEventListener('load', function() {
+            console.log('SMILEY: All scripts loaded');
+            if (typeof window.SMILEY_DATA === 'undefined') {
+                console.error('SMILEY_DATA not found!');
+            } else {
+                console.log('SMILEY_DATA loaded with', window.SMILEY_DATA.PRODUCTS.length, 'products');
+            }
+        });
+    </script>
+</body>
+</html>

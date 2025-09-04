@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/components/theme-provider'
 import { CartProvider } from '@/components/cart-provider'
 import { AuthProvider } from '@/components/auth-provider'
 import { Toaster } from '@/components/ui/toaster'
+import NewsletterPopup from '@/components/newsletter-popup'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -39,6 +40,7 @@ export default function RootLayout({
             <CartProvider>
               {children}
               <Toaster />
+              <NewsletterPopup />
             </CartProvider>
           </AuthProvider>
         </ThemeProvider>

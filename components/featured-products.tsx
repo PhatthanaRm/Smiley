@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Star, ShoppingCart, Heart } from 'lucide-react'
@@ -135,7 +136,7 @@ const FeaturedProducts = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Our <span className="bg-gradient-to-r from-smiely-mango to-smiely-strawberry bg-clip-text text-transparent">Flavorful</span> Collection
+            Our <span className="text-rainbow">Flavorful</span> Collection
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Discover our range of dentist-approved oral care products with delightful fruit-inspired flavors
@@ -175,7 +176,7 @@ const FeaturedProducts = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="group hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-gray-50 to-white overflow-hidden">
+              <Card className="group hover:shadow-xl transition-all duration-300 border border-gray-200 bg-white overflow-hidden">
                 {/* Product Badge */}
                 {product.badge && (
                   <div className="absolute top-4 right-4 z-10">
@@ -262,18 +263,20 @@ const FeaturedProducts = () => {
           ))}
         </div>
 
-        {/* View All Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="text-center mt-12"
-        >
-          <Button variant="smileyOutline" size="xl">
-            View All Products
-          </Button>
-        </motion.div>
+                 {/* View All Button */}
+         <motion.div
+           initial={{ opacity: 0, y: 20 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           transition={{ duration: 0.8, delay: 0.4 }}
+           viewport={{ once: true }}
+           className="text-center mt-12"
+         >
+           <Link href="/shop">
+             <Button variant="smileyOutline" size="xl">
+               View All Products
+             </Button>
+           </Link>
+         </motion.div>
       </div>
     </section>
   )

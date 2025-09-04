@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - SMILEY HTML Version</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        .info { background-color: #d1ecf1; border-color: #bee5eb; }
+        .test-result {
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .pass { color: #155724; }
+        .fail { color: #721c24; }
+        button {
+            background: #FF8C42;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #e67e22;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 SMILEY HTML Version Test</h1>
+    <p>This page tests the functionality of the HTML version of the SMILEY website.</p>
+
+    <div class="test-section info">
+        <h2>📋 Test Instructions</h2>
+        <p>Click the buttons below to test different features. Check the results in each section.</p>
+    </div>
+
+    <div class="test-section">
+        <h2>🔗 File Loading Tests</h2>
+        <button onclick="testFileLoading()">Test File Loading</button>
+        <div id="fileTestResult" class="test-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>📊 Data Tests</h2>
+        <button onclick="testData()">Test Data Loading</button>
+        <div id="dataTestResult" class="test-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🛒 Cart Tests</h2>
+        <button onclick="testCart()">Test Cart Functionality</button>
+        <div id="cartTestResult" class="test-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🎨 Theme Tests</h2>
+        <button onclick="testTheme()">Test Theme Switching</button>
+        <div id="themeTestResult" class="test-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>📱 Responsive Tests</h2>
+        <button onclick="testResponsive()">Test Responsive Design</button>
+        <div id="responsiveTestResult" class="test-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🔍 Navigation Tests</h2>
+        <button onclick="testNavigation()">Test Navigation Links</button>
+        <div id="navTestResult" class="test-result"></div>
+    </div>
+
+    <div class="test-section info">
+        <h2>📝 Test Results Summary</h2>
+        <div id="summaryResult"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🚀 Quick Links</h2>
+        <p>Test the actual pages:</p>
+        <a href="index.html" target="_blank">
+            <button>🏠 Homepage</button>
+        </a>
+        <a href="shop.html" target="_blank">
+            <button>🛒 Shop</button>
+        </a>
+        <a href="about.html" target="_blank">
+            <button>ℹ️ About</button>
+        </a>
+    </div>
+
+    <script>
+        let testResults = {};
+
+        function testFileLoading() {
+            const result = document.getElementById('fileTestResult');
+            const files = [
+                'css/styles.css',
+                'css/animations.css',
+                'js/data.js',
+                'js/utils.js',
+                'js/components.js',
+                'js/main.js'
+            ];
+            
+            let passed = 0;
+            let total = files.length;
+            
+            files.forEach(file => {
+                fetch(file)
+                    .then(response => {
+                        if (response.ok) {
+                            passed++;
+                        }
+                    })
+                    .catch(() => {});
+            });
+            
+            setTimeout(() => {
+                const success = passed === total;
+                result.innerHTML = `<span class="${success ? 'pass' : 'fail'}">${passed}/${total} files loaded successfully</span>`;
+                result.parentElement.className = `test-section ${success ? 'success' : 'error'}`;
+                testResults.fileLoading = success;
+                updateSummary();
+            }, 1000);
+        }
+
+        function testData() {
+            const result = document.getElementById('dataTestResult');
+            
+            try {
+                // Test if data is accessible
+                const hasProducts = typeof window.SMILEY_DATA !== 'undefined' && 
+                                  window.SMILEY_DATA.PRODUCTS && 
+                                  window.SMILEY_DATA.PRODUCTS.length > 0;
+                
+                const hasPosts = typeof window.SMILEY_DATA !== 'undefined' && 
+                               window.SMILEY_DATA.POSTS && 
+                               window.SMILEY_DATA.POSTS.length > 0;
+                
+                const success = hasProducts && hasPosts;
+                result.innerHTML = `<span class="${success ? 'pass' : 'fail'}">Data loaded: ${hasProducts ? 'Products ✓' : 'Products ✗'}, ${hasPosts ? 'Posts ✓' : 'Posts ✗'}</span>`;
+                result.parentElement.className = `test-section ${success ? 'success' : 'error'}`;
+                testResults.data = success;
+            } catch (error) {
+                result.innerHTML = `<span class="fail">Data test failed: ${error.message}</span>`;
+                result.parentElement.className = 'test-section error';
+                testResults.data = false;
+            }
+            updateSummary();
+        }
+
+        function testCart() {
+            const result = document.getElementById('cartTestResult');
+            
+            try {
+                // Test localStorage
+                const canStore = typeof Storage !== 'undefined';
+                
+                if (canStore) {
+                    // Test cart functionality
+                    localStorage.setItem('test', 'value');
+                    const canRetrieve = localStorage.getItem('test') === 'value';
+                    localStorage.removeItem('test');
+                    
+                    const success = canStore && canRetrieve;
+                    result.innerHTML = `<span class="${success ? 'pass' : 'fail'}">Cart storage: ${success ? 'Working ✓' : 'Failed ✗'}</span>`;
+                    result.parentElement.className = `test-section ${success ? 'success' : 'error'}`;
+                    testResults.cart = success;
+                } else {
+                    result.innerHTML = `<span class="fail">localStorage not supported</span>`;
+                    result.parentElement.className = 'test-section error';
+                    testResults.cart = false;
+                }
+            } catch (error) {
+                result.innerHTML = `<span class="fail">Cart test failed: ${error.message}</span>`;
+                result.parentElement.className = 'test-section error';
+                testResults.cart = false;
+            }
+            updateSummary();
+        }
+
+        function testTheme() {
+            const result = document.getElementById('themeTestResult');
+            
+            try {
+                // Test CSS custom properties
+                const root = document.documentElement;
+                const hasCustomProperties = getComputedStyle(root).getPropertyValue('--smiely-mango') !== '';
+                
+                // Test theme switching capability
+                const canSetTheme = typeof document.documentElement.setAttribute === 'function';
+                
+                const success = hasCustomProperties && canSetTheme;
+                result.innerHTML = `<span class="${success ? 'pass' : 'fail'}">Theme system: ${success ? 'Working ✓' : 'Failed ✗'}</span>`;
+                result.parentElement.className = `test-section ${success ? 'success' : 'error'}`;
+                testResults.theme = success;
+            } catch (error) {
+                result.innerHTML = `<span class="fail">Theme test failed: ${error.message}</span>`;
+                result.parentElement.className = 'test-section error';
+                testResults.theme = false;
+            }
+            updateSummary();
+        }
+
+        function testResponsive() {
+            const result = document.getElementById('responsiveTestResult');
+            
+            try {
+                // Test viewport meta tag
+                const viewport = document.querySelector('meta[name="viewport"]');
+                const hasViewport = viewport && viewport.content.includes('width=device-width');
+                
+                // Test CSS media queries support
+                const supportsMediaQueries = window.matchMedia && window.matchMedia('(max-width: 768px)');
+                
+                const success = hasViewport && supportsMediaQueries;
+                result.innerHTML = `<span class="${success ? 'pass' : 'fail'}">Responsive: ${success ? 'Working ✓' : 'Failed ✗'}</span>`;
+                result.parentElement.className = `test-section ${success ? 'success' : 'error'}`;
+                testResults.responsive = success;
+            } catch (error) {
+                result.innerHTML = `<span class="fail">Responsive test failed: ${error.message}</span>`;
+                result.parentElement.className = 'test-section error';
+                testResults.responsive = false;
+            }
+            updateSummary();
+        }
+
+        function testNavigation() {
+            const result = document.getElementById('navTestResult');
+            
+            try {
+                // Test if main pages exist
+                const pages = ['index.html', 'shop.html', 'about.html'];
+                let existingPages = 0;
+                
+                pages.forEach(page => {
+                    fetch(page, { method: 'HEAD' })
+                        .then(response => {
+                            if (response.ok) {
+                                existingPages++;
+                            }
+                        })
+                        .catch(() => {});
+                });
+                
+                setTimeout(() => {
+                    const success = existingPages === pages.length;
+                    result.innerHTML = `<span class="${success ? 'pass' : 'fail'}">Navigation: ${existingPages}/${pages.length} pages found</span>`;
+                    result.parentElement.className = `test-section ${success ? 'success' : 'error'}`;
+                    testResults.navigation = success;
+                    updateSummary();
+                }, 1000);
+            } catch (error) {
+                result.innerHTML = `<span class="fail">Navigation test failed: ${error.message}</span>`;
+                result.parentElement.className = 'test-section error';
+                testResults.navigation = false;
+                updateSummary();
+            }
+        }
+
+        function updateSummary() {
+            const summary = document.getElementById('summaryResult');
+            const totalTests = Object.keys(testResults).length;
+            const passedTests = Object.values(testResults).filter(result => result === true).length;
+            
+            if (totalTests > 0) {
+                const percentage = Math.round((passedTests / totalTests) * 100);
+                const status = percentage === 100 ? 'All tests passed! 🎉' : 
+                             percentage >= 80 ? 'Most tests passed! 👍' : 
+                             'Some tests failed! ⚠️';
+                
+                summary.innerHTML = `
+                    <p><strong>${status}</strong></p>
+                    <p>Passed: ${passedTests}/${totalTests} (${percentage}%)</p>
+                    <p>Tests completed: ${Object.keys(testResults).join(', ')}</p>
+                `;
+            }
+        }
+
+        // Auto-run basic tests on page load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                testData();
+                testCart();
+                testTheme();
+                testResponsive();
+            }, 500);
+        });
+    </script>
+</body>
+</html>

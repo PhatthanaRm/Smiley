@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMILEY - Simple Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #FF8C42, #FF6B9D);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+        }
+        .status {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .success { background: rgba(0, 255, 0, 0.3); }
+        .error { background: rgba(255, 0, 0, 0.3); }
+        button {
+            background: white;
+            color: #FF8C42;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover {
+            background: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">😊</div>
+        <h1>SMILEY</h1>
+        <p>Premium Oral Care Products</p>
+        
+        <div class="status" id="status">
+            <h2>System Status</h2>
+            <p>Checking system...</p>
+        </div>
+        
+        <div>
+            <button onclick="testBasic()">Test Basic Functions</button>
+            <button onclick="loadFullSite()">Load Full Site</button>
+        </div>
+        
+        <div id="results"></div>
+    </div>
+
+    <script>
+        function updateStatus(message, type = 'info') {
+            const status = document.getElementById('status');
+            status.innerHTML = `<h2>System Status</h2><p>${message}</p>`;
+            status.className = `status ${type}`;
+        }
+
+        function addResult(message, type = 'info') {
+            const results = document.getElementById('results');
+            const div = document.createElement('div');
+            div.className = `status ${type}`;
+            div.innerHTML = message;
+            results.appendChild(div);
+        }
+
+        function testBasic() {
+            updateStatus('Running basic tests...', 'info');
+            
+            // Test 1: JavaScript
+            try {
+                addResult('✓ JavaScript is working', 'success');
+            } catch (e) {
+                addResult('✗ JavaScript error: ' + e.message, 'error');
+                return;
+            }
+            
+            // Test 2: DOM
+            if (document.getElementById('status')) {
+                addResult('✓ DOM is working', 'success');
+            } else {
+                addResult('✗ DOM error', 'error');
+                return;
+            }
+            
+            // Test 3: Fetch API
+            fetch('js/data.js')
+                .then(response => {
+                    if (response.ok) {
+                        addResult('✓ Fetch API is working', 'success');
+                        return testDataLoading();
+                    } else {
+                        addResult('✗ Cannot load data.js', 'error');
+                    }
+                })
+                .catch(error => {
+                    addResult('✗ Fetch error: ' + error.message, 'error');
+                });
+        }
+
+        function testDataLoading() {
+            // Load the data script
+            const script = document.createElement('script');
+            script.src = 'js/data.js';
+            script.onload = () => {
+                addResult('✓ data.js loaded successfully', 'success');
+                
+                // Test if data is available
+                setTimeout(() => {
+                    if (typeof window.SMILEY_DATA !== 'undefined') {
+                        addResult('✓ SMILEY_DATA is available with ' + window.SMILEY_DATA.PRODUCTS.length + ' products', 'success');
+                        updateStatus('All tests passed! System is working.', 'success');
+                    } else {
+                        addResult('✗ SMILEY_DATA not found', 'error');
+                        updateStatus('Data loading failed', 'error');
+                    }
+                }, 100);
+            };
+            script.onerror = () => {
+                addResult('✗ Failed to load data.js', 'error');
+                updateStatus('Script loading failed', 'error');
+            };
+            document.head.appendChild(script);
+        }
+
+        function loadFullSite() {
+            updateStatus('Loading full site...', 'info');
+            window.location.href = 'index.html';
+        }
+
+        // Auto-run tests on page load
+        window.addEventListener('load', () => {
+            setTimeout(testBasic, 500);
+        });
+    </script>
+</body>
+</html>

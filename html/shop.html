@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - SMILEY</title>
+    <meta name="description" content="Shop our complete collection of premium oral care products with fruit-inspired flavors.">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <span class="logo-emoji">😊</span>
+                    </div>
+                    <span class="logo-text">SMILEY</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="nav-desktop">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="shop.html" class="nav-link active">Shop</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="blog.html" class="nav-link">Blog</a>
+                    <a href="faq.html" class="nav-link">FAQ</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </nav>
+
+                <!-- Right side actions -->
+                <div class="header-actions">
+                    <button class="btn-icon" id="searchBtn">
+                        <i data-lucide="search"></i>
+                    </button>
+                    <button class="btn-icon" id="accountBtn">
+                        <i data-lucide="user"></i>
+                    </button>
+                    <button class="btn-icon" id="themeToggle">
+                        <i data-lucide="sun" class="theme-icon"></i>
+                    </button>
+                    <button class="btn-icon cart-btn" id="cartBtn">
+                        <i data-lucide="shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                    <button class="btn-icon mobile-menu-btn" id="mobileMenuBtn">
+                        <i data-lucide="menu" class="menu-icon"></i>
+                        <i data-lucide="x" class="close-icon hidden"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div class="nav-mobile" id="mobileNav">
+                <div class="nav-mobile-content">
+                    <a href="index.html" class="nav-mobile-link">Home</a>
+                    <a href="shop.html" class="nav-mobile-link active">Shop</a>
+                    <a href="about.html" class="nav-mobile-link">About</a>
+                    <a href="blog.html" class="nav-mobile-link">Blog</a>
+                    <a href="faq.html" class="nav-mobile-link">FAQ</a>
+                    <a href="contact.html" class="nav-mobile-link">Contact</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Shop Header -->
+        <section class="shop-header">
+            <div class="container">
+                <div class="shop-header-content">
+                    <h1 class="shop-title">Our Products</h1>
+                    <p class="shop-description">
+                        Discover our complete collection of premium oral care products with fruit-inspired flavors.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filters and Sorting -->
+        <section class="shop-filters">
+            <div class="container">
+                <div class="filters-content">
+                    <div class="filter-group">
+                        <label class="filter-label">Category</label>
+                        <select class="filter-select" id="categoryFilter">
+                            <option value="">All Categories</option>
+                            <option value="Toothpaste">Toothpaste</option>
+                            <option value="Toothbrush">Toothbrush</option>
+                            <option value="Mouthwash">Mouthwash</option>
+                            <option value="Bundle">Bundles</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label class="filter-label">Price Range</label>
+                        <select class="filter-select" id="priceFilter">
+                            <option value="">All Prices</option>
+                            <option value="0-10">Under $10</option>
+                            <option value="10-20">$10 - $20</option>
+                            <option value="20-30">$20 - $30</option>
+                            <option value="30+">$30+</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label class="filter-label">Sort By</label>
+                        <select class="filter-select" id="sortFilter">
+                            <option value="featured">Featured</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="rating">Highest Rated</option>
+                            <option value="newest">Newest</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Grid -->
+        <section class="shop-products">
+            <div class="container">
+                <div class="products-grid" id="productsGrid">
+                    <!-- Products will be loaded here by JavaScript -->
+                </div>
+                
+                <!-- Loading State -->
+                <div class="loading-state" id="loadingState" style="display: none;">
+                    <div class="loading-spinner"></div>
+                    <p>Loading products...</p>
+                </div>
+                
+                <!-- No Results -->
+                <div class="no-results" id="noResults" style="display: none;">
+                    <i data-lucide="search" class="no-results-icon"></i>
+                    <h3>No products found</h3>
+                    <p>Try adjusting your filters or search terms.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div class="logo-icon">
+                            <span class="logo-emoji">😊</span>
+                        </div>
+                        <span class="logo-text">SMILEY</span>
+                    </div>
+                    <p class="footer-description">
+                        Making oral care fun, effective, and accessible for everyone.
+                    </p>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-title">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="shipping.html">Shipping</a></li>
+                        <li><a href="returns.html">Returns</a></li>
+                        <li><a href="privacy.html">Privacy</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-title">Connect</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i data-lucide="facebook"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i data-lucide="instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i data-lucide="twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i data-lucide="youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 SMILEY. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- JavaScript -->
+    <script src="js/data.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/shop.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

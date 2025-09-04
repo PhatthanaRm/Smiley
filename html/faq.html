@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - SMILEY</title>
+    <meta name="description" content="Frequently asked questions about SMILEY products, shipping, returns, and more.">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <span class="logo-emoji">😊</span>
+                    </div>
+                    <span class="logo-text">SMILEY</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="nav-desktop">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="shop.html" class="nav-link">Shop</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="blog.html" class="nav-link">Blog</a>
+                    <a href="faq.html" class="nav-link active">FAQ</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </nav>
+
+                <!-- Right side actions -->
+                <div class="header-actions">
+                    <button class="btn-icon" id="searchBtn">
+                        <i data-lucide="search"></i>
+                    </button>
+                    <button class="btn-icon" id="accountBtn">
+                        <i data-lucide="user"></i>
+                    </button>
+                    <button class="btn-icon" id="themeToggle">
+                        <i data-lucide="sun" class="theme-icon"></i>
+                    </button>
+                    <button class="btn-icon cart-btn" id="cartBtn">
+                        <i data-lucide="shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                    <button class="btn-icon mobile-menu-btn" id="mobileMenuBtn">
+                        <i data-lucide="menu" class="menu-icon"></i>
+                        <i data-lucide="x" class="close-icon hidden"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div class="nav-mobile" id="mobileNav">
+                <div class="nav-mobile-content">
+                    <a href="index.html" class="nav-mobile-link">Home</a>
+                    <a href="shop.html" class="nav-mobile-link">Shop</a>
+                    <a href="about.html" class="nav-mobile-link">About</a>
+                    <a href="blog.html" class="nav-mobile-link">Blog</a>
+                    <a href="faq.html" class="nav-mobile-link active">FAQ</a>
+                    <a href="contact.html" class="nav-mobile-link">Contact</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- FAQ Header -->
+        <section class="faq-header">
+            <div class="container">
+                <div class="faq-header-content">
+                    <h1 class="faq-header-title">Frequently Asked Questions</h1>
+                    <p class="faq-header-description">
+                        Find answers to common questions about our products, shipping, and more.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Content -->
+        <section class="faq-content">
+            <div class="container">
+                <div class="faq-categories">
+                    <!-- Products FAQ -->
+                    <div class="faq-category">
+                        <h2 class="faq-category-title">Products</h2>
+                        <div class="faq-items">
+                            <div class="faq-item">
+                                <button class="faq-question" onclick="toggleFAQ(this)">
+                                    <span>Are SMILEY products safe for children?</span>
+                                    <i data-lucide="chevron-down" class="faq-icon"></i>
+                                </button>
+                                <div class="faq-answer">
+                                    <p>Yes! Our Kids Mango Magic toothpaste is specifically formulated for children and is safe to swallow. All our products are made with natural ingredients and are free from harmful chemicals.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item">
+                                <button class="faq-question" onclick="toggleFAQ(this)">
+                                    <span>Do your products contain fluoride?</span>
+                                    <i data-lucide="chevron-down" class="faq-icon"></i>
+                                </button>
+                                <div class="faq-answer">
+                                    <p>Yes, our adult toothpastes contain fluoride for cavity protection. Our kids toothpaste also contains fluoride but in amounts safe for children. We also offer fluoride-free options for those who prefer them.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item">
+                                <button class="faq-question" onclick="toggleFAQ(this)">
+                                    <span>Are your products vegan and cruelty-free?</span>
+                                    <i data-lucide="chevron-down" class="faq-icon"></i>
+                                </button>
+                                <div class="faq-answer">
+                                    <p>Absolutely! All SMILEY products are 100% vegan and cruelty-free. We never test on animals and use only plant-based ingredients.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shipping FAQ -->
+                    <div class="faq-category">
+                        <h2 class="faq-category-title">Shipping & Delivery</h2>
+                        <div class="faq-items">
+                            <div class="faq-item">
+                                <button class="faq-question" onclick="toggleFAQ(this)">
+                                    <span>How long does shipping take?</span>
+                                    <i data-lucide="chevron-down" class="faq-icon"></i>
+                                </button>
+                                <div class="faq-answer">
+                                    <p>Standard shipping takes 3-5 business days. Express shipping (2-day) and overnight shipping options are also available at checkout.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item">
+                                <button class="faq-question" onclick="toggleFAQ(this)">
+                                    <span>Do you ship internationally?</span>
+                                    <i data-lucide="chevron-down" class="faq-icon"></i>
+                                </button>
+                                <div class="faq-answer">
+                                    <p>Yes, we ship to most countries worldwide. International shipping times vary by location. Please check our shipping page for specific delivery times to your country.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item">
+                                <button class="faq-question" onclick="toggleFAQ(this)">
+                                    <span>What if my package is damaged or lost?</span>
+                                    <i data-lucide="chevron-down" class="faq-icon"></i>
+                                </button>
+                                <div class="faq-answer">
+                                    <p>We'll replace any damaged or lost items at no cost to you. Please contact our customer service team with your order number and we'll take care of it immediately.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Returns FAQ -->
+                    <div class="faq-category">
+                        <h2 class="faq-category-title">Returns & Exchanges</h2>
+                        <div class="faq-items">
+                            <div class="faq-item">
+                                <button class="faq-question" onclick="toggleFAQ(this)">
+                                    <span>What is your return policy?</span>
+                                    <i data-lucide="chevron-down" class="faq-icon"></i>
+                                </button>
+                                <div class="faq-answer">
+                                    <p>We offer a 30-day money-back guarantee. If you're not completely satisfied with your purchase, you can return it for a full refund within 30 days of delivery.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item">
+                                <button class="faq-question" onclick="toggleFAQ(this)">
+                                    <span>How do I return an item?</span>
+                                    <i data-lucide="chevron-down" class="faq-icon"></i>
+                                </button>
+                                <div class="faq-answer">
+                                    <p>Simply contact our customer service team to initiate a return. We'll provide you with a prepaid return label and instructions. Returns are processed within 3-5 business days of receipt.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Subscription FAQ -->
+                    <div class="faq-category">
+                        <h2 class="faq-category-title">Subscriptions</h2>
+                        <div class="faq-items">
+                            <div class="faq-item">
+                                <button class="faq-question" onclick="toggleFAQ(this)">
+                                    <span>How do subscriptions work?</span>
+                                    <i data-lucide="chevron-down" class="faq-icon"></i>
+                                </button>
+                                <div class="faq-answer">
+                                    <p>Our subscription service automatically delivers your favorite products on a monthly or quarterly basis. You can pause, skip, or cancel anytime from your account dashboard.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item">
+                                <button class="faq-question" onclick="toggleFAQ(this)">
+                                    <span>Can I change my subscription frequency?</span>
+                                    <i data-lucide="chevron-down" class="faq-icon"></i>
+                                </button>
+                                <div class="faq-answer">
+                                    <p>Yes! You can change your delivery frequency, products, or quantities anytime. Changes will take effect on your next scheduled delivery.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div class="logo-icon">
+                            <span class="logo-emoji">😊</span>
+                        </div>
+                        <span class="logo-text">SMILEY</span>
+                    </div>
+                    <p class="footer-description">
+                        Making oral care fun, effective, and accessible for everyone.
+                    </p>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-title">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="shipping.html">Shipping</a></li>
+                        <li><a href="returns.html">Returns</a></li>
+                        <li><a href="privacy.html">Privacy</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-title">Connect</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i data-lucide="facebook"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i data-lucide="instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i data-lucide="twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i data-lucide="youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 SMILEY. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- JavaScript -->
+    <script src="js/data.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        function toggleFAQ(button) {
+            const faqItem = button.closest('.faq-item');
+            const answer = faqItem.querySelector('.faq-answer');
+            const icon = button.querySelector('.faq-icon');
+            
+            const isOpen = answer.style.display === 'block';
+            
+            // Close all other FAQ items
+            document.querySelectorAll('.faq-answer').forEach(item => {
+                item.style.display = 'none';
+            });
+            document.querySelectorAll('.faq-icon').forEach(item => {
+                item.style.transform = 'rotate(0deg)';
+            });
+            
+            // Toggle current item
+            if (!isOpen) {
+                answer.style.display = 'block';
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+    </script>
+</body>
+</html>

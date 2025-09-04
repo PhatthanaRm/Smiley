@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Heart, Users, Award, Leaf } from 'lucide-react'
 
@@ -36,7 +37,7 @@ const BrandStory = () => {
   ]
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+    <section className="py-20 bg-gradient-to-br from-smiely-mint/5 via-smiely-blueberry/5 to-smiely-lavender/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Content - Story */}
@@ -54,7 +55,7 @@ const BrandStory = () => {
               viewport={{ once: true }}
             >
               <h2 className="text-4xl font-bold text-gray-900 mb-6">
-                Our <span className="bg-gradient-to-r from-smiely-mango to-smiely-strawberry bg-clip-text text-transparent">Story</span>
+                Our <span className="text-sunset">Story</span>
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed mb-6">
                 SMILEY was born from a simple idea: oral care doesn't have to be boring! 
@@ -83,18 +84,20 @@ const BrandStory = () => {
               </p>
             </motion.div>
 
-            {/* CTA Button */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <Button variant="smiley" size="lg" className="group">
-                Learn More About Us
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </motion.div>
+                         {/* CTA Button */}
+             <motion.div
+               initial={{ opacity: 0, y: 20 }}
+               whileInView={{ opacity: 1, y: 0 }}
+               transition={{ delay: 0.6, duration: 0.8 }}
+               viewport={{ once: true }}
+             >
+               <Link href="/about">
+                 <Button variant="smiley" size="lg" className="group">
+                   Learn More About Us
+                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                 </Button>
+               </Link>
+             </motion.div>
           </motion.div>
 
           {/* Right Content - Stats & Values */}
@@ -169,7 +172,7 @@ const BrandStory = () => {
           className="mt-20 text-center"
         >
           <h3 className="text-3xl font-bold text-gray-900 mb-8">
-            Fun <span className="bg-gradient-to-r from-smiely-mango to-smiely-strawberry bg-clip-text text-transparent">Facts</span>
+            Fun <span className="text-rainbow">Facts</span>
           </h3>
           <div className="grid md:grid-cols-3 gap-8">
             {[

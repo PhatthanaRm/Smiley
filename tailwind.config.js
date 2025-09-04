@@ -50,14 +50,18 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // SMILEY brand colors
+        // SMILEY brand colors - Balanced and formal palette
         smiley: {
-          mango: "#FF6B35",
-          strawberry: "#FF6B9D",
-          yuzu: "#FFD93D",
-          mint: "#4ECDC4",
-          blueberry: "#45B7D1",
-          lavender: "#A8E6CF",
+          mango: "#FF8C42",      // Warm orange
+          strawberry: "#FF6B9D",  // Soft pink
+          yuzu: "#FFD700",       // Golden yellow
+          mint: "#00D4AA",       // Teal green
+          blueberry: "#4A90E2",  // Professional blue
+          lavender: "#B19CD9",   // Soft purple
+          peach: "#FFB347",      // Warm peach
+          lime: "#32CD32",       // Fresh lime
+          coral: "#FF7F50",      // Warm coral
+          cyan: "#00FFFF",       // Bright cyan
         }
       },
       borderRadius: {

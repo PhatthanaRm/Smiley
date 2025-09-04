@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import { ShoppingCart, Menu, X, User, Search } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/hooks/use-toast'
+import ThemeToggle from '@/components/theme-toggle'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -29,7 +30,7 @@ const Header = () => {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-smiely-mango/20 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -41,7 +42,7 @@ const Header = () => {
             >
               <span className="text-white text-xl font-bold">😊</span>
             </motion.div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-smiely-mango to-smiely-strawberry bg-clip-text text-transparent">
+            <span className="text-2xl font-bold text-rainbow">
               SMILEY
             </span>
           </Link>
@@ -70,6 +71,9 @@ const Header = () => {
             <Button variant="ghost" size="icon" className="hidden sm:flex">
               <User className="h-5 w-5" />
             </Button>
+
+            {/* Theme Toggle */}
+            <ThemeToggle />
 
             {/* Cart */}
             <Button
