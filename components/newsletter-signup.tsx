@@ -30,7 +30,7 @@ const NewsletterSignup = () => {
   ]
 
   return (
-    <section className="py-20 bg-gradient-to-br from-smiely-mango/15 via-smiely-strawberry/15 to-smiely-yuzu/15">
+    <section className="py-20 bg-candy-gradient">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -50,10 +50,10 @@ const NewsletterSignup = () => {
             >
               <span className="text-6xl">📧</span>
             </motion.div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Stay <span className="text-sunset">Smiley</span> with Us!
+            <h2 className="text-4xl font-bold text-white mb-4 drop-shadow-lg">
+              Stay <span className="text-fruit-burst">Smiley</span> with Us!
             </h2>
-            <p className="text-xl text-gray-700 max-w-2xl mx-auto">
+            <p className="text-xl text-white/90 max-w-2xl mx-auto drop-shadow-md">
               Join our community and be the first to discover new flavors, exclusive offers, 
               and oral care tips that will make you smile!
             </p>
@@ -74,7 +74,7 @@ const NewsletterSignup = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.6 + index * 0.1, duration: 0.5 }}
                 viewport={{ once: true }}
-                className="flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm"
+                className="flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm colorful-hover"
               >
                 <benefit.icon className={`w-5 h-5 ${benefit.color}`} />
                 <span className="text-sm font-medium text-gray-700">{benefit.text}</span>
@@ -88,7 +88,7 @@ const NewsletterSignup = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
             viewport={{ once: true }}
-            className="bg-white rounded-3xl shadow-xl p-8 max-w-md mx-auto"
+            className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-rainbow p-8 max-w-md mx-auto colorful-hover"
           >
             {!isSubscribed ? (
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -112,9 +112,9 @@ const NewsletterSignup = () => {
                 
                 <Button 
                   type="submit" 
-                  variant="smiley" 
+                  variant="fruit" 
                   size="lg" 
-                  className="w-full group"
+                  className="w-full group colorful-pulse"
                 >
                   Subscribe & Smile! 😊
                   <motion.div
@@ -150,7 +150,7 @@ const NewsletterSignup = () => {
                   You're now part of our SMILEY community! Check your email for a special welcome gift.
                 </p>
                 <Button
-                  variant="smileyOutline"
+                  variant="rainbowOutline"
                   onClick={() => setIsSubscribed(false)}
                   className="mt-4"
                 >
@@ -168,7 +168,7 @@ const NewsletterSignup = () => {
             viewport={{ once: true }}
             className="mt-8"
           >
-            <p className="text-sm text-gray-500 mb-2">Join thousands of happy customers</p>
+            <p className="text-sm text-white/80 mb-2 drop-shadow-md">Join thousands of happy customers</p>
             <div className="flex justify-center space-x-1">
               {[...Array(5)].map((_, i) => (
                 <motion.div
@@ -177,7 +177,7 @@ const NewsletterSignup = () => {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 1 + i * 0.1, duration: 0.3 }}
                   viewport={{ once: true }}
-                  className="w-8 h-8 bg-smiely-yuzu rounded-full flex items-center justify-center text-white text-sm font-bold"
+                  className="w-8 h-8 bg-rainbow-gradient rounded-full flex items-center justify-center text-white text-sm font-bold shadow-rainbow"
                 >
                   😊
                 </motion.div>

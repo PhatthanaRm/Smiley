@@ -22,6 +22,17 @@ const buttonVariants = cva(
         smiley: "bg-gradient-to-r from-smiely-mango to-smiely-strawberry text-white hover:shadow-lg hover:scale-105 !text-white",
         smileyOutline: "bg-white text-smiely-mango border-2 border-smiely-mango hover:bg-smiely-mango hover:text-white",
         smileyAccent: "bg-smiely-yuzu text-white hover:bg-smiely-yuzu/90 hover:scale-105 !text-white",
+        // Enhanced colorful variants
+        rainbow: "bg-rainbow-gradient text-white hover:shadow-rainbow hover:scale-105 !text-white",
+        sunset: "bg-sunset-gradient text-white hover:shadow-sunset hover:scale-105 !text-white",
+        ocean: "bg-ocean-gradient text-white hover:shadow-fruit hover:scale-105 !text-white",
+        tropical: "bg-tropical-gradient text-white hover:shadow-rainbow hover:scale-105 !text-white",
+        fruit: "bg-fruit-burst text-white hover:colorful-glow hover:scale-105 !text-white",
+        candy: "bg-candy-gradient text-white hover:shadow-rainbow hover:scale-105 !text-white",
+        // Colorful outline variants
+        rainbowOutline: "bg-white text-transparent bg-clip-text bg-rainbow-gradient border-2 border-transparent bg-gradient-to-r from-smiely-mango via-smiely-strawberry to-smiely-yuzu bg-clip-border hover:bg-rainbow-gradient hover:text-white",
+        sunsetOutline: "bg-white text-smiely-mango border-2 border-smiely-mango hover:bg-sunset-gradient hover:text-white",
+        oceanOutline: "bg-white text-smiely-blueberry border-2 border-smiely-blueberry hover:bg-ocean-gradient hover:text-white",
       },
       size: {
         default: "h-10 px-4 py-2",

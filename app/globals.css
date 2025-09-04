@@ -76,51 +76,171 @@
     animation: float 6s ease-in-out infinite;
   }
 
-  /* Enhanced colorful backgrounds - More subtle and formal */
+  /* Enhanced colorful backgrounds - More vibrant and playful */
   .bg-rainbow-gradient {
     background: linear-gradient(135deg, #FF8C42, #FF6B9D, #FFD700, #00D4AA, #4A90E2, #B19CD9);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
   }
 
   .bg-sunset-gradient {
     background: linear-gradient(135deg, #FF8C42, #FF6B9D, #FFD700);
+    background-size: 200% 200%;
+    animation: gradientShift 6s ease infinite;
   }
 
   .bg-ocean-gradient {
     background: linear-gradient(135deg, #00D4AA, #4A90E2, #B19CD9);
+    background-size: 200% 200%;
+    animation: gradientShift 7s ease infinite;
   }
 
   .bg-tropical-gradient {
     background: linear-gradient(135deg, #FF8C42, #32CD32, #00FFFF);
+    background-size: 200% 200%;
+    animation: gradientShift 5s ease infinite;
   }
 
-  /* Colorful text gradients - More subtle and formal */
+  .bg-fruit-burst {
+    background: linear-gradient(45deg, #FF8C42, #FF6B9D, #FFD700, #00D4AA, #4A90E2, #B19CD9, #FF8C42);
+    background-size: 600% 600%;
+    animation: gradientShift 10s ease infinite;
+  }
+
+  .bg-candy-gradient {
+    background: linear-gradient(135deg, #FF69B4, #FF1493, #FF6347, #FFD700, #32CD32, #00BFFF);
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease infinite;
+  }
+
+  /* Colorful text gradients - More vibrant and animated */
   .text-rainbow {
-    background: linear-gradient(135deg, #FF8C42, #FF6B9D, #FFD700);
+    background: linear-gradient(135deg, #FF8C42, #FF6B9D, #FFD700, #00D4AA, #4A90E2, #B19CD9);
+    background-size: 400% 400%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    animation: gradientShift 8s ease infinite;
   }
 
   .text-sunset {
     background: linear-gradient(135deg, #FF8C42, #FF6B9D, #FFD700);
+    background-size: 200% 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    animation: gradientShift 6s ease infinite;
   }
 
-  /* Enhanced colorful shadows - More subtle and formal */
+  .text-fruit-burst {
+    background: linear-gradient(45deg, #FF8C42, #FF6B9D, #FFD700, #00D4AA, #4A90E2, #B19CD9);
+    background-size: 600% 600%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 10s ease infinite;
+  }
+
+  /* Enhanced colorful shadows - More vibrant and dynamic */
   .shadow-rainbow {
-    box-shadow: 0 10px 25px rgba(255, 140, 66, 0.2), 0 0 0 1px rgba(255, 107, 157, 0.1);
+    box-shadow: 0 10px 25px rgba(255, 140, 66, 0.3), 0 0 0 1px rgba(255, 107, 157, 0.2), 0 0 20px rgba(255, 215, 0, 0.1);
   }
 
   .shadow-sunset {
-    box-shadow: 0 10px 25px rgba(255, 140, 66, 0.25), 0 0 0 1px rgba(255, 107, 157, 0.15);
+    box-shadow: 0 10px 25px rgba(255, 140, 66, 0.4), 0 0 0 1px rgba(255, 107, 157, 0.3), 0 0 30px rgba(255, 215, 0, 0.2);
   }
 
-  /* Colorful borders - More subtle and formal */
+  .shadow-fruit {
+    box-shadow: 0 15px 35px rgba(255, 140, 66, 0.25), 0 0 0 1px rgba(255, 107, 157, 0.15), 0 0 40px rgba(0, 212, 170, 0.1);
+  }
+
+  /* Colorful borders - More vibrant and animated */
   .border-rainbow {
     border: 2px solid;
-    border-image: linear-gradient(135deg, #FF8C42, #FF6B9D, #FFD700) 1;
+    border-image: linear-gradient(135deg, #FF8C42, #FF6B9D, #FFD700, #00D4AA, #4A90E2, #B19CD9) 1;
+  }
+
+  .border-animated {
+    border: 2px solid transparent;
+    background: linear-gradient(white, white) padding-box, linear-gradient(135deg, #FF8C42, #FF6B9D, #FFD700, #00D4AA, #4A90E2, #B19CD9) border-box;
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
+  }
+
+  /* Colorful floating elements */
+  .floating-fruit {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .floating-fruit::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 140, 66, 0.1) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+  }
+
+  /* Colorful hover effects */
+  .colorful-hover {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .colorful-hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .colorful-hover:hover::before {
+    left: 100%;
+  }
+
+  /* Colorful pulse animation */
+  .colorful-pulse {
+    animation: colorfulPulse 2s ease-in-out infinite;
+  }
+
+  /* Colorful glow effects */
+  .colorful-glow {
+    box-shadow: 0 0 20px rgba(255, 140, 66, 0.3), 0 0 40px rgba(255, 107, 157, 0.2), 0 0 60px rgba(255, 215, 0, 0.1);
+  }
+
+  .colorful-glow:hover {
+    box-shadow: 0 0 30px rgba(255, 140, 66, 0.5), 0 0 60px rgba(255, 107, 157, 0.3), 0 0 90px rgba(255, 215, 0, 0.2);
+  }
+}
+
+/* Keyframe animations for colorful effects */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes colorfulPulse {
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(255, 140, 66, 0.3);
+  }
+  50% { 
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(255, 140, 66, 0.5), 0 0 40px rgba(255, 107, 157, 0.3);
   }
 }
 

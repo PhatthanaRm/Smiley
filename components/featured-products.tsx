@@ -125,7 +125,7 @@ const FeaturedProducts = () => {
   }
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-gradient-to-br from-smiely-mango/5 via-smiely-strawberry/5 to-smiely-yuzu/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -136,7 +136,7 @@ const FeaturedProducts = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Our <span className="text-rainbow">Flavorful</span> Collection
+            Our <span className="text-fruit-burst">Flavorful</span> Collection
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Discover our range of dentist-approved oral care products with delightful fruit-inspired flavors
@@ -157,8 +157,8 @@ const FeaturedProducts = () => {
               onClick={() => setSelectedFilter(filter.value)}
               className={`px-6 py-2 rounded-full font-medium transition-all duration-200 ${
                 selectedFilter === filter.value
-                  ? 'bg-gradient-to-r from-smiely-mango to-smiely-strawberry text-white shadow-lg'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-rainbow-gradient text-white shadow-rainbow colorful-pulse'
+                  : 'bg-white/80 text-gray-700 hover:bg-sunset-gradient hover:text-white hover:shadow-sunset'
               }`}
             >
               {filter.name}
@@ -176,11 +176,11 @@ const FeaturedProducts = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="group hover:shadow-xl transition-all duration-300 border border-gray-200 bg-white overflow-hidden">
+              <Card className="group hover:shadow-xl transition-all duration-300 border border-gray-200 bg-white overflow-hidden colorful-hover">
                 {/* Product Badge */}
                 {product.badge && (
                   <div className="absolute top-4 right-4 z-10">
-                    <span className="bg-smiely-yuzu text-white px-3 py-1 rounded-full text-xs font-semibold">
+                    <span className="bg-rainbow-gradient text-white px-3 py-1 rounded-full text-xs font-semibold shadow-rainbow">
                       {product.badge}
                     </span>
                   </div>
@@ -191,7 +191,7 @@ const FeaturedProducts = () => {
                   <div className="relative">
                     <motion.div
                       whileHover={{ scale: 1.05 }}
-                      className={`w-full h-48 bg-gradient-to-br ${product.color} rounded-lg flex items-center justify-center text-6xl shadow-lg`}
+                      className={`w-full h-48 bg-gradient-to-br ${product.color} rounded-lg flex items-center justify-center text-6xl shadow-lg colorful-glow`}
                     >
                       {product.image}
                     </motion.div>
@@ -249,7 +249,7 @@ const FeaturedProducts = () => {
                     </span>
                     <Button
                       onClick={() => handleAddToCart(product)}
-                      variant="smiley"
+                      variant="sunset"
                       size="sm"
                       className="group"
                     >
@@ -272,7 +272,7 @@ const FeaturedProducts = () => {
            className="text-center mt-12"
          >
            <Link href="/shop">
-             <Button variant="smileyOutline" size="xl">
+             <Button variant="ocean" size="xl" className="colorful-pulse">
                View All Products
              </Button>
            </Link>

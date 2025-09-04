@@ -42,7 +42,7 @@ const Header = () => {
             >
               <span className="text-white text-xl font-bold">😊</span>
             </motion.div>
-            <span className="text-2xl font-bold text-rainbow">
+            <span className="text-2xl font-bold text-fruit-burst">
               SMILEY
             </span>
           </Link>
@@ -53,7 +53,7 @@ const Header = () => {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-700 hover:text-smiely-mango transition-colors duration-200 font-medium"
+                className="text-gray-700 hover:text-smiely-mango transition-colors duration-200 font-medium colorful-hover"
               >
                 {item.name}
               </Link>
