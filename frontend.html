@@ -1,0 +1,1845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMILEY - Premium Fruit-Inspired Products</title>
+    <meta name="description" content="Premium fruit-inspired products that bring joy and wellness to your life">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // SMILEY brand colors - Balanced and formal palette
+                        smiely: {
+                            mango: "#FF8C42",      // Warm orange
+                            strawberry: "#FF6B9D",  // Soft pink
+                            yuzu: "#FFD700",       // Golden yellow
+                            mint: "#00D4AA",       // Teal green
+                            blueberry: "#4A90E2",  // Professional blue
+                            lavender: "#B19CD9",   // Soft purple
+                            peach: "#FFB347",      // Warm peach
+                            lime: "#32CD32",       // Fresh lime
+                            coral: "#FF7F50",      // Warm coral
+                            cyan: "#00FFFF",       // Bright cyan
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif']
+                    },
+                    keyframes: {
+                        "float": {
+                            "0%, 100%": { transform: "translateY(0px)" },
+                            "50%": { transform: "translateY(-20px)" },
+                        },
+                        "bounce-gentle": {
+                            "0%, 100%": { transform: "scale(1)" },
+                            "50%": { transform: "scale(1.05)" },
+                        },
+                        "wiggle": {
+                            "0%, 100%": { transform: "rotate(-3deg)" },
+                            "50%": { transform: "rotate(3deg)" },
+                        },
+                    },
+                    animation: {
+                        "float": "float 6s ease-in-out infinite",
+                        "bounce-gentle": "bounce-gentle 2s ease-in-out infinite",
+                        "wiggle": "wiggle 1s ease-in-out infinite",
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <style>
+        .text-rainbow {
+            background: linear-gradient(135deg, #FF8C42 0%, #FF6B9D 0%, #FFD700 0%, #00D4AA 0%, #4A90E2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .animate-bounce-slow {
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+        .cart-item {
+            animation: slideIn 0.3s ease-out;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .bounce-gentle {
+            animation: bounce-gentle 2s ease-in-out infinite;
+        }
+        @keyframes bounce-gentle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        /* Additional SMILEY brand styles from globals.css */
+        .btn-primary {
+            background: linear-gradient(to right, #FF8C42, #FF6B9D);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: scale(1.05);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #FF8C42;
+            border: 2px solid #FF8C42;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background: #FF8C42;
+            color: white;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform: translateY(-0.5rem);
+        }
+        
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Enhanced colorful backgrounds */
+        .bg-rainbow-gradient {
+            background: linear-gradient(135deg, #FF8C42, #FF6B9D, #FFD700, #00D4AA, #4A90E2, #B19CD9);
+        }
+        
+        .bg-sunset-gradient {
+            background: linear-gradient(135deg, #FF8C42, #FF6B9D, #FFD700);
+        }
+        
+        .bg-ocean-gradient {
+            background: linear-gradient(135deg, #00D4AA, #4A90E2, #B19CD9);
+        }
+        
+        .bg-tropical-gradient {
+            background: linear-gradient(135deg, #FF8C42, #32CD32, #00FFFF);
+        }
+        
+        /* Colorful text gradients */
+        .text-sunset {
+            background: linear-gradient(135deg, #FF8C42, #FF6B9D, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Enhanced colorful shadows */
+        .shadow-rainbow {
+            box-shadow: 0 10px 25px rgba(255, 140, 66, 0.2), 0 0 0 1px rgba(255, 107, 157, 0.1);
+        }
+        
+        .shadow-sunset {
+            box-shadow: 0 10px 25px rgba(255, 140, 66, 0.25), 0 0 0 1px rgba(255, 107, 157, 0.15);
+        }
+        
+        /* Colorful borders */
+        .border-rainbow {
+            border: 2px solid;
+            border-image: linear-gradient(135deg, #FF8C42, #FF6B9D, #FFD700) 1;
+        }
+        
+        /* Dark mode styles */
+        .dark {
+            background-color: #1a1a1a;
+            color: #e5e5e5;
+        }
+        
+        .dark .bg-white {
+            background-color: #2d2d2d !important;
+        }
+        
+        .dark .text-gray-900 {
+            color: #e5e5e5 !important;
+        }
+        
+        .dark .text-gray-700 {
+            color: #d1d5db !important;
+        }
+        
+        .dark .text-gray-600 {
+            color: #9ca3af !important;
+        }
+        
+        .dark .border-gray-100 {
+            border-color: #374151 !important;
+        }
+        
+        .dark .border-gray-200 {
+            border-color: #4b5563 !important;
+        }
+        
+        .dark .bg-gray-50 {
+            background-color: #374151 !important;
+        }
+        
+        .dark .bg-gray-100 {
+            background-color: #4b5563 !important;
+        }
+        
+        .dark .hover\:bg-gray-50:hover {
+            background-color: #374151 !important;
+        }
+        
+        .dark .hover\:bg-gray-200:hover {
+            background-color: #4b5563 !important;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-smiely-mango/20 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-smiely-mango to-smiely-strawberry rounded-full flex items-center justify-center">
+                        <span class="text-white text-xl font-bold">😊</span>
+                    </div>
+                    <span class="text-2xl font-bold text-rainbow">SMILEY</span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-smiely-mango transition-colors duration-200 font-medium">Home</a>
+                    <a href="#shop" class="text-gray-700 hover:text-smiely-mango transition-colors duration-200 font-medium">Shop</a>
+                    <a href="#about" class="text-gray-700 hover:text-smiely-mango transition-colors duration-200 font-medium">About</a>
+                    <a href="#blog" class="text-gray-700 hover:text-smiely-mango transition-colors duration-200 font-medium">Blog</a>
+                    <a href="#faq" class="text-gray-700 hover:text-smiely-mango transition-colors duration-200 font-medium">FAQ</a>
+                    <a href="#contact" class="text-gray-700 hover:text-smiely-mango transition-colors duration-200 font-medium">Contact</a>
+                </nav>
+                
+                <!-- Right side actions -->
+                <div class="flex items-center space-x-4">
+                    <!-- Search -->
+                    <button class="hidden sm:flex p-2 text-gray-700 hover:text-smiely-mango transition-colors">
+                        <i class="fas fa-search w-5 h-5"></i>
+                    </button>
+                    
+                    <!-- User Account -->
+                    <button class="hidden sm:flex p-2 text-gray-700 hover:text-smiely-mango transition-colors">
+                        <i class="fas fa-user w-5 h-5"></i>
+                    </button>
+                    
+                    <!-- Theme Toggle -->
+                    <button id="themeToggle" class="hidden sm:flex p-2 text-gray-700 hover:text-smiely-mango transition-colors">
+                        <i id="themeIcon" class="fas fa-moon w-5 h-5"></i>
+                    </button>
+                    
+                    <!-- Cart -->
+                    <button id="cartButton" class="relative p-2 text-gray-700 hover:text-smiely-mango transition-colors">
+                        <i class="fas fa-shopping-cart w-5 h-5"></i>
+                        <span id="cartCount" class="absolute -top-2 -right-2 bg-smiely-strawberry text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">0</span>
+                    </button>
+                    
+                    <!-- Mobile menu button -->
+                    <button id="mobileMenuButton" class="md:hidden p-2 text-gray-700 hover:text-smiely-mango transition-colors">
+                        <i id="mobileMenuIcon" class="fas fa-bars w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobileMenu" class="md:hidden border-t border-gray-100 hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-smiely-mango hover:bg-gray-50 rounded-md transition-colors duration-200">Home</a>
+                <a href="#shop" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-smiely-mango hover:bg-gray-50 rounded-md transition-colors duration-200">Shop</a>
+                <a href="#about" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-smiely-mango hover:bg-gray-50 rounded-md transition-colors duration-200">About</a>
+                <a href="#blog" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-smiely-mango hover:bg-gray-50 rounded-md transition-colors duration-200">Blog</a>
+                <a href="#faq" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-smiely-mango hover:bg-gray-50 rounded-md transition-colors duration-200">FAQ</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-smiely-mango hover:bg-gray-50 rounded-md transition-colors duration-200">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cart Sidebar -->
+    <div id="cartSidebar" class="fixed top-0 right-0 h-full w-96 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 z-50">
+        <div class="p-6 h-full flex flex-col">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-900">Shopping Cart</h3>
+                <button id="closeCart" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div id="cartItems" class="flex-1 overflow-y-auto space-y-4">
+                <!-- Cart items will be populated here -->
+            </div>
+            
+            <div class="border-t pt-4">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-lg font-semibold">Total:</span>
+                    <span id="cartTotal" class="text-2xl font-bold text-smiely-mango">$0.00</span>
+                </div>
+                <button id="checkoutBtn" class="w-full bg-gradient-to-r from-smiely-mango to-smiely-strawberry text-white py-3 rounded-lg font-semibold text-lg hover:shadow-lg hover:scale-105 transition-all duration-200 transform disabled:opacity-50 disabled:cursor-not-allowed">
+                    Proceed to Checkout
+                </button>
+                <button id="clearCart" class="w-full mt-2 bg-gray-200 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-300 transition-colors">
+                    Clear Cart
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div id="cartOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-smiely-mango/10 via-smiely-strawberry/10 to-smiely-yuzu/10 pt-16">
+        <!-- Floating Fruit Background -->
+        <div class="absolute w-20 h-20 bg-gradient-to-br from-smiely-mango to-orange-400 rounded-full flex items-center justify-center text-4xl shadow-lg" style="left: 20%; top: 30%;">
+            <div class="animate-bounce">🥭</div>
+        </div>
+        <div class="absolute w-20 h-20 bg-gradient-to-br from-smiely-strawberry to-pink-400 rounded-full flex items-center justify-center text-4xl shadow-lg" style="left: 40%; top: 50%;">
+            <div class="animate-bounce" style="animation-delay: 1s;">🍓</div>
+        </div>
+        <div class="absolute w-20 h-20 bg-gradient-to-br from-smiely-yuzu to-yellow-400 rounded-full flex items-center justify-center text-4xl shadow-lg" style="left: 60%; top: 30%;">
+            <div class="animate-bounce" style="animation-delay: 2s;">🍋</div>
+        </div>
+        <div class="absolute w-20 h-20 bg-gradient-to-br from-smiely-blueberry to-blue-400 rounded-full flex items-center justify-center text-4xl shadow-lg" style="left: 80%; top: 50%;">
+            <div class="animate-bounce" style="animation-delay: 3s;">🫐</div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="space-y-8">
+                    <div>
+                        <h1 class="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                            Make Brushing{' '}
+                            <span class="text-rainbow">
+                                Fun Again!
+                            </span>
+                        </h1>
+                        <p class="mt-6 text-xl text-gray-600 leading-relaxed">
+                            Discover our playful yet premium oral care products with fruit-inspired flavors. 
+                            Dentist-approved, fun, and effective for the whole family.
+                        </p>
+                    </div>
+
+                    <!-- Features -->
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <div class="flex items-center space-x-2 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-md">
+                            <i class="fas fa-star w-5 h-5 text-smiely-yuzu"></i>
+                            <span class="text-sm font-medium text-gray-700">Dentist Approved</span>
+                        </div>
+                        <div class="flex items-center space-x-2 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-md">
+                            <i class="fas fa-shield-alt w-5 h-5 text-smiely-mint"></i>
+                            <span class="text-sm font-medium text-gray-700">100% Natural</span>
+                        </div>
+                        <div class="flex items-center space-x-2 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-md">
+                            <i class="fas fa-bolt w-5 h-5 text-smiely-strawberry"></i>
+                            <span class="text-sm font-medium text-gray-700">Long Lasting</span>
+                        </div>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="#shop" class="bg-gradient-to-r from-smiely-mango to-smiely-strawberry text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-lg hover:scale-105 transition-all duration-200 transform">
+                            Shop Now <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="#about" class="bg-white text-smiely-mango border-2 border-smiely-mango px-8 py-4 rounded-full font-semibold text-lg hover:bg-smiely-mango hover:text-white transition-all duration-200">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Right Content - Animated Toothpaste -->
+                <div class="text-center">
+                    <div class="relative">
+                        <!-- Main Toothpaste Tube -->
+                        <div class="w-80 h-96 mx-auto relative">
+                            <!-- Tube Body -->
+                            <div class="absolute inset-0 bg-gradient-to-b from-smiely-mint to-smiely-blueberry rounded-full transform rotate-12 shadow-2xl">
+                                <!-- Cap -->
+                                <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 w-16 h-8 bg-smiely-yuzu rounded-t-full"></div>
+                                
+                                <!-- Product Label -->
+                                <div class="absolute top-8 left-1/2 transform -translate-x-1/2 -rotate-12 bg-white/90 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg">
+                                    <span class="text-2xl font-bold text-smiely-mango">SMILEY</span>
+                        </div>
+                                
+                                <!-- Flavor Badge -->
+                                <div class="absolute bottom-8 right-4 bg-smiely-strawberry text-white px-3 py-1 rounded-full text-sm font-semibold transform rotate-12">
+                                    🍓 Strawberry
+                    </div>
+                </div>
+
+                            <!-- Floating Bubbles -->
+                            <div class="absolute w-4 h-4 bg-white/60 rounded-full" style="left: 20%; top: 30%; animation: float 3s ease-in-out infinite;"></div>
+                            <div class="absolute w-4 h-4 bg-white/60 rounded-full" style="left: 35%; top: 40%; animation: float 3s ease-in-out infinite 0.5s;"></div>
+                            <div class="absolute w-4 h-4 bg-white/60 rounded-full" style="left: 50%; top: 30%; animation: float 3s ease-in-out infinite 1s;"></div>
+                            <div class="absolute w-4 h-4 bg-white/60 rounded-full" style="left: 65%; top: 40%; animation: float 3s ease-in-out infinite 1.5s;"></div>
+                            <div class="absolute w-4 h-4 bg-white/60 rounded-full" style="left: 80%; top: 30%; animation: float 3s ease-in-out infinite 2s;"></div>
+                            <div class="absolute w-4 h-4 bg-white/60 rounded-full" style="left: 30%; top: 50%; animation: float 3s ease-in-out infinite 2.5s;"></div>
+                        </div>
+
+                        <!-- Success Checkmark -->
+                        <div class="absolute -top-4 -right-4 w-16 h-16 bg-green-500 rounded-full flex items-center justify-center shadow-lg" style="animation: bounceIn 0.5s ease-out 2s both;">
+                            <div class="w-8 h-8 text-white">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                    <path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+            <div class="w-6 h-10 border-2 border-smiely-mango rounded-full flex justify-center" style="animation: bounce 2s infinite;">
+                <div class="w-1 h-3 bg-smiely-mango rounded-full mt-2" style="animation: bounce 2s infinite;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section id="shop" class="py-20 bg-gradient-to-br from-smiely-mango/5 via-smiely-strawberry/5 to-smiely-yuzu/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Our <span class="text-rainbow">Flavorful</span> Collection</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Discover our range of dentist-approved oral care products with delightful fruit-inspired flavors</p>
+            </div>
+            
+            <!-- Product Filters -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button class="filter-btn active px-6 py-2 rounded-full font-medium transition-all duration-200 bg-gradient-to-r from-smiely-mango to-smiely-strawberry text-white shadow-lg" data-filter="all">
+                    All
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full font-medium transition-all duration-200 bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="mango">
+                    Mango
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full font-medium transition-all duration-200 bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="strawberry">
+                    Strawberry
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full font-medium transition-all duration-200 bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="yuzu">
+                    Yuzu
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full font-medium transition-all duration-200 bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="blueberry">
+                    Blueberry
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full font-medium transition-all duration-200 bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="lavender">
+                    Lavender
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full font-medium transition-all duration-200 bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="mint">
+                    Mint
+                </button>
+            </div>
+            
+            <div id="productsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Fallback products while loading -->
+                <div id="fallbackProducts" class="contents">
+                    <!-- Product 1 -->
+                    <div class="product-card card-hover bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100" data-flavor="mango">
+                        <div class="h-64 bg-gradient-to-br from-smiely-mango/20 to-orange-400/20 flex items-center justify-center relative overflow-hidden">
+                            <span class="text-6xl">🥭</span>
+                            <div class="absolute top-4 right-4 bg-smiely-yuzu text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Best Seller
+                            </div>
+                            <button class="wishlist-btn absolute top-2 left-2 p-2 bg-white/80 backdrop-blur-sm rounded-full hover:bg-white transition-colors duration-200">
+                                <i class="fas fa-heart text-gray-600"></i>
+                            </button>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Mango Tango Toothpaste</h3>
+                            <p class="text-gray-600 mb-4">Tropical mango flavor with natural whitening</p>
+                            <div class="flex items-center space-x-2 mb-4">
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-star text-smiely-yuzu"></i>
+                                    <i class="fas fa-star text-smiely-yuzu"></i>
+                                    <i class="fas fa-star text-smiely-yuzu"></i>
+                                    <i class="fas fa-star text-smiely-yuzu"></i>
+                                    <i class="fas fa-star text-gray-300"></i>
+                                </div>
+                                <span class="text-sm text-gray-600">4.8 (127 reviews)</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-2xl font-bold text-gray-900">$8.99</span>
+                                <button class="add-to-cart bg-gradient-to-r from-smiely-mango to-smiely-strawberry text-white px-6 py-2 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200" 
+                                        data-id="p-mango-tango" 
+                                        data-name="Mango Tango Toothpaste" 
+                                        data-price="8.99" 
+                                        data-image="🥭">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 2 -->
+                    <div class="product-card card-hover bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100" data-flavor="strawberry">
+                        <div class="h-64 bg-gradient-to-br from-smiely-strawberry/20 to-pink-400/20 flex items-center justify-center relative overflow-hidden">
+                            <span class="text-6xl">🍓</span>
+                            <div class="absolute top-4 right-4 bg-smiely-yuzu text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                New
+                            </div>
+                            <button class="wishlist-btn absolute top-2 left-2 p-2 bg-white/80 backdrop-blur-sm rounded-full hover:bg-white transition-colors duration-200">
+                                <i class="fas fa-heart text-gray-600"></i>
+                            </button>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Strawberry Fields</h3>
+                            <p class="text-gray-600 mb-4">Sweet strawberry with cavity protection</p>
+                            <div class="flex items-center space-x-2 mb-4">
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-star text-smiely-yuzu"></i>
+                                    <i class="fas fa-star text-smiely-yuzu"></i>
+                                    <i class="fas fa-star text-smiely-yuzu"></i>
+                                    <i class="fas fa-star text-smiely-yuzu"></i>
+                                    <i class="fas fa-star text-smiely-yuzu"></i>
+                                </div>
+                                <span class="text-sm text-gray-600">4.9 (89 reviews)</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-2xl font-bold text-gray-900">$8.99</span>
+                                <button class="add-to-cart bg-gradient-to-r from-smiely-mango to-smiely-strawberry text-white px-6 py-2 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200" 
+                                        data-id="p-strawberry-fields" 
+                                        data-name="Strawberry Fields" 
+                                        data-price="8.99" 
+                                        data-image="🍓">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 3 -->
+                    <div class="product-card card-hover bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100" data-flavor="yuzu">
+                        <div class="h-64 bg-gradient-to-br from-smiely-yuzu/20 to-yellow-400/20 flex items-center justify-center relative overflow-hidden">
+                            <span class="text-6xl">🍋</span>
+                            <div class="absolute top-4 right-4 bg-smiely-yuzu text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Limited
+                            </div>
+                            <button class="wishlist-btn absolute top-2 left-2 p-2 bg-white/80 backdrop-blur-sm rounded-full hover:bg-white transition-colors duration-200">
+                                <i class="fas fa-heart text-gray-600"></i>
+                            </button>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Yuzu Fresh</h3>
+                            <p class="text-gray-600 mb-4">Citrus yuzu for fresh breath</p>
+                            <div class="flex items-center space-x-2 mb-4">
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-star text-smiely-yuzu"></i>
+                                    <i class="fas fa-star text-smiely-yuzu"></i>
+                                    <i class="fas fa-star text-smiely-yuzu"></i>
+                                    <i class="fas fa-star text-smiely-yuzu"></i>
+                                    <i class="fas fa-star text-gray-300"></i>
+                                </div>
+                                <span class="text-sm text-gray-600">4.7 (64 reviews)</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-2xl font-bold text-gray-900">$8.99</span>
+                                <button class="add-to-cart bg-gradient-to-r from-smiely-mango to-smiely-strawberry text-white px-6 py-2 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200" 
+                                        data-id="p-yuzu-fresh" 
+                                        data-name="Yuzu Fresh" 
+                                        data-price="8.99" 
+                                        data-image="🍋">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 4 -->
+                    <div class="product-card card-hover bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100" data-flavor="blueberry">
+                        <div class="h-64 bg-gradient-to-br from-smiely-blueberry/20 to-blue-400/20 flex items-center justify-center relative overflow-hidden">
+                            <span class="text-6xl">🫐</span>
+                            <div class="absolute top-4 right-4 bg-smiely-yuzu text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Popular
+                            </div>
+                            <button class="wishlist-btn absolute top-2 left-2 p-2 bg-white/80 backdrop-blur-sm rounded-full hover:bg-white transition-colors duration-200">
+                                <i class="fas fa-heart text-gray-600"></i>
+                            </button>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Blueberry Mint</h3>
+                            <p class="text-gray-600 mb-4">Cool mint with blueberry essence</p>
+                            <div class="flex items-center space-x-2 mb-4">
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-star text-smiely-yuzu"></i>
+                                    <i class="fas fa-star text-smiely-yuzu"></i>
+                                    <i class="fas fa-star text-smiely-yuzu"></i>
+                                    <i class="fas fa-star text-smiely-yuzu"></i>
+                                    <i class="fas fa-star text-gray-300"></i>
+                                </div>
+                                <span class="text-sm text-gray-600">4.6 (42 reviews)</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-2xl font-bold text-gray-900">$8.99</span>
+                                <button class="add-to-cart bg-gradient-to-r from-smiely-mango to-smiely-strawberry text-white px-6 py-2 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200" 
+                                        data-id="p-blueberry-mint" 
+                                        data-name="Blueberry Mint" 
+                                        data-price="8.99" 
+                                        data-image="🫐">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 5 -->
+                    <div class="product-card card-hover bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100" data-flavor="lavender">
+                        <div class="h-64 bg-gradient-to-br from-smiely-lavender/20 to-purple-400/20 flex items-center justify-center relative overflow-hidden">
+                            <span class="text-6xl">💜</span>
+                            <div class="absolute top-4 right-4 bg-smiely-yuzu text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Premium
+                            </div>
+                            <button class="wishlist-btn absolute top-2 left-2 p-2 bg-white/80 backdrop-blur-sm rounded-full hover:bg-white transition-colors duration-200">
+                                <i class="fas fa-heart text-gray-600"></i>
+                            </button>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Lavender Dream</h3>
+                            <p class="text-gray-600 mb-4">Calming lavender for bedtime</p>
+                            <div class="flex items-center space-x-2 mb-4">
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-star text-smiely-yuzu"></i>
+                                    <i class="fas fa-star text-smiely-yuzu"></i>
+                                    <i class="fas fa-star text-smiely-yuzu"></i>
+                                    <i class="fas fa-star text-smiely-yuzu"></i>
+                                    <i class="fas fa-star text-gray-300"></i>
+                                </div>
+                                <span class="text-sm text-gray-600">4.5 (38 reviews)</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-2xl font-bold text-gray-900">$9.99</span>
+                                <button class="add-to-cart bg-gradient-to-r from-smiely-mango to-smiely-strawberry text-white px-6 py-2 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200" 
+                                        data-id="p-lavender-dream" 
+                                        data-name="Lavender Dream" 
+                                        data-price="9.99" 
+                                        data-image="💜">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 6 -->
+                    <div class="product-card card-hover bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100" data-flavor="mint">
+                        <div class="h-64 bg-gradient-to-br from-smiely-mint/20 to-green-400/20 flex items-center justify-center relative overflow-hidden">
+                            <span class="text-6xl">🌿</span>
+                            <div class="absolute top-4 right-4 bg-smiely-yuzu text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Classic
+                            </div>
+                            <button class="wishlist-btn absolute top-2 left-2 p-2 bg-white/80 backdrop-blur-sm rounded-full hover:bg-white transition-colors duration-200">
+                                <i class="fas fa-heart text-gray-600"></i>
+                            </button>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Mint Fresh</h3>
+                            <p class="text-gray-600 mb-4">Classic mint for everyday freshness</p>
+                            <div class="flex items-center space-x-2 mb-4">
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-star text-smiely-yuzu"></i>
+                                    <i class="fas fa-star text-smiely-yuzu"></i>
+                                    <i class="fas fa-star text-smiely-yuzu"></i>
+                                    <i class="fas fa-star text-smiely-yuzu"></i>
+                                    <i class="fas fa-star text-gray-300"></i>
+                                </div>
+                                <span class="text-sm text-gray-600">4.4 (156 reviews)</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-2xl font-bold text-gray-900">$7.99</span>
+                                <button class="add-to-cart bg-gradient-to-r from-smiely-mango to-smiely-strawberry text-white px-6 py-2 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200" 
+                                        data-id="p-mint-fresh" 
+                                        data-name="Mint Fresh" 
+                                        data-price="7.99" 
+                                        data-image="🌿">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Loading spinner (hidden by default) -->
+                <div id="loadingSpinner" class="hidden flex items-center justify-center col-span-full py-12">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-smiely-mango"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Story Section -->
+    <section id="about" class="py-20 bg-gradient-to-br from-smiely-mint/5 via-smiely-blueberry/5 to-smiely-lavender/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Left Content - Story -->
+                <div class="space-y-8">
+                <div>
+                        <h2 class="text-4xl font-bold text-gray-900 mb-6">
+                            Our <span class="text-sunset">Story</span>
+                        </h2>
+                        <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                            SMILEY was born from a simple idea: oral care doesn't have to be boring! 
+                            As parents, we struggled to get our kids excited about brushing their teeth. 
+                            That's when we decided to create something different.
+                        </p>
+                        <p class="text-lg text-gray-600 leading-relaxed mb-8">
+                            We combined the expertise of dental professionals with the creativity of flavor scientists 
+                            to develop toothpaste that kids actually want to use. The result? A collection of 
+                            delicious, effective, and fun oral care products that make everyone smile.
+                        </p>
+                            </div>
+
+                    <!-- Mission Statement -->
+                    <div class="bg-white p-6 rounded-2xl shadow-lg border-l-4 border-smiely-mango">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Our Mission</h3>
+                        <p class="text-gray-600">
+                            "To transform daily oral care from a chore into a delightful experience, 
+                            making healthy smiles accessible to everyone through innovative, fun, and effective products."
+                        </p>
+                    </div>
+
+                    <!-- CTA Button -->
+                            <div>
+                        <a href="#about" class="bg-gradient-to-r from-smiely-mango to-smiely-strawberry text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-lg hover:scale-105 transition-all duration-200 transform inline-flex items-center">
+                            Learn More About Us
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                            </div>
+                        </div>
+
+                <!-- Right Content - Stats & Values -->
+                <div class="space-y-8">
+                    <!-- Stats Grid -->
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-2xl shadow-lg text-center hover:shadow-xl transition-shadow duration-300">
+                            <i class="fas fa-users w-8 h-8 mx-auto mb-3 text-smiely-mango"></i>
+                            <div class="text-2xl font-bold text-gray-900 mb-1">50K+</div>
+                            <div class="text-sm text-gray-600">Happy Customers</div>
+                            </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-lg text-center hover:shadow-xl transition-shadow duration-300">
+                            <i class="fas fa-award w-8 h-8 mx-auto mb-3 text-smiely-strawberry"></i>
+                            <div class="text-2xl font-bold text-gray-900 mb-1">100%</div>
+                            <div class="text-sm text-gray-600">Dentist Approved</div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-lg text-center hover:shadow-xl transition-shadow duration-300">
+                            <i class="fas fa-leaf w-8 h-8 mx-auto mb-3 text-smiely-mint"></i>
+                            <div class="text-2xl font-bold text-gray-900 mb-1">100%</div>
+                            <div class="text-sm text-gray-600">Natural Ingredients</div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-lg text-center hover:shadow-xl transition-shadow duration-300">
+                            <i class="fas fa-heart w-8 h-8 mx-auto mb-3 text-smiely-yuzu"></i>
+                            <div class="text-2xl font-bold text-gray-900 mb-1">4.8★</div>
+                            <div class="text-sm text-gray-600">Average Rating</div>
+                        </div>
+                    </div>
+
+                    <!-- Values -->
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold text-gray-900 text-center mb-6">Our Values</h3>
+                        <div class="grid gap-4">
+                            <div class="flex items-start space-x-4 p-4 bg-white/80 backdrop-blur-sm rounded-xl hover:bg-white transition-colors duration-200">
+                                <span class="text-3xl">🌱</span>
+                            <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">Natural & Safe</h4>
+                                    <p class="text-sm text-gray-600">We use only the finest natural ingredients, ensuring your family's safety comes first.</p>
+                            </div>
+                        </div>
+                            <div class="flex items-start space-x-4 p-4 bg-white/80 backdrop-blur-sm rounded-xl hover:bg-white transition-colors duration-200">
+                                <span class="text-3xl">😊</span>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">Fun & Engaging</h4>
+                                    <p class="text-sm text-gray-600">Oral care should be enjoyable! Our playful flavors make brushing a daily delight.</p>
+                            </div>
+                            </div>
+                            <div class="flex items-start space-x-4 p-4 bg-white/80 backdrop-blur-sm rounded-xl hover:bg-white transition-colors duration-200">
+                                <span class="text-3xl">🦷</span>
+                            <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">Dentist Approved</h4>
+                                    <p class="text-sm text-gray-600">Every product is tested and approved by dental professionals for effectiveness.</p>
+                            </div>
+                        </div>
+                            <div class="flex items-start space-x-4 p-4 bg-white/80 backdrop-blur-sm rounded-xl hover:bg-white transition-colors duration-200">
+                                <span class="text-3xl">🌍</span>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">Eco-Friendly</h4>
+                                    <p class="text-sm text-gray-600">Committed to sustainability with recyclable packaging and eco-conscious practices.</p>
+                    </div>
+                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Section - Fun Facts -->
+            <div class="mt-20 text-center">
+                <h3 class="text-3xl font-bold text-gray-900 mb-8">
+                    Fun <span class="text-rainbow">Facts</span>
+                </h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div class="text-4xl mb-4">⏰</div>
+                        <h4 class="text-lg font-semibold text-gray-900 mb-2">Did you know?</h4>
+                        <p class="text-gray-600">The average person spends 38.5 days of their life brushing their teeth!</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div class="text-4xl mb-4">🔬</div>
+                        <h4 class="text-lg font-semibold text-gray-900 mb-2">Flavor Science</h4>
+                        <p class="text-gray-600">Our mango flavor took 47 iterations to perfect the tropical taste!</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div class="text-4xl mb-4">😊</div>
+                        <h4 class="text-lg font-semibold text-gray-900 mb-2">Smile Power</h4>
+                        <p class="text-gray-600">A genuine smile can boost your mood and reduce stress levels!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="py-20 bg-gradient-to-br from-smiely-mango/15 via-smiely-strawberry/15 to-smiely-yuzu/15">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="space-y-8">
+                <!-- Header -->
+                <div>
+                    <div class="inline-block mb-4">
+                        <span class="text-6xl">📧</span>
+                    </div>
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                        Stay <span class="text-sunset">Smiley</span> with Us!
+                    </h2>
+                    <p class="text-xl text-gray-700 max-w-2xl mx-auto">
+                        Join our community and be the first to discover new flavors, exclusive offers, 
+                        and oral care tips that will make you smile!
+                    </p>
+                </div>
+
+                <!-- Benefits -->
+                <div class="flex flex-wrap justify-center gap-6 mb-8">
+                    <div class="flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm">
+                        <i class="fas fa-gift w-5 h-5 text-smiely-mango"></i>
+                        <span class="text-sm font-medium text-gray-700">Exclusive flavor drops</span>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm">
+                        <i class="fas fa-sparkles w-5 h-5 text-smiely-strawberry"></i>
+                        <span class="text-sm font-medium text-gray-700">Early access to new products</span>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm">
+                        <i class="fas fa-envelope w-5 h-5 text-smiely-yuzu"></i>
+                        <span class="text-sm font-medium text-gray-700">Oral care tips & tricks</span>
+                    </div>
+                </div>
+
+                <!-- Signup Form -->
+                <div class="bg-white rounded-3xl shadow-xl p-8 max-w-md mx-auto">
+                    <div id="newsletterForm">
+                        <form id="newsletterFormElement" class="space-y-6">
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Email Address
+                                </label>
+                                <div class="relative">
+                                    <i class="fas fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+                                    <input
+                                        type="email"
+                                        id="newsletterEmail"
+                                        placeholder="your@email.com"
+                                        required
+                                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-full focus:ring-2 focus:ring-smiely-mango focus:border-transparent transition-all duration-200"
+                                    />
+                                </div>
+                            </div>
+                            
+                            <button 
+                                type="submit" 
+                                id="newsletterBtn"
+                                class="w-full bg-gradient-to-r from-smiely-mango to-smiely-strawberry text-white py-3 rounded-full font-semibold text-lg hover:shadow-lg hover:scale-105 transition-all duration-200 transform group"
+                            >
+                                Subscribe & Smile! 😊
+                                <span class="ml-2" style="animation: wiggle 1s ease-in-out infinite 2s;">✨</span>
+                </button>
+                            
+                            <p class="text-xs text-gray-500 text-center">
+                                We respect your privacy. Unsubscribe at any time.
+                            </p>
+                        </form>
+                    </div>
+                    
+                    <!-- Success State (Hidden by default) -->
+                    <div id="newsletterSuccess" class="text-center space-y-4 hidden">
+                        <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto">
+                            <span class="text-4xl">✅</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900">Welcome to the Family! 🎉</h3>
+                        <p class="text-gray-600">
+                            You're now part of our SMILEY community! Check your email for a special welcome gift.
+                        </p>
+                        <button
+                            id="newsletterReset"
+                            class="bg-white text-smiely-mango border-2 border-smiely-mango px-6 py-2 rounded-full font-medium hover:bg-smiely-mango hover:text-white transition-all duration-200 mt-4"
+                        >
+                            Subscribe Another Email
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Social Proof -->
+                <div class="mt-8">
+                    <p class="text-sm text-gray-500 mb-2">Join thousands of happy customers</p>
+                    <div class="flex justify-center space-x-1">
+                        <div class="w-8 h-8 bg-smiely-yuzu rounded-full flex items-center justify-center text-white text-sm font-bold">😊</div>
+                        <div class="w-8 h-8 bg-smiely-yuzu rounded-full flex items-center justify-center text-white text-sm font-bold">😊</div>
+                        <div class="w-8 h-8 bg-smiely-yuzu rounded-full flex items-center justify-center text-white text-sm font-bold">😊</div>
+                        <div class="w-8 h-8 bg-smiely-yuzu rounded-full flex items-center justify-center text-white text-sm font-bold">😊</div>
+                        <div class="w-8 h-8 bg-smiely-yuzu rounded-full flex items-center justify-center text-white text-sm font-bold">😊</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">Our <span class="text-rainbow">Blog</span></h2>
+            <p class="text-xl text-gray-600 mb-8">Coming Soon! Stay tuned for oral care tips, product updates, and fun stories.</p>
+            <div class="bg-gradient-to-br from-smiely-mango/10 to-smiely-strawberry/10 rounded-2xl p-12">
+                <div class="text-6xl mb-4">📝</div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">Blog Coming Soon!</h3>
+                <p class="text-gray-600 mb-6">We're working on bringing you amazing content about oral care, healthy habits, and behind-the-scenes stories.</p>
+                <button class="bg-gradient-to-r from-smiely-mango to-smiely-strawberry text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200 transform">
+                    Notify Me When Ready
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Frequently Asked <span class="text-rainbow">Questions</span></h2>
+                <p class="text-xl text-gray-600">Everything you need to know about SMILEY products</p>
+            </div>
+            
+            <div class="space-y-6">
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Are SMILEY products safe for children?</h3>
+                    <p class="text-gray-600">Yes! All our products are dentist-approved and made with natural ingredients. They're safe for the whole family, including children 2 years and older.</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Do your products contain fluoride?</h3>
+                    <p class="text-gray-600">Yes, our toothpaste contains the recommended amount of fluoride for effective cavity protection while maintaining our delicious fruit flavors.</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">How long does shipping take?</h3>
+                    <p class="text-gray-600">We offer free shipping on orders over $25. Standard shipping takes 3-5 business days, and express shipping takes 1-2 business days.</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Can I return products if I'm not satisfied?</h3>
+                    <p class="text-gray-600">Absolutely! We offer a 30-day money-back guarantee. If you're not completely satisfied, we'll refund your purchase, no questions asked.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gradient-to-br from-smiely-mint/5 via-smiely-blueberry/5 to-smiely-lavender/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Get in <span class="text-rainbow">Touch</span></h2>
+                <p class="text-xl text-gray-600">We'd love to hear from you! Send us a message and we'll respond as soon as possible.</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Send us a Message</h3>
+                    <form class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-smiely-mango focus:border-transparent" placeholder="Your first name">
+                    </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-smiely-mango focus:border-transparent" placeholder="Your last name">
+                    </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-smiely-mango focus:border-transparent" placeholder="your@email.com">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-smiely-mango focus:border-transparent" placeholder="How can we help?">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                            <textarea rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-smiely-mango focus:border-transparent" placeholder="Tell us more..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-gradient-to-r from-smiely-mango to-smiely-strawberry text-white py-3 rounded-lg font-semibold text-lg hover:shadow-lg hover:scale-105 transition-all duration-200 transform">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="space-y-8">
+                    <div class="bg-white rounded-2xl shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Contact Information</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-envelope w-5 h-5 text-smiely-mango"></i>
+                                <span class="text-gray-600">hello@smiley.com</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-phone w-5 h-5 text-smiely-mango"></i>
+                                <span class="text-gray-600">+1 (555) 123-4567</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-map-marker-alt w-5 h-5 text-smiely-mango"></i>
+                                <span class="text-gray-600">123 Smile Street, Happy City, HC 12345</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Business Hours</h3>
+                        <div class="space-y-2 text-gray-600">
+                            <div class="flex justify-between">
+                                <span>Monday - Friday</span>
+                                <span>9:00 AM - 6:00 PM</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Saturday</span>
+                                <span>10:00 AM - 4:00 PM</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Sunday</span>
+                                <span>Closed</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <!-- Main Footer Content -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+                <!-- Brand Section -->
+                <div class="lg:col-span-2">
+                    <div class="space-y-6">
+                        <a href="#home" class="flex items-center space-x-2">
+                            <div class="w-10 h-10 bg-gradient-to-br from-smiely-mango to-smiely-strawberry rounded-full flex items-center justify-center">
+                                <span class="text-white text-xl font-bold">😊</span>
+                            </div>
+                            <span class="text-2xl font-bold text-rainbow">
+                                SMILEY
+                            </span>
+                        </a>
+                        
+                        <p class="text-gray-300 leading-relaxed max-w-md">
+                            Making oral care fun and effective with our playful yet premium products. 
+                            Join the SMILEY family and discover the joy of healthy smiles!
+                        </p>
+
+                        <!-- Social Links -->
+                    <div class="flex space-x-4">
+                            <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-smiely-mango transition-all duration-200" aria-label="Facebook">
+                                <i class="fab fa-facebook w-5 h-5"></i>
+                        </a>
+                            <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-smiely-mango transition-all duration-200" aria-label="Twitter">
+                                <i class="fab fa-twitter w-5 h-5"></i>
+                        </a>
+                            <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-smiely-mango transition-all duration-200" aria-label="Instagram">
+                                <i class="fab fa-instagram w-5 h-5"></i>
+                        </a>
+                            <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-smiely-mango transition-all duration-200" aria-label="YouTube">
+                                <i class="fab fa-youtube w-5 h-5"></i>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Products Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-smiely-mango">Products</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/shop?category=toothpaste" class="text-gray-300 hover:text-smiely-mango transition-colors duration-200">Toothpaste</a></li>
+                        <li><a href="/shop?category=mouthwash" class="text-gray-300 hover:text-smiely-mango transition-colors duration-200">Mouthwash</a></li>
+                        <li><a href="/shop?category=toothbrushes" class="text-gray-300 hover:text-smiely-mango transition-colors duration-200">Toothbrushes</a></li>
+                        <li><a href="/shop?category=floss" class="text-gray-300 hover:text-smiely-mango transition-colors duration-200">Floss</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Company Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-smiely-strawberry">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/about" class="text-gray-300 hover:text-smiely-strawberry transition-colors duration-200">About Us</a></li>
+                        <li><a href="/about#story" class="text-gray-300 hover:text-smiely-strawberry transition-colors duration-200">Our Story</a></li>
+                        <li><a href="/careers" class="text-gray-300 hover:text-smiely-strawberry transition-colors duration-200">Careers</a></li>
+                        <li><a href="/press" class="text-gray-300 hover:text-smiely-strawberry transition-colors duration-200">Press</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Support Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-smiely-yuzu">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/help" class="text-gray-300 hover:text-smiely-yuzu transition-colors duration-200">Help Center</a></li>
+                        <li><a href="/contact" class="text-gray-300 hover:text-smiely-yuzu transition-colors duration-200">Contact Us</a></li>
+                        <li><a href="/shipping" class="text-gray-300 hover:text-smiely-yuzu transition-colors duration-200">Shipping Info</a></li>
+                        <li><a href="/returns" class="text-gray-300 hover:text-smiely-yuzu transition-colors duration-200">Returns</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Contact Section -->
+            <div class="border-t border-gray-800 pt-8 mb-8">
+                <h3 class="text-lg font-semibold mb-4 text-smiely-mint">Get in Touch</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <a href="mailto:hello@smiley.com" class="flex items-center space-x-3 text-gray-300 hover:text-smiely-mint transition-colors duration-200">
+                        <i class="fas fa-envelope w-5 h-5"></i>
+                        <span>hello@smiley.com</span>
+                    </a>
+                    <a href="tel:+15551234567" class="flex items-center space-x-3 text-gray-300 hover:text-smiely-mint transition-colors duration-200">
+                        <i class="fas fa-phone w-5 h-5"></i>
+                        <span>+1 (555) 123-4567</span>
+                    </a>
+                    <a href="#" class="flex items-center space-x-3 text-gray-300 hover:text-smiely-mint transition-colors duration-200">
+                        <i class="fas fa-map-marker-alt w-5 h-5"></i>
+                        <span>123 Smile Street, Happy City, HC 12345</span>
+                    </a>
+            </div>
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <div class="flex items-center space-x-2 text-gray-400">
+                        <span>© 2024 SMILEY. Made with</span>
+                        <i class="fas fa-heart w-4 h-4 text-smiely-strawberry"></i>
+                        <span>for healthy smiles everywhere.</span>
+                    </div>
+                    
+                    <div class="flex space-x-6">
+                        <a href="/privacy" class="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Privacy Policy</a>
+                        <a href="/terms" class="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Terms of Service</a>
+                        <a href="/cookies" class="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Cookie Policy</a>
+                        <a href="/accessibility" class="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Accessibility</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Chat Widget -->
+        <div class="fixed bottom-6 right-6 z-50">
+            <button
+                id="chatWidget"
+                class="w-16 h-16 bg-gradient-to-r from-smiely-mango to-smiely-strawberry rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center hover:scale-110 transform"
+                aria-label="Chat with Dr. SmileBot"
+            >
+                <span class="text-2xl">💬</span>
+            </button>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Cart functionality
+        let cart = JSON.parse(localStorage.getItem('smiley_cart_v1')) || [];
+        const API_BASE = 'http://localhost:3000';
+
+        // Update cart display
+        function updateCartDisplay() {
+            const cartCount = document.getElementById('cartCount');
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            
+            // Update cart count
+            cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            // Update cart items
+            cartItems.innerHTML = '';
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="text-gray-500 text-center py-8">Your cart is empty</p>';
+                checkoutBtn.disabled = true;
+            } else {
+                checkoutBtn.disabled = false;
+                cart.forEach(item => {
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item flex items-center space-x-3 p-3 bg-gray-50 rounded-lg';
+                    cartItem.innerHTML = `
+                        <div class="w-12 h-12 bg-gradient-to-br from-smiely-mango/20 to-smiely-strawberry/20 rounded-lg flex items-center justify-center">
+                            <span class="text-2xl">${item.image}</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-gray-900">${item.name}</h4>
+                            <p class="text-sm text-gray-600">$${item.price}</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <select class="quantity-select border rounded px-2 py-1 text-sm" data-id="${item.id}">
+                                ${[1,2,3,4,5].map(num => `<option value="${num}" ${num === item.quantity ? 'selected' : ''}>${num}</option>`).join('')}
+                            </select>
+                            <button class="remove-item text-red-500 hover:text-red-700 text-sm" data-id="${item.id}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                    cartItems.appendChild(cartItem);
+                });
+            }
+            
+            // Update total
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotal.textContent = `$${total.toFixed(2)}`;
+            
+            // Save to localStorage
+            localStorage.setItem('smiley_cart_v1', JSON.stringify(cart));
+        }
+
+        // Enhanced Add to cart with animations
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('add-to-cart')) {
+                const button = e.target;
+                const id = button.dataset.id;
+                const name = button.dataset.name;
+                const price = parseFloat(button.dataset.price);
+                const image = button.dataset.image;
+                
+                // Animate button
+                const originalText = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Adding...';
+                button.disabled = true;
+                
+                setTimeout(() => {
+                const existingItem = cart.find(item => item.id === id);
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({ id, name, price, image, quantity: 1 });
+                }
+                
+                updateCartDisplay();
+                
+                    // Show success animation
+                button.innerHTML = '<i class="fas fa-check mr-2"></i>Added!';
+                button.classList.add('bg-green-500');
+                    showNotification(`${name} added to cart! 🛒`, 'success');
+                
+                setTimeout(() => {
+                        button.innerHTML = originalText;
+                    button.classList.remove('bg-green-500');
+                        button.disabled = false;
+                    }, 1500);
+                }, 800);
+            }
+        });
+
+        // Mobile menu toggle
+        document.getElementById('mobileMenuButton').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuIcon = document.getElementById('mobileMenuIcon');
+            
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+                mobileMenuIcon.classList.remove('fa-bars');
+                mobileMenuIcon.classList.add('fa-times');
+            } else {
+                mobileMenu.classList.add('hidden');
+                mobileMenuIcon.classList.remove('fa-times');
+                mobileMenuIcon.classList.add('fa-bars');
+            }
+        });
+
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobileMenu').classList.add('hidden');
+                document.getElementById('mobileMenuIcon').classList.remove('fa-times');
+                document.getElementById('mobileMenuIcon').classList.add('fa-bars');
+            });
+        });
+
+        // Cart sidebar toggle
+        document.getElementById('cartButton').addEventListener('click', function() {
+            document.getElementById('cartSidebar').classList.remove('translate-x-full');
+            document.getElementById('cartOverlay').classList.remove('hidden');
+        });
+
+        document.getElementById('closeCart').addEventListener('click', function() {
+            document.getElementById('cartSidebar').classList.add('translate-x-full');
+            document.getElementById('cartOverlay').classList.add('hidden');
+        });
+
+        document.getElementById('cartOverlay').addEventListener('click', function() {
+            document.getElementById('cartSidebar').classList.add('translate-x-full');
+            document.getElementById('cartOverlay').classList.add('hidden');
+        });
+
+        // Quantity change
+        document.addEventListener('change', function(e) {
+            if (e.target.classList.contains('quantity-select')) {
+                const id = e.target.dataset.id;
+                const quantity = parseInt(e.target.value);
+                const item = cart.find(item => item.id === id);
+                if (item) {
+                    item.quantity = quantity;
+                    updateCartDisplay();
+                }
+            }
+        });
+
+        // Remove item
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.remove-item')) {
+                const id = e.target.closest('.remove-item').dataset.id;
+                cart = cart.filter(item => item.id !== id);
+                updateCartDisplay();
+            }
+        });
+
+        // Clear cart
+        document.getElementById('clearCart').addEventListener('click', function() {
+            cart = [];
+            updateCartDisplay();
+        });
+
+        // Checkout
+        document.getElementById('checkoutBtn').addEventListener('click', function() {
+            if (cart.length === 0) return;
+            
+            // Redirect to Next.js checkout page
+            window.location.href = `${API_BASE}/checkout`;
+        });
+
+        // Enhanced Newsletter signup
+        document.getElementById('newsletterFormElement').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsletterEmail').value;
+            
+            if (!email) {
+                showNotification('Please enter your email address', 'error');
+                return;
+            }
+            
+            if (!validateEmail(email)) {
+                showNotification('Please enter a valid email address', 'error');
+                return;
+            }
+            
+            try {
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Subscribing...';
+                submitBtn.disabled = true;
+                
+                const response = await fetch(`${API_BASE}/api/newsletter`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email })
+                });
+                
+                if (response.ok) {
+                    // Show success state
+                    document.getElementById('newsletterForm').classList.add('hidden');
+                    document.getElementById('newsletterSuccess').classList.remove('hidden');
+                    showNotification('Welcome to SMILEY! Check your email for exclusive offers! 🎉', 'success');
+                } else {
+                    showNotification('Something went wrong. Please try again.', 'error');
+                }
+            } catch (error) {
+                console.error('Newsletter signup error:', error);
+                showNotification('Something went wrong. Please try again.', 'error');
+            }
+        });
+
+        // Newsletter reset
+        document.getElementById('newsletterReset').addEventListener('click', function() {
+            document.getElementById('newsletterForm').classList.remove('hidden');
+            document.getElementById('newsletterSuccess').classList.add('hidden');
+            document.getElementById('newsletterEmail').value = '';
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fetch and display products from backend
+        async function loadProducts() {
+            const fallbackProducts = document.getElementById('fallbackProducts');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const productsGrid = document.getElementById('productsGrid');
+            
+            try {
+                // Show loading spinner and hide fallback products
+                fallbackProducts.classList.add('hidden');
+                loadingSpinner.classList.remove('hidden');
+                
+                const response = await fetch(`${API_BASE}/api/products`);
+                const data = await response.json();
+                
+                if (data.success && data.products) {
+                    // Hide loading spinner
+                    loadingSpinner.classList.add('hidden');
+                    
+                    // Clear and populate with backend products
+                    productsGrid.innerHTML = '';
+                    
+                    data.products.forEach(product => {
+                        const productCard = document.createElement('div');
+                        productCard.className = 'card-hover bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100';
+                        
+                        // Create gradient background based on product colors
+                        const gradientClass = `bg-gradient-to-br ${product.gradientFrom || 'from-smiely-mango/20'} ${product.gradientTo || 'to-smiely-strawberry/20'}`;
+                        
+                        productCard.innerHTML = `
+                            <div class="h-64 ${gradientClass} flex items-center justify-center relative overflow-hidden">
+                                <span class="text-6xl">${product.imageEmoji}</span>
+                                ${product.badges && product.badges.length > 0 ? `
+                                    <div class="absolute top-4 right-4 bg-smiely-strawberry text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                        ${product.badges[0]}
+                                    </div>
+                                ` : ''}
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">${product.name}</h3>
+                                <p class="text-gray-600 mb-4">${product.description}</p>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-2xl font-bold text-smiely-mango">$${product.price.toFixed(2)}</span>
+                                    <button class="add-to-cart bg-gradient-to-r from-smiely-mango to-smiely-strawberry text-white px-6 py-2 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200" 
+                                            data-id="${product.id}" 
+                                            data-name="${product.name}" 
+                                            data-price="${product.price}" 
+                                            data-image="${product.imageEmoji}">
+                                        Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        
+                        productsGrid.appendChild(productCard);
+                    });
+                } else {
+                    // If API fails, show fallback products
+                    loadingSpinner.classList.add('hidden');
+                    fallbackProducts.classList.remove('hidden');
+                    console.log('Using fallback products - API response:', data);
+                }
+            } catch (error) {
+                console.error('Failed to load products:', error);
+                // If API fails, show fallback products
+                loadingSpinner.classList.add('hidden');
+                fallbackProducts.classList.remove('hidden');
+            }
+        }
+
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const body = document.body;
+        
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            body.classList.add('dark');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', function() {
+            if (body.classList.contains('dark')) {
+                body.classList.remove('dark');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.classList.add('dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Product filtering functionality
+        let wishlist = JSON.parse(localStorage.getItem('smiley_wishlist_v1')) || [];
+        
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const filter = this.dataset.filter;
+                
+                // Update active button
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('active', 'bg-gradient-to-r', 'from-smiely-mango', 'to-smiely-strawberry', 'text-white', 'shadow-lg');
+                    b.classList.add('bg-gray-100', 'text-gray-700');
+                });
+                this.classList.add('active', 'bg-gradient-to-r', 'from-smiely-mango', 'to-smiely-strawberry', 'text-white', 'shadow-lg');
+                this.classList.remove('bg-gray-100', 'text-gray-700');
+                
+                // Filter products
+                document.querySelectorAll('.product-card').forEach(card => {
+                    const flavor = card.dataset.flavor;
+                    if (filter === 'all' || flavor === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Wishlist functionality
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.wishlist-btn')) {
+                const btn = e.target.closest('.wishlist-btn');
+                const icon = btn.querySelector('i');
+                const productCard = btn.closest('.product-card');
+                const productId = productCard.querySelector('.add-to-cart').dataset.id;
+                
+                if (wishlist.includes(productId)) {
+                    wishlist = wishlist.filter(id => id !== productId);
+                    icon.classList.remove('fas', 'text-smiely-strawberry');
+                    icon.classList.add('far', 'text-gray-600');
+                } else {
+                    wishlist.push(productId);
+                    icon.classList.remove('far', 'text-gray-600');
+                    icon.classList.add('fas', 'text-smiely-strawberry');
+                }
+                
+                localStorage.setItem('smiley_wishlist_v1', JSON.stringify(wishlist));
+            }
+        });
+
+        // Initialize wishlist display
+        function updateWishlistDisplay() {
+            document.querySelectorAll('.wishlist-btn').forEach(btn => {
+                const productCard = btn.closest('.product-card');
+                const productId = productCard.querySelector('.add-to-cart').dataset.id;
+                const icon = btn.querySelector('i');
+                
+                if (wishlist.includes(productId)) {
+                    icon.classList.remove('far', 'text-gray-600');
+                    icon.classList.add('fas', 'text-smiely-strawberry');
+                } else {
+                    icon.classList.remove('fas', 'text-smiely-strawberry');
+                    icon.classList.add('far', 'text-gray-600');
+                }
+            });
+        }
+
+        // Chat widget functionality
+        document.getElementById('chatWidget').addEventListener('click', function() {
+            alert('Chat feature coming soon! 💬\n\nFor now, you can reach us at:\n📧 hello@smiley.com\n📞 +1 (555) 123-4567');
+        });
+
+        // Enhanced Contact form functionality
+        const contactForm = document.querySelector('#contact form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (validateForm(this)) {
+                    const submitBtn = this.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Sending...';
+                    submitBtn.disabled = true;
+                    
+                    setTimeout(() => {
+                        showNotification('Message sent successfully! We\'ll get back to you within 24 hours. 📧', 'success');
+                        this.reset();
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }, 2000);
+                } else {
+                    showNotification('Please fill in all required fields correctly.', 'error');
+                }
+            });
+        }
+
+        // Blog notification button
+        const notifyButton = document.querySelector('#blog button');
+        if (notifyButton) {
+            notifyButton.addEventListener('click', function() {
+                alert('Thanks for your interest! 📝\n\nWe\'ll notify you as soon as our blog is ready.\n\nIn the meantime, follow us on social media for updates!');
+            });
+        }
+
+        // Enhanced JavaScript Features
+        
+        // 1. Enhanced Notifications System
+        function showNotification(message, type = 'success', duration = 3000) {
+            // Remove existing notifications
+            const existingNotifications = document.querySelectorAll('.notification');
+            existingNotifications.forEach(notif => notif.remove());
+            
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 ${
+                type === 'success' ? 'bg-green-500 text-white' : 
+                type === 'error' ? 'bg-red-500 text-white' : 
+                type === 'info' ? 'bg-blue-500 text-white' : 
+                'bg-gray-800 text-white'
+            }`;
+            
+            notification.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <span class="text-lg">${type === 'success' ? '✅' : type === 'error' ? '❌' : type === 'info' ? 'ℹ️' : '🔔'}</span>
+                    <span>${message}</span>
+                    <button onclick="this.parentElement.parentElement.remove()" class="ml-2 text-white hover:text-gray-200">×</button>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 100);
+            
+            // Auto remove
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => notification.remove(), 300);
+            }, duration);
+        }
+        
+        // 2. Enhanced Form Validation
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+        
+        function validateForm(form) {
+            const inputs = form.querySelectorAll('input[required], textarea[required]');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    showFieldError(input, 'This field is required');
+                    isValid = false;
+                } else if (input.type === 'email' && !validateEmail(input.value)) {
+                    showFieldError(input, 'Please enter a valid email address');
+                    isValid = false;
+                } else {
+                    clearFieldError(input);
+                }
+            });
+            
+            return isValid;
+        }
+        
+        function showFieldError(field, message) {
+            clearFieldError(field);
+            field.classList.add('border-red-500');
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'text-red-500 text-sm mt-1';
+            errorDiv.textContent = message;
+            field.parentNode.appendChild(errorDiv);
+        }
+        
+        function clearFieldError(field) {
+            field.classList.remove('border-red-500');
+            const existingError = field.parentNode.querySelector('.text-red-500');
+            if (existingError) {
+                existingError.remove();
+            }
+        }
+
+        // Enhanced Search Functionality
+        function setupSearch() {
+            // Add search input to header
+            const searchButton = document.querySelector('button[class*="search"]');
+            if (searchButton) {
+                const searchInput = document.createElement('input');
+                searchInput.type = 'text';
+                searchInput.placeholder = 'Search products...';
+                searchInput.className = 'hidden sm:block px-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-smiely-mango focus:border-transparent ml-2';
+                searchInput.id = 'searchInput';
+                
+                searchButton.parentNode.insertBefore(searchInput, searchButton);
+                
+                // Search functionality
+                searchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    const products = document.querySelectorAll('.product-card');
+                    
+                    products.forEach(product => {
+                        const productName = product.querySelector('h3').textContent.toLowerCase();
+                        const productDesc = product.querySelector('p').textContent.toLowerCase();
+                        
+                        if (productName.includes(searchTerm) || productDesc.includes(searchTerm)) {
+                            product.style.display = 'block';
+                        } else {
+                            product.style.display = 'none';
+                        }
+                    });
+                    
+                    // Show no results message
+                    const visibleProducts = document.querySelectorAll('.product-card[style*="block"], .product-card:not([style*="none"])');
+                    const noResultsMsg = document.getElementById('noResultsMsg');
+                    
+                    if (visibleProducts.length === 0 && searchTerm) {
+                        if (!noResultsMsg) {
+                            const msg = document.createElement('div');
+                            msg.id = 'noResultsMsg';
+                            msg.className = 'col-span-full text-center py-8 text-gray-500';
+                            msg.innerHTML = '<div class="text-4xl mb-2">🔍</div><p>No products found matching your search.</p>';
+                            document.getElementById('productsGrid').appendChild(msg);
+                        }
+                    } else if (noResultsMsg) {
+                        noResultsMsg.remove();
+                    }
+                });
+            }
+        }
+        
+        // Enhanced Mobile Experience
+        function enhanceMobileExperience() {
+            // Add touch gestures for mobile
+            let startY = 0;
+            let startX = 0;
+            
+            document.addEventListener('touchstart', function(e) {
+                startY = e.touches[0].clientY;
+                startX = e.touches[0].clientX;
+            });
+            
+            document.addEventListener('touchend', function(e) {
+                const endY = e.changedTouches[0].clientY;
+                const endX = e.changedTouches[0].clientX;
+                const diffY = startY - endY;
+                const diffX = startX - endX;
+                
+                // Swipe up to close mobile menu
+                if (diffY > 50 && Math.abs(diffX) < 50) {
+                    const mobileMenu = document.getElementById('mobileMenu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        document.getElementById('mobileMenuIcon').classList.remove('fa-times');
+                        document.getElementById('mobileMenuIcon').classList.add('fa-bars');
+                    }
+                }
+            });
+        }
+        
+        // Enhanced Product Animations
+        function addProductAnimations() {
+            // Add hover effects to product cards
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        }
+        
+        // Initialize all enhanced features
+        function initializeEnhancedFeatures() {
+            setupSearch();
+            addProductAnimations();
+            enhanceMobileExperience();
+            
+            // Add loading animation
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s ease-in';
+                document.body.style.opacity = '1';
+            }, 100);
+        }
+        
+        // Initialize everything
+        updateCartDisplay();
+        updateWishlistDisplay();
+        loadProducts();
+        initializeEnhancedFeatures();
+    </script>
+</body>
+</html>

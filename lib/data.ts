@@ -85,8 +85,7 @@ export const PRODUCTS: Product[] = [
     gradientFrom: 'from-yellow-300',
     gradientTo: 'to-yellow-500',
     description: 'Citrus yuzu for fresh breath',
-    badges: ['Limited'],
-    inStock: true
+    badges: ['Limited']
   },
   {
     id: 'p-blueberry-mouthwash',
@@ -101,8 +100,7 @@ export const PRODUCTS: Product[] = [
     gradientFrom: 'from-blue-300',
     gradientTo: 'to-blue-500',
     description: 'Antibacterial mouthwash with natural blueberry',
-    badges: ['Popular'],
-    inStock: true
+    badges: ['Popular']
   },
   {
     id: 'p-lavender-dream',
@@ -117,8 +115,7 @@ export const PRODUCTS: Product[] = [
     gradientFrom: 'from-purple-300',
     gradientTo: 'to-purple-500',
     description: 'Calming lavender for bedtime',
-    badges: ['Premium'],
-    inStock: true
+    badges: ['Premium']
   },
   {
     id: 'p-mint-fresh',
