@@ -12,7 +12,7 @@ import ThemeToggle from '@/components/theme-toggle'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const { itemCount } = useCart()
+  const { itemCount, lastAddedItem } = useCart()
   const { user } = useAuth()
   const { toast } = useToast()
 
@@ -84,7 +84,15 @@ const Header = () => {
               onClick={handleCartClick}
               className="relative"
             >
-              <ShoppingCart className="h-5 w-5" />
+              <motion.div
+                animate={lastAddedItem ? { 
+                  scale: [1, 1.2, 1],
+                  rotate: [0, -10, 10, 0]
+                } : {}}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+              >
+                <ShoppingCart className="h-5 w-5" />
+              </motion.div>
               {itemCount > 0 && (
                 <motion.span
                   initial={{ scale: 0 }}
@@ -93,6 +101,16 @@ const Header = () => {
                 >
                   {itemCount}
                 </motion.span>
+              )}
+              {lastAddedItem && (
+                <motion.div
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0, opacity: 0 }}
+                  className="absolute -top-1 -right-1 bg-green-500 text-white text-xs rounded-full h-3 w-3 flex items-center justify-center"
+                >
+                  ✓
+                </motion.div>
               )}
             </Button>
 

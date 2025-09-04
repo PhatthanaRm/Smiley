@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import Header from '@/components/header'
+import Footer from '@/components/footer'
 
 export default function CheckoutPage() {
   const { items, subtotal, removeItem, updateQuantity } = useCart()
@@ -61,7 +63,9 @@ export default function CheckoutPage() {
 
   if (items.length === 0) {
   return (
-    <main className="pt-24 pb-20">
+    <main className="min-h-screen">
+      <Header />
+      <div className="pt-24 pb-20">
         <div className="max-w-2xl mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -76,12 +80,16 @@ export default function CheckoutPage() {
             </Link>
           </motion.div>
         </div>
-      </main>
+      </div>
+      <Footer />
+    </main>
     )
   }
 
   return (
-    <main className="pt-24 pb-20 bg-gradient-to-br from-orange-50 to-pink-50 min-h-screen">
+    <main className="min-h-screen bg-gradient-to-br from-orange-50 to-pink-50">
+      <Header />
+      <div className="pt-24 pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -305,6 +313,8 @@ export default function CheckoutPage() {
           </div>
         </motion.div>
       </div>
+      </div>
+      <Footer />
     </main>
   )
 }

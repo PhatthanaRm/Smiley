@@ -7,6 +7,8 @@ import { Card, CardContent } from '@/components/ui/card'
 import { useAuth } from '@/components/auth-provider'
 import { Mail, Lock, User, ShoppingBag, Heart, Settings, LogOut, ArrowRight, CheckCircle, Star, Package, CreditCard, Phone, Globe } from 'lucide-react'
 import Link from 'next/link'
+import Header from '@/components/header'
+import Footer from '@/components/footer'
 
 export default function AccountPage() {
   const { user, loading, signIn, signUp, signOut } = useAuth()
@@ -47,7 +49,9 @@ export default function AccountPage() {
   }
 
   return (
-    <main className="pt-24 pb-20 bg-gradient-to-br from-orange-50 via-pink-50 to-yellow-50 min-h-screen">
+    <main className="min-h-screen bg-gradient-to-br from-orange-50 via-pink-50 to-yellow-50">
+      <Header />
+      <div className="pt-24 pb-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -402,6 +406,8 @@ export default function AccountPage() {
           </motion.div>
         )}
       </div>
+      </div>
+      <Footer />
     </main>
   )
 }

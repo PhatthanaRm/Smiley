@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button'
 import { Clock, User, Tag } from 'lucide-react'
 import { POSTS } from '@/lib/data'
 import type { BlogPost } from '@/lib/types'
+import Header from '@/components/header'
+import Footer from '@/components/footer'
 
 export default function BlogPage() {
   const [selectedTag, setSelectedTag] = useState<string>('All')
@@ -19,7 +21,9 @@ export default function BlogPage() {
     : POSTS.filter(post => post.tags?.includes(selectedTag))
 
   return (
-    <main className="pt-24 pb-20">
+    <main className="min-h-screen">
+      <Header />
+      <div className="pt-24 pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -193,6 +197,8 @@ export default function BlogPage() {
           </Card>
         </motion.div>
       </div>
+      </div>
+      <Footer />
     </main>
   )
 }

@@ -19,6 +19,7 @@ type CartContextValue = {
   clear: () => void
   subtotal: number
   itemCount: number
+  lastAddedItem: CartItem | null
 }
 
 const CartContext = createContext<CartContextValue | null>(null)
@@ -27,6 +28,7 @@ const STORAGE_KEY = "smiley_cart_v1"
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])
+  const [lastAddedItem, setLastAddedItem] = useState<CartItem | null>(null)
 
   useEffect(() => {
     try {
@@ -42,6 +44,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, [items])
 
   const addItem = (item: CartItem) => {
+    setLastAddedItem(item)
     setItems(prev => {
       const existing = prev.find(p => p.id === item.id)
       if (existing) {
@@ -49,6 +52,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       }
       return [...prev, item]
     })
+    
+    // Clear lastAddedItem after a short delay
+    setTimeout(() => setLastAddedItem(null), 2000)
   }
 
   const removeItem = (id: string) => setItems(prev => prev.filter(p => p.id !== id))
@@ -66,6 +72,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     clear,
     subtotal,
     itemCount,
+    lastAddedItem,
   }
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>

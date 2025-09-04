@@ -8,6 +8,8 @@ import { Card, CardContent } from '@/components/ui/card'
 import Link from 'next/link'
 import { Minus, Plus, Trash2, ShoppingBag, ArrowLeft, Tag } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
+import Header from '@/components/header'
+import Footer from '@/components/footer'
 
 export default function CartPage() {
   const { items, updateQuantity, removeItem, clear, subtotal } = useCart()
@@ -44,7 +46,9 @@ export default function CartPage() {
   }
 
   return (
-    <main className="pt-24 pb-20">
+    <main className="min-h-screen">
+      <Header />
+      <div className="pt-24 pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -258,6 +262,8 @@ export default function CartPage() {
           </div>
         )}
       </div>
+      </div>
+      <Footer />
     </main>
   )
 }

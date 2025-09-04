@@ -4,6 +4,8 @@ import { motion } from 'framer-motion'
 import { Heart, Users, Award, Leaf, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import Header from '@/components/header'
+import Footer from '@/components/footer'
 
 export default function AboutPage() {
   const values = [
@@ -51,7 +53,9 @@ export default function AboutPage() {
   ]
 
   return (
-    <main className="pt-24 pb-20">
+    <main className="min-h-screen">
+      <Header />
+      <div className="pt-24 pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Back Button */}
         <motion.div
@@ -201,6 +205,8 @@ export default function AboutPage() {
           </div>
         </motion.div>
       </div>
+      </div>
+      <Footer />
     </main>
   )
 }

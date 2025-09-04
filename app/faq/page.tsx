@@ -1,6 +1,8 @@
 "use client"
 
 import { useMemo, useState } from 'react'
+import Header from '@/components/header'
+import Footer from '@/components/footer'
 
 const FAQS = [
   { q: 'What makes SMILEY dentist-approved?', a: 'Our formulas are developed with dental experts and use safe, effective ingredients.' },
@@ -15,7 +17,9 @@ export default function FaqPage() {
   const filtered = useMemo(() => FAQS.filter(i => i.q.toLowerCase().includes(query.toLowerCase())), [query])
 
   return (
-    <main className="pt-24 pb-20">
+    <main className="min-h-screen">
+      <Header />
+      <div className="pt-24 pb-20">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-4xl font-bold text-gray-900 mb-6">FAQ & Support</h1>
         <input
@@ -46,6 +50,8 @@ export default function FaqPage() {
           })}
         </div>
       </div>
+      </div>
+      <Footer />
     </main>
   )
 }

@@ -9,6 +9,8 @@ import { Star, Heart, Shield, Truck, RotateCcw, CheckCircle, Minus, Plus } from 
 import { PRODUCTS } from '@/lib/data'
 import { useToast } from '@/hooks/use-toast'
 import type { Product } from '@/lib/types'
+import Header from '@/components/header'
+import Footer from '@/components/footer'
 
 interface ProductPageProps {
   params: {
@@ -46,7 +48,9 @@ export default function ProductPage({ params }: ProductPageProps) {
   }
 
   return (
-    <main className="pt-24 pb-20">
+    <main className="min-h-screen">
+      <Header />
+      <div className="pt-24 pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Product Images */}
@@ -273,6 +277,8 @@ export default function ProductPage({ params }: ProductPageProps) {
           </div>
         </motion.div>
       </div>
+      </div>
+      <Footer />
     </main>
   )
 }

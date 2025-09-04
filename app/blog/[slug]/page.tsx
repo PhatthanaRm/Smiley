@@ -8,6 +8,8 @@ import { Card, CardContent } from '@/components/ui/card'
 import { ArrowLeft, Clock, User, Tag, Share2 } from 'lucide-react'
 import { POSTS } from '@/lib/data'
 import type { BlogPost } from '@/lib/types'
+import Header from '@/components/header'
+import Footer from '@/components/footer'
 
 interface BlogPostPageProps {
   params: {
@@ -27,7 +29,9 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     .slice(0, 3)
 
   return (
-    <main className="pt-24 pb-20">
+    <main className="min-h-screen">
+      <Header />
+      <div className="pt-24 pb-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Back Button */}
         <motion.div
@@ -215,6 +219,8 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
           </Card>
         </motion.div>
       </div>
+      </div>
+      <Footer />
     </main>
   )
 }

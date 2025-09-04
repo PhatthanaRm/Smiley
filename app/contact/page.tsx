@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Mail, Phone, MapPin, Clock, Send, MessageCircle } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
+import Header from '@/components/header'
+import Footer from '@/components/footer'
 
 export default function ContactPage() {
   const { toast } = useToast()
@@ -33,7 +35,9 @@ export default function ContactPage() {
   }
 
   return (
-    <main className="pt-24 pb-20">
+    <main className="min-h-screen">
+      <Header />
+      <div className="pt-24 pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -274,6 +278,8 @@ export default function ContactPage() {
           </motion.div>
         </div>
       </div>
+      </div>
+      <Footer />
     </main>
   )
 }

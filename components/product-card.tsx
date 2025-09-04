@@ -11,11 +11,14 @@ import { useCart } from '@/components/cart-provider'
 import { useEffect, useState } from 'react'
 import { useAuth } from '@/components/auth-provider'
 import { fetchWishlist, toggleWishlist } from '@/lib/wishlist'
+import { useToast } from '@/hooks/use-toast'
 
 export default function ProductCard({ product, index = 0 }: { product: Product; index?: number }) {
   const { addItem } = useCart()
   const { user } = useAuth()
+  const { toast } = useToast()
   const [wish, setWish] = useState(false)
+  const [isAdding, setIsAdding] = useState(false)
 
   useEffect(() => {
     ;(async () => {
@@ -27,6 +30,27 @@ export default function ProductCard({ product, index = 0 }: { product: Product; 
       }
     })()
   }, [user, product.id])
+
+  const handleAddToCart = async () => {
+    setIsAdding(true)
+    addItem({ 
+      id: product.id, 
+      name: product.name, 
+      price: product.price, 
+      quantity: 1, 
+      image: product.imageEmoji, 
+      flavor: product.flavor 
+    })
+    
+    toast({
+      title: "Added to cart! 🛒",
+      description: `${product.name} has been added to your cart`,
+      duration: 3000,
+    })
+    
+    // Reset button state after animation
+    setTimeout(() => setIsAdding(false), 1000)
+  }
 
   return (
     <motion.div
@@ -85,13 +109,29 @@ export default function ProductCard({ product, index = 0 }: { product: Product; 
           <div className="flex items-center justify-between">
             <span className="text-2xl font-bold text-gray-900">${product.price}</span>
             <Button
-              onClick={() => addItem({ id: product.id, name: product.name, price: product.price, quantity: 1, image: product.imageEmoji, flavor: product.flavor })}
+              onClick={handleAddToCart}
               variant="smiley"
               size="sm"
-              className="group"
+              className="group relative overflow-hidden"
+              disabled={isAdding}
             >
-              <ShoppingCart className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
-              Add to Cart
+              <motion.div
+                className="flex items-center"
+                animate={isAdding ? { scale: [1, 1.1, 1] } : {}}
+                transition={{ duration: 0.3 }}
+              >
+                <ShoppingCart className={`w-4 h-4 mr-2 group-hover:scale-110 transition-transform ${isAdding ? 'animate-pulse' : ''}`} />
+                {isAdding ? 'Adding...' : 'Add to Cart'}
+              </motion.div>
+              
+              {isAdding && (
+                <motion.div
+                  className="absolute inset-0 bg-green-400/20"
+                  initial={{ x: '-100%' }}
+                  animate={{ x: '100%' }}
+                  transition={{ duration: 0.6, ease: 'easeInOut' }}
+                />
+              )}
             </Button>
           </div>
         </CardContent>
