@@ -62,7 +62,7 @@ const Footer = () => {
               className="space-y-6"
             >
               <Link href="/" className="flex items-center space-x-2">
-                <div className="w-10 h-10 bg-gradient-to-br from-smiely-mango to-smiely-strawberry rounded-full flex items-center justify-center">
+                <div className="w-10 h-10 bg-gradient-to-br from-smiley-mango to-smiley-strawberry rounded-full flex items-center justify-center">
                   <span className="text-white text-xl font-bold">😊</span>
                 </div>
                 <span className="text-2xl font-bold text-rainbow">
@@ -86,7 +86,7 @@ const Footer = () => {
                     transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
                     viewport={{ once: true }}
                     whileHover={{ scale: 1.1, y: -2 }}
-                    className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-smiely-mango transition-all duration-200"
+                    className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-smiley-mango transition-all duration-200"
                     aria-label={social.label}
                   >
                     <social.icon className="w-5 h-5" />
@@ -103,13 +103,13 @@ const Footer = () => {
             transition={{ duration: 0.8, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-lg font-semibold mb-4 text-smiely-mango">Products</h3>
+            <h3 className="text-lg font-semibold mb-4 text-smiley-mango">Products</h3>
             <ul className="space-y-2">
               {footerLinks.products.map((link) => (
                 <li key={link.name}>
                   <Link 
                     href={link.href}
-                    className="text-gray-300 hover:text-smiely-mango transition-colors duration-200"
+                    className="text-gray-300 hover:text-smiley-mango transition-colors duration-200"
                   >
                     {link.name}
                   </Link>
@@ -125,13 +125,13 @@ const Footer = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-lg font-semibold mb-4 text-smiely-strawberry">Company</h3>
+            <h3 className="text-lg font-semibold mb-4 text-smiley-strawberry">Company</h3>
             <ul className="space-y-2">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
                   <Link 
                     href={link.href}
-                    className="text-gray-300 hover:text-smiely-strawberry transition-colors duration-200"
+                    className="text-gray-300 hover:text-smiley-strawberry transition-colors duration-200"
                   >
                     {link.name}
                   </Link>
@@ -147,13 +147,13 @@ const Footer = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-lg font-semibold mb-4 text-smiely-yuzu">Support</h3>
+            <h3 className="text-lg font-semibold mb-4 text-smiley-yuzu">Support</h3>
             <ul className="space-y-2">
               {footerLinks.support.map((link) => (
                 <li key={link.name}>
                   <Link 
                     href={link.href}
-                    className="text-gray-300 hover:text-smiely-yuzu transition-colors duration-200"
+                    className="text-gray-300 hover:text-smiley-yuzu transition-colors duration-200"
                   >
                     {link.name}
                   </Link>
@@ -171,7 +171,7 @@ const Footer = () => {
           viewport={{ once: true }}
           className="border-t border-gray-800 pt-8 mb-8"
         >
-          <h3 className="text-lg font-semibold mb-4 text-smiely-mint">Get in Touch</h3>
+          <h3 className="text-lg font-semibold mb-4 text-smiley-mint">Get in Touch</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {contactInfo.map((contact, index) => (
               <motion.a
@@ -181,7 +181,7 @@ const Footer = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.5 + index * 0.1, duration: 0.5 }}
                 viewport={{ once: true }}
-                className="flex items-center space-x-3 text-gray-300 hover:text-smiely-mint transition-colors duration-200"
+                className="flex items-center space-x-3 text-gray-300 hover:text-smiley-mint transition-colors duration-200"
               >
                 <contact.icon className="w-5 h-5" />
                 <span>{contact.text}</span>
@@ -201,7 +201,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="flex items-center space-x-2 text-gray-400">
               <span>© {currentYear} SMILEY. Made with</span>
-              <Heart className="w-4 h-4 text-smiely-strawberry fill-current" />
+              <Heart className="w-4 h-4 text-smiley-strawberry fill-current" />
               <span>for healthy smiles everywhere.</span>
             </div>
             
@@ -228,7 +228,7 @@ const Footer = () => {
           transition={{ delay: 1, duration: 0.5, type: "spring" }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          className="w-16 h-16 bg-gradient-to-r from-smiely-mango to-smiely-strawberry rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
+          className="w-16 h-16 bg-gradient-to-r from-smiley-mango to-smiley-strawberry rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
           aria-label="Chat with Dr. SmileBot"
         >
           <span className="text-2xl">💬</span>

@@ -7,10 +7,10 @@ import { ArrowRight, Heart, Users, Award, Leaf } from 'lucide-react'
 
 const BrandStory = () => {
   const stats = [
-    { icon: Users, number: '50K+', label: 'Happy Customers', color: 'text-smiely-mango' },
-    { icon: Award, number: '100%', label: 'Dentist Approved', color: 'text-smiely-strawberry' },
-    { icon: Leaf, number: '100%', label: 'Natural Ingredients', color: 'text-smiely-mint' },
-    { icon: Heart, number: '4.8★', label: 'Average Rating', color: 'text-smiely-yuzu' },
+    { icon: Users, number: '50K+', label: 'Happy Customers', color: 'text-smiley-mango' },
+    { icon: Award, number: '100%', label: 'Dentist Approved', color: 'text-smiley-strawberry' },
+    { icon: Leaf, number: '100%', label: 'Natural Ingredients', color: 'text-smiley-mint' },
+    { icon: Heart, number: '4.8★', label: 'Average Rating', color: 'text-smiley-yuzu' },
   ]
 
   const values = [
@@ -37,7 +37,7 @@ const BrandStory = () => {
   ]
 
   return (
-    <section className="py-20 bg-ocean-gradient">
+    <section className="py-20 bg-gradient-to-br from-smiley-mint/10 via-smiley-blueberry/10 to-smiley-lavender/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Content - Story */}
@@ -54,15 +54,15 @@ const BrandStory = () => {
               transition={{ delay: 0.2, duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl font-bold text-white mb-6 drop-shadow-lg">
-                Our <span className="text-fruit-burst">Story</span>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                Our <span className="text-sunset">Story</span>
               </h2>
-              <p className="text-lg text-white/90 leading-relaxed mb-6 drop-shadow-md">
+              <p className="text-lg text-gray-600 leading-relaxed mb-6">
                 SMILEY was born from a simple idea: oral care doesn't have to be boring! 
                 As parents, we struggled to get our kids excited about brushing their teeth. 
                 That's when we decided to create something different.
               </p>
-              <p className="text-lg text-white/90 leading-relaxed mb-8 drop-shadow-md">
+              <p className="text-lg text-gray-600 leading-relaxed mb-8">
                 We combined the expertise of dental professionals with the creativity of flavor scientists 
                 to develop toothpaste that kids actually want to use. The result? A collection of 
                 delicious, effective, and fun oral care products that make everyone smile.
@@ -75,7 +75,7 @@ const BrandStory = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
               viewport={{ once: true }}
-              className="bg-white/95 backdrop-blur-sm p-6 rounded-2xl shadow-rainbow border-l-4 border-smiely-mango colorful-hover"
+              className="bg-white p-6 rounded-2xl shadow-lg border-l-4 border-smiley-mango"
             >
               <h3 className="text-xl font-semibold text-gray-900 mb-3">Our Mission</h3>
               <p className="text-gray-600">
@@ -92,7 +92,7 @@ const BrandStory = () => {
                viewport={{ once: true }}
              >
                <Link href="/about">
-                 <Button variant="tropical" size="lg" className="group colorful-pulse">
+                 <Button variant="smiley" size="lg" className="group">
                    Learn More About Us
                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                  </Button>
@@ -123,7 +123,7 @@ const BrandStory = () => {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
                   viewport={{ once: true }}
-                  className="bg-white/95 backdrop-blur-sm p-6 rounded-2xl shadow-lg text-center hover:shadow-xl transition-shadow duration-300 colorful-hover"
+                  className="bg-white p-6 rounded-2xl shadow-lg text-center hover:shadow-xl transition-shadow duration-300"
                 >
                   <stat.icon className={`w-8 h-8 mx-auto mb-3 ${stat.color}`} />
                   <div className="text-2xl font-bold text-gray-900 mb-1">{stat.number}</div>
@@ -140,7 +140,7 @@ const BrandStory = () => {
               viewport={{ once: true }}
               className="space-y-4"
             >
-              <h3 className="text-2xl font-bold text-white text-center mb-6 drop-shadow-lg">Our Values</h3>
+              <h3 className="text-2xl font-bold text-gray-900 text-center mb-6">Our Values</h3>
               <div className="grid gap-4">
                 {values.map((value, index) => (
                   <motion.div
@@ -149,7 +149,7 @@ const BrandStory = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.8 + index * 0.1, duration: 0.5 }}
                     viewport={{ once: true }}
-                    className="flex items-start space-x-4 p-4 bg-white/80 backdrop-blur-sm rounded-xl hover:bg-white transition-colors duration-200 colorful-hover"
+                    className="flex items-start space-x-4 p-4 bg-white/80 backdrop-blur-sm rounded-xl hover:bg-white transition-colors duration-200"
                   >
                     <span className="text-3xl">{value.icon}</span>
                     <div>
@@ -171,8 +171,8 @@ const BrandStory = () => {
           viewport={{ once: true }}
           className="mt-20 text-center"
         >
-          <h3 className="text-3xl font-bold text-white mb-8 drop-shadow-lg">
-            Fun <span className="text-fruit-burst">Facts</span>
+          <h3 className="text-3xl font-bold text-gray-900 mb-8">
+            Fun <span className="text-rainbow">Facts</span>
           </h3>
           <div className="grid md:grid-cols-3 gap-8">
             {[
@@ -198,7 +198,7 @@ const BrandStory = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.2 + index * 0.2, duration: 0.6 }}
                 viewport={{ once: true }}
-                className="bg-white/95 backdrop-blur-sm p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 colorful-hover"
+                className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
                 <div className="text-4xl mb-4">{item.emoji}</div>
                 <h4 className="text-lg font-semibold text-gray-900 mb-2">{item.fact}</h4>

@@ -30,7 +30,7 @@ const Header = () => {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-smiely-mango/20 shadow-lg">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-smiley-mango/20 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -38,11 +38,11 @@ const Header = () => {
             <motion.div
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="w-10 h-10 bg-gradient-to-br from-smiely-mango to-smiely-strawberry rounded-full flex items-center justify-center"
+              className="w-10 h-10 bg-gradient-to-br from-smiley-mango to-smiley-strawberry rounded-full flex items-center justify-center"
             >
               <span className="text-white text-xl font-bold">😊</span>
             </motion.div>
-            <span className="text-2xl font-bold text-fruit-burst">
+            <span className="text-2xl font-bold text-rainbow">
               SMILEY
             </span>
           </Link>
@@ -53,7 +53,7 @@ const Header = () => {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-700 hover:text-smiely-mango transition-colors duration-200 font-medium colorful-hover"
+                className="text-gray-700 hover:text-smiley-mango transition-colors duration-200 font-medium"
               >
                 {item.name}
               </Link>
@@ -87,7 +87,7 @@ const Header = () => {
                 <motion.span
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  className="absolute -top-2 -right-2 bg-smiely-strawberry text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold"
+                  className="absolute -top-2 -right-2 bg-smiley-strawberry text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold"
                 >
                   {cartCount}
                 </motion.span>
@@ -119,7 +119,7 @@ const Header = () => {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-smiely-mango hover:bg-gray-50 rounded-md transition-colors duration-200"
+                  className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-smiley-mango hover:bg-gray-50 rounded-md transition-colors duration-200"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}

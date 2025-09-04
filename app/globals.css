@@ -61,11 +61,11 @@
 /* Custom SMILEY brand styles - Enhanced colorful theme */
 @layer components {
   .btn-primary {
-    @apply bg-gradient-to-r from-smiely-mango to-smiely-strawberry text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105;
+    @apply bg-gradient-to-r from-smiley-mango to-smiley-strawberry text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105;
   }
   
   .btn-secondary {
-    @apply bg-white text-smiely-mango border-2 border-smiely-mango px-6 py-3 rounded-full font-semibold hover:bg-smiely-mango hover:text-white transition-all duration-300;
+    @apply bg-white text-smiley-mango border-2 border-smiley-mango px-6 py-3 rounded-full font-semibold hover:bg-smiley-mango hover:text-white transition-all duration-300;
   }
   
   .card-hover {

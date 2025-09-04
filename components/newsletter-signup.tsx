@@ -24,13 +24,13 @@ const NewsletterSignup = () => {
   }
 
   const benefits = [
-    { icon: Gift, text: 'Exclusive flavor drops', color: 'text-smiely-mango' },
-    { icon: Sparkles, text: 'Early access to new products', color: 'text-smiely-strawberry' },
-    { icon: Mail, text: 'Oral care tips & tricks', color: 'text-smiely-yuzu' },
+    { icon: Gift, text: 'Exclusive flavor drops', color: 'text-smiley-mango' },
+    { icon: Sparkles, text: 'Early access to new products', color: 'text-smiley-strawberry' },
+    { icon: Mail, text: 'Oral care tips & tricks', color: 'text-smiley-yuzu' },
   ]
 
   return (
-    <section className="py-20 bg-candy-gradient">
+    <section className="py-20 bg-gradient-to-br from-smiley-mango/15 via-smiley-strawberry/15 to-smiley-yuzu/15">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -50,10 +50,10 @@ const NewsletterSignup = () => {
             >
               <span className="text-6xl">📧</span>
             </motion.div>
-            <h2 className="text-4xl font-bold text-white mb-4 drop-shadow-lg">
-              Stay <span className="text-fruit-burst">Smiley</span> with Us!
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Stay <span className="text-sunset">Smiley</span> with Us!
             </h2>
-            <p className="text-xl text-white/90 max-w-2xl mx-auto drop-shadow-md">
+            <p className="text-xl text-gray-700 max-w-2xl mx-auto">
               Join our community and be the first to discover new flavors, exclusive offers, 
               and oral care tips that will make you smile!
             </p>
@@ -74,7 +74,7 @@ const NewsletterSignup = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.6 + index * 0.1, duration: 0.5 }}
                 viewport={{ once: true }}
-                className="flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm colorful-hover"
+                className="flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm"
               >
                 <benefit.icon className={`w-5 h-5 ${benefit.color}`} />
                 <span className="text-sm font-medium text-gray-700">{benefit.text}</span>
@@ -88,7 +88,7 @@ const NewsletterSignup = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
             viewport={{ once: true }}
-            className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-rainbow p-8 max-w-md mx-auto colorful-hover"
+            className="bg-white rounded-3xl shadow-xl p-8 max-w-md mx-auto"
           >
             {!isSubscribed ? (
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -105,16 +105,16 @@ const NewsletterSignup = () => {
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="your@email.com"
                       required
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-full focus:ring-2 focus:ring-smiely-mango focus:border-transparent transition-all duration-200"
+                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-full focus:ring-2 focus:ring-smiley-mango focus:border-transparent transition-all duration-200"
                     />
                   </div>
                 </div>
                 
                 <Button 
                   type="submit" 
-                  variant="fruit" 
+                  variant="smiley" 
                   size="lg" 
-                  className="w-full group colorful-pulse"
+                  className="w-full group"
                 >
                   Subscribe & Smile! 😊
                   <motion.div
@@ -150,7 +150,7 @@ const NewsletterSignup = () => {
                   You're now part of our SMILEY community! Check your email for a special welcome gift.
                 </p>
                 <Button
-                  variant="rainbowOutline"
+                  variant="smileyOutline"
                   onClick={() => setIsSubscribed(false)}
                   className="mt-4"
                 >
@@ -168,7 +168,7 @@ const NewsletterSignup = () => {
             viewport={{ once: true }}
             className="mt-8"
           >
-            <p className="text-sm text-white/80 mb-2 drop-shadow-md">Join thousands of happy customers</p>
+            <p className="text-sm text-gray-500 mb-2">Join thousands of happy customers</p>
             <div className="flex justify-center space-x-1">
               {[...Array(5)].map((_, i) => (
                 <motion.div
@@ -177,7 +177,7 @@ const NewsletterSignup = () => {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 1 + i * 0.1, duration: 0.3 }}
                   viewport={{ once: true }}
-                  className="w-8 h-8 bg-rainbow-gradient rounded-full flex items-center justify-center text-white text-sm font-bold shadow-rainbow"
+                  className="w-8 h-8 bg-smiley-yuzu rounded-full flex items-center justify-center text-white text-sm font-bold"
                 >
                   😊
                 </motion.div>

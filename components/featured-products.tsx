@@ -19,7 +19,7 @@ const products = [
     rating: 4.8,
     reviews: 127,
     image: '🥭',
-    color: 'from-smiely-mango to-orange-400',
+    color: 'from-smiley-mango to-orange-400',
     description: 'Tropical mango flavor with natural whitening',
     badge: 'Best Seller'
   },
@@ -32,7 +32,7 @@ const products = [
     rating: 4.9,
     reviews: 89,
     image: '🍓',
-    color: 'from-smiely-strawberry to-pink-400',
+    color: 'from-smiley-strawberry to-pink-400',
     description: 'Sweet strawberry with cavity protection',
     badge: 'New'
   },
@@ -45,7 +45,7 @@ const products = [
     rating: 4.7,
     reviews: 64,
     image: '🍋',
-    color: 'from-smiely-yuzu to-yellow-400',
+    color: 'from-smiley-yuzu to-yellow-400',
     description: 'Citrus yuzu for fresh breath',
     badge: 'Limited'
   },
@@ -58,7 +58,7 @@ const products = [
     rating: 4.6,
     reviews: 42,
     image: '🫐',
-    color: 'from-smiely-blueberry to-blue-400',
+    color: 'from-smiley-blueberry to-blue-400',
     description: 'Cool mint with blueberry essence',
     badge: 'Popular'
   },
@@ -71,7 +71,7 @@ const products = [
     rating: 4.5,
     reviews: 38,
     image: '💜',
-    color: 'from-smiely-lavender to-purple-400',
+    color: 'from-smiley-lavender to-purple-400',
     description: 'Calming lavender for bedtime',
     badge: 'Premium'
   },
@@ -84,7 +84,7 @@ const products = [
     rating: 4.4,
     reviews: 156,
     image: '🌿',
-    color: 'from-smiely-mint to-green-400',
+    color: 'from-smiley-mint to-green-400',
     description: 'Classic mint for everyday freshness',
     badge: 'Classic'
   }
@@ -125,7 +125,7 @@ const FeaturedProducts = () => {
   }
 
   return (
-    <section className="py-20 bg-gradient-to-br from-smiely-mango/5 via-smiely-strawberry/5 to-smiely-yuzu/5">
+    <section className="py-20 bg-gradient-to-br from-smiley-mango/5 via-smiley-strawberry/5 to-smiley-yuzu/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -157,8 +157,8 @@ const FeaturedProducts = () => {
               onClick={() => setSelectedFilter(filter.value)}
               className={`px-6 py-2 rounded-full font-medium transition-all duration-200 ${
                 selectedFilter === filter.value
-                  ? 'bg-rainbow-gradient text-white shadow-rainbow colorful-pulse'
-                  : 'bg-white/80 text-gray-700 hover:bg-sunset-gradient hover:text-white hover:shadow-sunset'
+                  ? 'bg-gradient-to-r from-smiley-mango to-smiley-strawberry text-white shadow-lg'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
               {filter.name}
@@ -176,11 +176,11 @@ const FeaturedProducts = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="group hover:shadow-xl transition-all duration-300 border border-gray-200 bg-white overflow-hidden colorful-hover">
+              <Card className="group hover:shadow-xl transition-all duration-300 border border-gray-200 bg-white overflow-hidden">
                 {/* Product Badge */}
                 {product.badge && (
                   <div className="absolute top-4 right-4 z-10">
-                    <span className="bg-rainbow-gradient text-white px-3 py-1 rounded-full text-xs font-semibold shadow-rainbow">
+                    <span className="bg-smiley-yuzu text-white px-3 py-1 rounded-full text-xs font-semibold">
                       {product.badge}
                     </span>
                   </div>
@@ -191,7 +191,7 @@ const FeaturedProducts = () => {
                   <div className="relative">
                     <motion.div
                       whileHover={{ scale: 1.05 }}
-                      className={`w-full h-48 bg-gradient-to-br ${product.color} rounded-lg flex items-center justify-center text-6xl shadow-lg colorful-glow`}
+                      className={`w-full h-48 bg-gradient-to-br ${product.color} rounded-lg flex items-center justify-center text-6xl shadow-lg`}
                     >
                       {product.image}
                     </motion.div>
@@ -204,7 +204,7 @@ const FeaturedProducts = () => {
                       <Heart 
                         className={`w-5 h-5 ${
                           wishlist.includes(product.id) 
-                            ? 'fill-smiely-strawberry text-smiely-strawberry' 
+                            ? 'fill-smiley-strawberry text-smiley-strawberry' 
                             : 'text-gray-600'
                         }`} 
                       />
@@ -231,7 +231,7 @@ const FeaturedProducts = () => {
                           key={i}
                           className={`w-4 h-4 ${
                             i < Math.floor(product.rating)
-                              ? 'fill-smiely-yuzu text-smiely-yuzu'
+                              ? 'fill-smiley-yuzu text-smiley-yuzu'
                               : 'text-gray-300'
                           }`}
                         />
@@ -249,7 +249,7 @@ const FeaturedProducts = () => {
                     </span>
                     <Button
                       onClick={() => handleAddToCart(product)}
-                      variant="sunset"
+                      variant="smiley"
                       size="sm"
                       className="group"
                     >
@@ -272,7 +272,7 @@ const FeaturedProducts = () => {
            className="text-center mt-12"
          >
            <Link href="/shop">
-             <Button variant="ocean" size="xl" className="colorful-pulse">
+             <Button variant="smileyOutline" size="xl">
                View All Products
              </Button>
            </Link>
