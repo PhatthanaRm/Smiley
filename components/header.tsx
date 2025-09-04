@@ -6,11 +6,14 @@ import { motion } from 'framer-motion'
 import { ShoppingCart, Menu, X, User, Search } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/hooks/use-toast'
+import { useCart } from '@/components/cart-provider'
+import { useAuth } from '@/components/auth-provider'
 import ThemeToggle from '@/components/theme-toggle'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [cartCount, setCartCount] = useState(3) // Mock cart count
+  const { itemCount } = useCart()
+  const { user } = useAuth()
   const { toast } = useToast()
 
   const navigation = [
@@ -23,10 +26,7 @@ const Header = () => {
   ]
 
   const handleCartClick = () => {
-    toast({
-      title: "Cart",
-      description: "Your cart is ready! 🛒",
-    })
+    window.location.href = '/cart'
   }
 
   return (
@@ -68,9 +68,11 @@ const Header = () => {
             </Button>
 
             {/* User Account */}
-            <Button variant="ghost" size="icon" className="hidden sm:flex">
-              <User className="h-5 w-5" />
-            </Button>
+            <Link href="/account">
+              <Button variant="ghost" size="icon" className="hidden sm:flex">
+                <User className="h-5 w-5" />
+              </Button>
+            </Link>
 
             {/* Theme Toggle */}
             <ThemeToggle />
@@ -83,13 +85,13 @@ const Header = () => {
               className="relative"
             >
               <ShoppingCart className="h-5 w-5" />
-              {cartCount > 0 && (
+              {itemCount > 0 && (
                 <motion.span
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   className="absolute -top-2 -right-2 bg-smiley-strawberry text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold"
                 >
-                  {cartCount}
+                  {itemCount}
                 </motion.span>
               )}
             </Button>
