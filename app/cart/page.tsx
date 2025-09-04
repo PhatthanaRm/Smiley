@@ -110,17 +110,12 @@ export default function CartPage() {
                             {item.name}
                           </h3>
                           <p className="text-gray-600 text-sm mb-2">
-                            {item.flavor} • {item.size || 'Standard'}
+                            {item.flavor || 'Standard'} • Standard
                           </p>
                           <div className="flex items-center space-x-2">
                             <span className="text-lg font-bold text-gray-900">
                               ${item.price.toFixed(2)}
                             </span>
-                            {item.originalPrice && (
-                              <span className="text-sm text-gray-500 line-through">
-                                ${item.originalPrice.toFixed(2)}
-                              </span>
-                            )}
                           </div>
                         </div>
                         <div className="flex items-center space-x-3">
