@@ -3,19 +3,24 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import type { User } from '@supabase/supabase-js'
 import { supabase } from '@/lib/supabase-client'
+import { getCurrentUserProfile } from '@/lib/auth'
+import { Profile } from '@/lib/types'
 
 type AuthContextValue = {
   user: User | null
+  profile: Profile | null
   loading: boolean
   signIn: (email: string, password: string) => Promise<{ error?: string }>
-  signUp: (email: string, password: string) => Promise<{ error?: string }>
+  signUp: (email: string, password: string, fullName?: string) => Promise<{ error?: string }>
   signOut: () => Promise<void>
+  refreshProfile: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null)
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
+  const [profile, setProfile] = useState<Profile | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -29,11 +34,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const { data } = await supabase.auth.getSession()
       if (mounted) {
         setUser(data.session?.user ?? null)
+        if (data.session?.user) {
+          const { profile: userProfile } = await getCurrentUserProfile()
+          setProfile(userProfile)
+        }
         setLoading(false)
       }
     })()
-    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: sub } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setUser(session?.user ?? null)
+      if (session?.user) {
+        const { profile: userProfile } = await getCurrentUserProfile()
+        setProfile(userProfile)
+      } else {
+        setProfile(null)
+      }
     })
     return () => {
       mounted = false
@@ -63,18 +78,42 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return { error: error?.message }
   }
 
-  const signUp = async (email: string, password: string) => {
+  const signUp = async (email: string, password: string, fullName?: string) => {
     if (!supabase) return { error: 'Supabase not configured' }
-    const { error } = await supabase.auth.signUp({ email, password })
+    const { error } = await supabase.auth.signUp({ 
+      email, 
+      password,
+      options: {
+        data: {
+          full_name: fullName,
+        },
+      },
+    })
     return { error: error?.message }
   }
 
   const signOut = async () => {
     if (!supabase) return
     await supabase.auth.signOut()
+    setProfile(null)
   }
 
-  const value = useMemo<AuthContextValue>(() => ({ user, loading, signIn, signUp, signOut }), [user, loading])
+  const refreshProfile = async () => {
+    if (user) {
+      const { profile: userProfile } = await getCurrentUserProfile()
+      setProfile(userProfile)
+    }
+  }
+
+  const value = useMemo<AuthContextValue>(() => ({ 
+    user, 
+    profile, 
+    loading, 
+    signIn, 
+    signUp, 
+    signOut, 
+    refreshProfile 
+  }), [user, profile, loading])
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 

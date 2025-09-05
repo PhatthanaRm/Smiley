@@ -220,20 +220,6 @@ const Footer = () => {
         </motion.div>
       </div>
 
-      {/* Live Chat Widget Placeholder */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <motion.button
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 1, duration: 0.5, type: "spring" }}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          className="w-16 h-16 bg-gradient-to-r from-smiley-mango to-smiley-strawberry rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
-          aria-label="Chat with Dr. SmileBot"
-        >
-          <span className="text-2xl">💬</span>
-        </motion.button>
-      </div>
     </footer>
   )
 }
