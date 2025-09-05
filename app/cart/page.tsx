@@ -78,7 +78,7 @@ export default function CartPage() {
             <div className="text-8xl mb-6">🛒</div>
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Your cart is empty</h2>
             <p className="text-gray-600 mb-8 max-w-md mx-auto">
-              Looks like you haven't added any products to your cart yet. Let's find something you'll love!
+              Looks like you haven&apos;t added any products to your cart yet. Let&apos;s find something you&apos;ll love!
             </p>
             <Link href="/shop">
               <Button variant="smiley" size="lg" className="group">
@@ -106,7 +106,7 @@ export default function CartPage() {
                   <Card className="hover:shadow-lg transition-all duration-300">
                     <CardContent className="p-6">
                       <div className="flex items-center space-x-4">
-                        <div className="w-20 h-20 bg-gradient-to-br from-smiely-mango/20 to-smiely-strawberry/20 rounded-xl flex items-center justify-center text-3xl">
+                        <div className="w-20 h-20 bg-gradient-to-br from-smiley-mango/20 to-smiley-strawberry/20 rounded-xl flex items-center justify-center text-3xl">
                           {item.image ?? '🦷'}
                         </div>
                         <div className="flex-1">
@@ -181,7 +181,7 @@ export default function CartPage() {
                         value={promoCode}
                         onChange={(e) => setPromoCode(e.target.value)}
                         placeholder="Enter code"
-                        className="flex-1 px-3 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-smiely-mango"
+                        className="flex-1 px-3 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-smiley-mango"
                       />
                       <Button
                         onClick={handlePromoCode}

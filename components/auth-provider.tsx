@@ -42,7 +42,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   const signIn = async (email: string, password: string) => {
-    if (!supabase) return { error: 'Supabase not configured' }
+    // For development: mock authentication when Supabase is not configured
+    if (!supabase) {
+      // Simple mock authentication for development
+      if (email === 'demo@smiley.com' && password === 'demo123') {
+        // Create a mock user object
+        const mockUser = {
+          id: 'demo-1',
+          email: email,
+        } as any
+        
+        setUser(mockUser)
+        return { error: undefined }
+      } else {
+        return { error: 'Invalid credentials' }
+      }
+    }
+    
     const { error } = await supabase.auth.signInWithPassword({ email, password })
     return { error: error?.message }
   }

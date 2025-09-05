@@ -16,7 +16,7 @@ export async function GET(request: Request) {
     
     // Filter by tag
     if (tag) {
-      filteredPosts = filteredPosts.filter(p => p.tags.includes(tag))
+      filteredPosts = filteredPosts.filter(p => p.tags?.includes(tag))
     }
     
     // Get all unique tags

@@ -9,6 +9,8 @@ export type CartItem = {
   quantity: number
   image?: string
   flavor?: string
+  size?: string
+  originalPrice?: number
 }
 
 type CartContextValue = {

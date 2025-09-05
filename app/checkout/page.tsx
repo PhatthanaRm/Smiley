@@ -74,7 +74,7 @@ export default function CheckoutPage() {
           >
             <div className="text-6xl">🛒</div>
             <h1 className="text-3xl font-bold text-gray-900">Your cart is empty</h1>
-            <p className="text-gray-600">Looks like you haven't added any items to your cart yet.</p>
+            <p className="text-gray-600">Looks like you haven&apos;t added any items to your cart yet.</p>
             <Link href="/shop" className="inline-block bg-gradient-to-r from-orange-400 to-pink-500 hover:from-orange-500 hover:to-pink-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105">
               Start Shopping
             </Link>

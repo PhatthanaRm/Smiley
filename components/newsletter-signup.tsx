@@ -147,7 +147,7 @@ const NewsletterSignup = () => {
                 </motion.div>
                 <h3 className="text-2xl font-bold text-gray-900">Welcome to the Family! 🎉</h3>
                 <p className="text-gray-600">
-                  You're now part of our SMILEY community! Check your email for a special welcome gift.
+                  You&apos;re now part of our SMILEY community! Check your email for a special welcome gift.
                 </p>
                 <Button
                   variant="smileyOutline"

@@ -24,6 +24,7 @@ A complete, modern e-commerce website for the SMILEY oral care brand built with 
 - **Newsletter Integration**: Email capture with discount codes
 - **SEO Optimized**: Meta tags, structured data, and performance optimized
 
+
 ### Technical Features
 - **Next.js 14**: Latest React framework with App Router
 - **TypeScript**: Full type safety throughout the application
@@ -80,6 +81,21 @@ A complete, modern e-commerce website for the SMILEY oral care brand built with 
 
 5. **Open your browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
+
+## 🔐 User Authentication Setup
+
+### Setting Up User Accounts
+
+1. **Create User Account**
+   - Go to `/account` page
+   - Sign up with your email address
+   - You'll be able to manage your account and orders
+
+2. **Account Features**
+   - **Order History**: Track your purchases
+   - **Wishlist**: Save favorite products
+   - **Subscriptions**: Manage recurring orders
+   - **Profile Management**: Update your information
 
 ## 📁 Project Structure
 

@@ -50,7 +50,7 @@ export default function ContactPage() {
             Get in <span className="text-rainbow">Touch</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Have questions about our products? Need help with your order? We'd love to hear from you!
+            Have questions about our products? Need help with your order? We&apos;d love to hear from you!
           </p>
         </motion.div>
 
@@ -169,7 +169,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold text-gray-900 mb-2">Email Us</h3>
-                      <p className="text-gray-600 mb-2">We'll respond within 24 hours</p>
+                      <p className="text-gray-600 mb-2">We&apos;ll respond within 24 hours</p>
                       <a
                         href="mailto:hello@smiley.com"
                         className="text-smiely-mango hover:text-smiely-strawberry transition-colors font-medium"

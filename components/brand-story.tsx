@@ -58,9 +58,9 @@ const BrandStory = () => {
                 Our <span className="text-sunset">Story</span>
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                SMILEY was born from a simple idea: oral care doesn't have to be boring! 
+                SMILEY was born from a simple idea: oral care doesn&apos;t have to be boring! 
                 As parents, we struggled to get our kids excited about brushing their teeth. 
-                That's when we decided to create something different.
+                That&apos;s when we decided to create something different.
               </p>
               <p className="text-lg text-gray-600 leading-relaxed mb-8">
                 We combined the expertise of dental professionals with the creativity of flavor scientists 
@@ -79,8 +79,8 @@ const BrandStory = () => {
             >
               <h3 className="text-xl font-semibold text-gray-900 mb-3">Our Mission</h3>
               <p className="text-gray-600">
-                "To transform daily oral care from a chore into a delightful experience, 
-                making healthy smiles accessible to everyone through innovative, fun, and effective products."
+                &ldquo;To transform daily oral care from a chore into a delightful experience, 
+                making healthy smiles accessible to everyone through innovative, fun, and effective products.&rdquo;
               </p>
             </motion.div>
 

@@ -83,7 +83,7 @@ export default function AboutPage() {
             About <span className="text-sunset">SMILEY</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            We're on a mission to transform daily oral care from a chore into a delightful experience, 
+            We&apos;re on a mission to transform daily oral care from a chore into a delightful experience, 
             making healthy smiles accessible to everyone through innovative, fun, and effective products.
           </p>
         </motion.div>
@@ -100,9 +100,9 @@ export default function AboutPage() {
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Story</h2>
               <div className="space-y-4 text-gray-600 leading-relaxed">
                 <p>
-                  SMILEY was born from a simple idea: oral care doesn't have to be boring! 
+                  SMILEY was born from a simple idea: oral care doesn&apos;t have to be boring! 
                   As parents, we struggled to get our kids excited about brushing their teeth. 
-                  That's when we decided to create something different.
+                  That&apos;s when we decided to create something different.
                 </p>
                 <p>
                   We combined the expertise of dental professionals with the creativity of flavor scientists 
@@ -110,17 +110,17 @@ export default function AboutPage() {
                   delicious, effective, and fun oral care products that make everyone smile.
                 </p>
                 <p>
-                  Today, we're proud to serve thousands of families worldwide, helping them 
+                  Today, we&apos;re proud to serve thousands of families worldwide, helping them 
                   establish healthy oral care habits that last a lifetime.
                 </p>
               </div>
             </div>
-            <div className="bg-gradient-to-br from-smiely-mango/10 via-smiely-strawberry/10 to-smiely-yuzu/10 p-8 rounded-3xl">
+            <div className="bg-gradient-to-br from-smiley-mango/10 via-smiley-strawberry/10 to-smiley-yuzu/10 p-8 rounded-3xl">
               <div className="text-6xl mb-4">😊</div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
               <p className="text-gray-600">
-                "To transform daily oral care from a chore into a delightful experience, 
-                making healthy smiles accessible to everyone through innovative, fun, and effective products."
+                &ldquo;To transform daily oral care from a chore into a delightful experience, 
+                making healthy smiles accessible to everyone through innovative, fun, and effective products.&rdquo;
               </p>
             </div>
           </div>
@@ -170,7 +170,7 @@ export default function AboutPage() {
               >
                 <div className="text-6xl mb-4">{member.image}</div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">{member.name}</h3>
-                <p className="text-smiely-mango font-medium mb-3">{member.role}</p>
+                <p className="text-smiley-mango font-medium mb-3">{member.role}</p>
                 <p className="text-gray-600 text-sm">{member.description}</p>
               </motion.div>
             ))}
@@ -182,24 +182,24 @@ export default function AboutPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="bg-gradient-to-br from-smiely-mint/10 via-smiely-blueberry/10 to-smiely-lavender/10 p-12 rounded-3xl"
+          className="bg-gradient-to-br from-smiley-mint/10 via-smiley-blueberry/10 to-smiley-lavender/10 p-12 rounded-3xl"
         >
           <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">Our Impact</h2>
           <div className="grid md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-4xl font-bold text-smiely-mango mb-2">50K+</div>
+              <div className="text-4xl font-bold text-smiley-mango mb-2">50K+</div>
               <div className="text-gray-600">Happy Customers</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-smiely-strawberry mb-2">100%</div>
+              <div className="text-4xl font-bold text-smiley-strawberry mb-2">100%</div>
               <div className="text-gray-600">Dentist Approved</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-smiely-yuzu mb-2">4.8★</div>
+              <div className="text-4xl font-bold text-smiley-yuzu mb-2">4.8★</div>
               <div className="text-gray-600">Average Rating</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-smiely-mint mb-2">100%</div>
+              <div className="text-4xl font-bold text-smiley-mint mb-2">100%</div>
               <div className="text-gray-600">Natural Ingredients</div>
             </div>
           </div>

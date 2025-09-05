@@ -1,17 +1,19 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { useAuth } from '@/components/auth-provider'
 import { Mail, Lock, User, ShoppingBag, Heart, Settings, LogOut, ArrowRight, CheckCircle, Star, Package, CreditCard, Phone, Globe } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 
 export default function AccountPage() {
   const { user, loading, signIn, signUp, signOut } = useAuth()
+  const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [firstName, setFirstName] = useState('')
@@ -21,6 +23,7 @@ export default function AccountPage() {
   const [error, setError] = useState<string | null>(null)
   const [isSignUp, setIsSignUp] = useState(false)
   const [success, setSuccess] = useState<string | null>(null)
+
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault()
