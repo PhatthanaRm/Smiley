@@ -8,7 +8,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
 export async function POST(req: NextRequest) {
   try {
     const { items } = await req.json()
-    const line_items = (items ?? []).map((item: any) => ({
+    const line_items = (items ?? []).map((item: { name: string; price: number; quantity: number }) => ({
       price_data: {
         currency: 'usd',
         product_data: { name: item.name },
@@ -25,8 +25,8 @@ export async function POST(req: NextRequest) {
     })
 
     return NextResponse.json({ url: session.url })
-  } catch (e: any) {
-    return NextResponse.json({ error: e.message }, { status: 500 })
+  } catch (e: unknown) {
+    return NextResponse.json({ error: e instanceof Error ? e.message : 'An error occurred' }, { status: 500 })
   }
 }
 

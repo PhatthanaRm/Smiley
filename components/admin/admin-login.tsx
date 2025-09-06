@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { useAdmin } from '@/components/admin-provider'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -122,9 +123,9 @@ export function AdminLogin() {
         <div className="text-center">
           <p className="text-sm text-gray-600">
             Don&apos;t have admin access?{' '}
-            <a href="/" className="font-medium text-blue-600 hover:text-blue-500">
+            <Link href="/" className="font-medium text-blue-600 hover:text-blue-500">
               Go to main site
-            </a>
+            </Link>
           </p>
         </div>
       </div>

@@ -30,7 +30,7 @@ export async function middleware(request: NextRequest) {
 
   if (isAdminRoute || isPublicAdminRoute) {
     // Create Supabase client
-    const supabase = createSupabaseServerClient()
+    const supabase = await createSupabaseServerClient()
 
     try {
       // Get current user

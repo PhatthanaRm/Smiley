@@ -82,8 +82,8 @@ export type Order = {
   stripe_payment_intent_id?: string
   status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled'
   total_amount: number
-  shipping_address: any
-  billing_address: any
+  shipping_address: Address
+  billing_address: Address
   created_at: string
   updated_at: string
 }

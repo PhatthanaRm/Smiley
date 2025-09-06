@@ -2,9 +2,9 @@ import { createClient } from '@supabase/supabase-js'
 import { createServerClient } from '@supabase/ssr'
 
 // Server-side Supabase client for API routes
-export const createSupabaseServerClient = () => {
+export const createSupabaseServerClient = async () => {
   // Import cookies only when this function is called (server-side)
-  const { cookies } = require('next/headers')
+  const { cookies } = await import('next/headers')
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -13,10 +13,10 @@ export const createSupabaseServerClient = () => {
         get: (name: string) => {
           return cookies().get(name)?.value
         },
-        set: (name: string, value: string, options: any) => {
+        set: (name: string, value: string, options: { [key: string]: any }) => {
           cookies().set(name, value, options)
         },
-        remove: (name: string, options: any) => {
+        remove: (name: string, options: { [key: string]: any }) => {
           cookies().set(name, '', { ...options, maxAge: 0 })
         }
       }
