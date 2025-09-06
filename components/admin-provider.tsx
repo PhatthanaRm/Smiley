@@ -4,11 +4,9 @@ import React, { createContext, useContext, useEffect, useMemo, useState, useCall
 import { createSupabaseClientComponent } from '@/lib/supabase-client'
 import { AdminUser, AdminSession, AdminPermission } from '@/lib/types'
 import { 
-  adminSignIn, 
   createAdminSession, 
   getAdminSession, 
   refreshAdminSession, 
-  adminSignOut,
   getCurrentAdminUser,
   hasPermission,
   hasAnyPermission,
@@ -112,19 +110,27 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
 
   const signIn = async (email: string, password: string) => {
     try {
-      const { user: adminUser, error } = await adminSignIn(email, password)
-      
-      if (error) {
-        return { error: error.message }
+      const response = await fetch('/api/admin/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        return { error: data.error || 'Login failed' }
       }
 
-      if (adminUser) {
-        setUser(adminUser)
+      if (data.user) {
+        setUser(data.user)
         
         // Create admin session
         const { session: adminSession, error: sessionError } = await createAdminSession(
-          adminUser.id, 
-          adminUser.permissions
+          data.user.id, 
+          data.user.permissions
         )
         
         if (adminSession) {
@@ -144,8 +150,14 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
   const signOut = async () => {
     try {
       if (session?.user) {
-        // Delete admin session
-        await adminSignOut(session.user.id)
+        // Delete admin session via API
+        await fetch('/api/admin/signout', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ sessionId: session.user.id }),
+        })
       }
       
       // Sign out from Supabase Auth
