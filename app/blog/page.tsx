@@ -20,6 +20,26 @@ export default function BlogPage() {
     ? POSTS 
     : POSTS.filter(post => post.tags?.includes(selectedTag))
 
+  // Determine if content is fruit or dessert related
+  const isFruitRelated = (post: BlogPost) => {
+    const fruitKeywords = ['strawberry', 'mango', 'yuzu', 'blueberry', 'mint', 'lavender', 'peach', 'lime', 'coral', 'cyan', 'flavor', 'fruit']
+    const content = `${post.title} ${post.excerpt} ${post.content}`.toLowerCase()
+    return fruitKeywords.some(keyword => content.includes(keyword))
+  }
+
+  // Get appropriate emojis based on content
+  const getContentEmojis = () => {
+    const fruitEmojis = ['🍓', '🍊', '🍋', '🍇', '🍑', '🥝', '🍎', '🍌']
+    const dessertEmojis = ['🍰', '🧁', '🍪', '🍩', '🍭', '🍦', '🍫', '🍬']
+    
+    // Check if any posts are fruit-related
+    const hasFruitContent = POSTS.some(post => isFruitRelated(post))
+    
+    return hasFruitContent ? fruitEmojis : dessertEmojis
+  }
+
+  const contentEmojis = getContentEmojis()
+
   return (
     <main className="min-h-screen">
       <Header />

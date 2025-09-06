@@ -67,7 +67,7 @@ export default function ShopPage() {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative pt-24 pb-16 overflow-hidden">
+      <section className="relative pt-32 pb-20 overflow-hidden">
         <div className="absolute inset-0">
           <motion.div
             className="absolute top-20 left-10 text-6xl opacity-20"

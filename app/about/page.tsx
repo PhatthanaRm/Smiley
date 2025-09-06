@@ -80,7 +80,7 @@ export default function AboutPage() {
           className="text-center mb-16"
         >
           <h1 className="text-5xl font-bold text-gray-900 mb-6">
-            About <span className="text-sunset">SMILEY</span>
+            About <span className="text-rainbow">SMILEY</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             We&apos;re on a mission to transform daily oral care from a chore into a delightful experience, 
