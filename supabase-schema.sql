@@ -261,13 +261,14 @@ CREATE POLICY "Admins can update all orders" ON orders FOR UPDATE USING (
 );
 
 -- Insert sample data
+-- Insert sample data
 INSERT INTO products (slug, name, flavor, type, price, original_price, description, rating, reviews_count, featured, in_stock, category, tags, images) VALUES
 ('strawberry-fresh-toothpaste', 'Strawberry Fresh Toothpaste', 'Strawberry', 'Toothpaste', 8.99, 12.99, 'Delicious strawberry-flavored toothpaste that makes brushing fun for kids and adults alike!', 4.5, 23, true, true, 'Toothpaste', ARRAY['strawberry', 'kids', 'fruity'], ARRAY['/images/strawberry-toothpaste.jpg']),
 ('minty-fresh-toothbrush', 'Minty Fresh Toothbrush', 'Mint', 'Toothbrush', 6.99, 9.99, 'Soft-bristled toothbrush with ergonomic handle for comfortable brushing', 4.8, 45, true, true, 'Toothbrush', ARRAY['mint', 'soft', 'ergonomic'], ARRAY['/images/minty-toothbrush.jpg']),
 ('berry-blast-mouthwash', 'Berry Blast Mouthwash', 'Berry', 'Mouthwash', 7.99, 11.99, 'Refreshing berry-flavored mouthwash that leaves your mouth feeling clean and fresh', 4.3, 18, true, true, 'Mouthwash', ARRAY['berry', 'fresh', 'refreshing'], ARRAY['/images/berry-mouthwash.jpg']),
 ('complete-oral-care-bundle', 'Complete Oral Care Bundle', 'Mixed', 'Bundle', 24.99, 34.99, 'Everything you need for a complete oral care routine', 4.7, 67, true, true, 'Bundle', ARRAY['bundle', 'complete', 'savings'], ARRAY['/images/oral-care-bundle.jpg']);
 
--- Insert sample admin user (you'll need to create this user in Supabase Auth first)
--- Note: Replace 'admin-user-id' with actual UUID from auth.users
--- INSERT INTO profiles (id, email, full_name, role, is_active) VALUES
--- ('admin-user-id', 'admin@smiley.com', 'Admin User', 'super_admin', true);
+-- Insert admin user
+-- Note: Make sure this user exists in Supabase Auth first
+INSERT INTO profiles (id, email, full_name, role, is_active) VALUES
+('c9d16b3d-d8cf-409d-ab12-ad48108fed58', 'phatthana.rm@gmail.com', 'Phatthana', 'super_admin', true);
