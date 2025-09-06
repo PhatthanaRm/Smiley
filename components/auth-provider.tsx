@@ -1,6 +1,6 @@
 "use client"
 
-import React, { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import React, { createContext, useContext, useEffect, useMemo, useState, useCallback } from 'react'
 import { getCurrentUser, getCurrentUserProfile, signIn as authSignIn, signUp as authSignUp, signOut as authSignOut } from '@/lib/auth'
 import { User, Profile } from '@/lib/types'
 
@@ -100,7 +100,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  const refreshProfile = async () => {
+  const refreshProfile = useCallback(async () => {
     if (user) {
       try {
         const { profile: userProfile } = await getCurrentUserProfile()
@@ -109,7 +109,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         console.error('Profile refresh error:', error)
       }
     }
-  }
+  }, [user])
 
   const value = useMemo<AuthContextValue>(() => ({ 
     user, 
@@ -119,7 +119,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signUp, 
     signOut, 
     refreshProfile 
-  }), [user, profile, loading])
+  }), [user, profile, loading, refreshProfile])
   
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
