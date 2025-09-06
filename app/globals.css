@@ -115,12 +115,12 @@
 
   /* Colorful text gradients - More vibrant and animated */
   .text-rainbow {
-    background: linear-gradient(135deg, #FF8C42, #FF6B9D, #FFD700, #00D4AA, #4A90E2, #B19CD9);
-    background-size: 400% 400%;
+    background: linear-gradient(45deg, #FF8C42, #FF6B9D, #FFD700, #00D4AA, #4A90E2, #B19CD9, #FF8C42);
+    background-size: 300% 300%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: gradientShift 8s ease infinite;
+    animation: gradientFlow 8s ease-in-out infinite;
   }
 
   .text-sunset {
@@ -226,6 +226,14 @@
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 0%; }
+  25% { background-position: 100% 0%; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 0% 100%; }
+  100% { background-position: 0% 0%; }
 }
 
 @keyframes rotate {

@@ -23,6 +23,7 @@ export default function BlogPage() {
   return (
     <main className="min-h-screen">
       <Header />
+      
       <div className="pt-24 pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -48,24 +49,24 @@ export default function BlogPage() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="mb-12"
           >
-            <Card className="overflow-hidden">
+            <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
               <CardContent className="p-0">
                 <div className="grid md:grid-cols-2 gap-0">
-                  <div className="bg-gradient-to-br from-smiely-mango/20 to-smiely-strawberry/20 p-8 flex items-center justify-center">
+                  <div className="bg-gradient-to-br from-smiley-mango/20 to-smiley-strawberry/20 p-8 flex items-center justify-center">
                     <div className="text-8xl">
                       {POSTS.find(post => post.featured)?.coverEmoji}
                     </div>
                   </div>
                   <div className="p-8">
                     <div className="flex items-center space-x-2 mb-3">
-                      <span className="bg-smiely-yuzu text-white px-3 py-1 rounded-full text-sm font-semibold">
+                      <span className="bg-smiley-yuzu text-white px-3 py-1 rounded-full text-sm font-semibold">
                         Featured
                       </span>
-                      <span className="bg-smiely-mint/20 text-smiely-mint px-3 py-1 rounded-full text-sm font-medium">
+                      <span className="bg-smiley-mint/20 text-smiley-mint px-3 py-1 rounded-full text-sm font-medium">
                         {POSTS.find(post => post.featured)?.tags?.[0]}
                       </span>
                     </div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-3">
+                    <h2 className="text-2xl font-bold text-smiley-strawberry mb-3">
                       {POSTS.find(post => post.featured)?.title}
                     </h2>
                     <p className="text-gray-600 mb-4">
@@ -106,7 +107,7 @@ export default function BlogPage() {
               onClick={() => setSelectedTag(tag)}
               className={`px-4 py-2 rounded-full font-medium transition-all duration-200 ${
                 selectedTag === tag
-                  ? 'bg-gradient-to-r from-smiely-mango to-smiely-strawberry text-white shadow-lg'
+                  ? 'bg-gradient-to-r from-smiley-mango to-smiley-strawberry text-white shadow-lg'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -125,7 +126,7 @@ export default function BlogPage() {
               transition={{ duration: 0.6, delay: 0.1 * index }}
             >
               <Card className="group hover:shadow-xl transition-all duration-300 border-0 bg-white overflow-hidden">
-                <div className="bg-gradient-to-br from-smiely-mint/20 to-smiely-blueberry/20 p-8 flex items-center justify-center">
+                <div className="bg-gradient-to-br from-smiley-mint/20 to-smiley-blueberry/20 p-8 flex items-center justify-center">
                   <div className="text-6xl group-hover:scale-110 transition-transform duration-300">
                     {post.coverEmoji}
                   </div>
@@ -135,13 +136,13 @@ export default function BlogPage() {
                     {post.tags?.slice(0, 2).map((tag) => (
                       <span
                         key={tag}
-                        className="bg-smiely-mint/20 text-smiely-mint px-2 py-1 rounded-full text-xs font-medium"
+                        className="bg-smiley-mint/20 text-smiley-mint px-2 py-1 rounded-full text-xs font-medium"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-smiely-mango transition-colors">
+                  <h3 className="text-lg font-semibold text-rainbow mb-2 group-hover:text-rainbow transition-colors">
                     {post.title}
                   </h3>
                   <p className="text-gray-600 text-sm mb-4 line-clamp-3">
@@ -175,10 +176,10 @@ export default function BlogPage() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-16"
         >
-          <Card className="bg-gradient-to-br from-smiely-mango/10 to-smiely-strawberry/10 border-0">
+          <Card className="bg-gradient-to-br from-smiley-mango/10 to-smiley-strawberry/10 border-0">
             <CardContent className="p-8 text-center">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                Stay Updated with SMILEY! 📧
+              <h3 className="text-2xl font-bold text-rainbow mb-4">
+                Stay Updated with SMILEY!
               </h3>
               <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
                 Get the latest flavor drops, oral care tips, and exclusive offers delivered to your inbox.
@@ -187,7 +188,7 @@ export default function BlogPage() {
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="flex-1 px-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-smiely-mango"
+                  className="flex-1 px-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-smiley-mango"
                 />
                 <Button variant="smiley" size="lg">
                   Subscribe
