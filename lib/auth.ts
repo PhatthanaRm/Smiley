@@ -1,27 +1,6 @@
-// Mock authentication system (Supabase removed)
-// This will be replaced with a real authentication system later
-
-export interface User {
-  id: string
-  email: string
-  created_at: string
-  updated_at: string
-}
-
-export interface Profile {
-  id: string
-  email: string
-  full_name?: string
-  avatar_url?: string
-  phone?: string
-  address?: string
-  city?: string
-  state?: string
-  zip_code?: string
-  country?: string
-  created_at: string
-  updated_at: string
-}
+import { createSupabaseClient, createSupabaseServerClient, createSupabaseAdminClient } from './supabase'
+import { User, Profile } from './types'
+import type { User as SupabaseUser } from '@supabase/supabase-js'
 
 export interface AuthError {
   message: string
@@ -38,151 +17,374 @@ export interface ProfileResponse {
   error: any
 }
 
-// Mock user storage (in production, this would be in a database)
-let mockUsers: User[] = []
-let mockProfiles: Profile[] = []
-let currentUser: User | null = null
-
 // Authentication functions
 export const signUp = async (email: string, password: string, fullName?: string): Promise<AuthResponse> => {
-  // Check if user already exists
-  const existingUser = mockUsers.find(u => u.email === email)
-  if (existingUser) {
+  try {
+    const supabase = createSupabaseClient()
+    
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          full_name: fullName
+        }
+      }
+    })
+
+    if (error) {
+      return { 
+        user: null, 
+        error: { message: error.message, status: error.status || 400 } 
+      }
+    }
+
+    if (data.user) {
+      // Create profile
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .insert({
+          id: data.user.id,
+          email: data.user.email!,
+          full_name: fullName
+        })
+
+      if (profileError) {
+        console.error('Error creating profile:', profileError)
+      }
+
+      return { 
+        user: {
+          id: data.user.id,
+          email: data.user.email!,
+          created_at: data.user.created_at,
+          updated_at: data.user.updated_at || data.user.created_at
+        }, 
+        error: null 
+      }
+    }
+
+    return { user: null, error: null }
+  } catch (error) {
     return { 
       user: null, 
-      error: { message: 'User already exists', status: 400 } 
+      error: { message: 'An unexpected error occurred', status: 500 } 
     }
   }
-
-  // Create new user
-  const newUser: User = {
-    id: Math.random().toString(36).substr(2, 9),
-    email,
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  }
-
-  mockUsers.push(newUser)
-  currentUser = newUser
-
-  // Create profile
-  await createProfile(newUser.id, email, fullName)
-
-  return { user: newUser, error: null }
 }
 
 export const signIn = async (email: string, password: string): Promise<AuthResponse> => {
-  const user = mockUsers.find(u => u.email === email)
-  if (!user) {
+  try {
+    const supabase = createSupabaseClient()
+    
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password
+    })
+
+    if (error) {
+      return { 
+        user: null, 
+        error: { message: error.message, status: error.status || 401 } 
+      }
+    }
+
+    if (data.user) {
+      return { 
+        user: {
+          id: data.user.id,
+          email: data.user.email!,
+          created_at: data.user.created_at,
+          updated_at: data.user.updated_at || data.user.created_at
+        }, 
+        error: null 
+      }
+    }
+
+    return { user: null, error: null }
+  } catch (error) {
     return { 
       user: null, 
-      error: { message: 'Invalid credentials', status: 401 } 
+      error: { message: 'An unexpected error occurred', status: 500 } 
     }
   }
-
-  currentUser = user
-  return { user, error: null }
 }
 
 export const signOut = async (): Promise<{ error: AuthError | null }> => {
-  currentUser = null
-  return { error: null }
+  try {
+    const supabase = createSupabaseClient()
+    const { error } = await supabase.auth.signOut()
+    
+    if (error) {
+      return { error: { message: error.message, status: error.status || 500 } }
+    }
+
+    return { error: null }
+  } catch (error) {
+    return { 
+      error: { message: 'An unexpected error occurred', status: 500 } 
+    }
+  }
 }
 
 export const resetPassword = async (email: string): Promise<{ error: AuthError | null }> => {
-  const user = mockUsers.find(u => u.email === email)
-  if (!user) {
+  try {
+    const supabase = createSupabaseClient()
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/reset-password`
+    })
+
+    if (error) {
+      return { 
+        error: { message: error.message, status: error.status || 400 } 
+      }
+    }
+
+    return { error: null }
+  } catch (error) {
     return { 
-      error: { message: 'User not found', status: 404 } 
+      error: { message: 'An unexpected error occurred', status: 500 } 
     }
   }
-
-  // In a real app, you would send an email here
-  console.log(`Password reset email would be sent to ${email}`)
-  return { error: null }
 }
 
 export const updatePassword = async (password: string): Promise<{ error: AuthError | null }> => {
-  if (!currentUser) {
+  try {
+    const supabase = createSupabaseClient()
+    const { error } = await supabase.auth.updateUser({
+      password
+    })
+
+    if (error) {
+      return { 
+        error: { message: error.message, status: error.status || 400 } 
+      }
+    }
+
+    return { error: null }
+  } catch (error) {
     return { 
-      error: { message: 'User not authenticated', status: 401 } 
+      error: { message: 'An unexpected error occurred', status: 500 } 
     }
   }
-
-  // In a real app, you would update the password in the database
-  console.log(`Password updated for user ${currentUser.email}`)
-  return { error: null }
 }
 
 // Profile management functions
 export const createProfile = async (userId: string, email: string, fullName?: string): Promise<ProfileResponse> => {
-  const newProfile: Profile = {
-    id: userId,
-    email,
-    full_name: fullName || undefined,
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  }
+  try {
+    const supabase = createSupabaseClient()
+    
+    const { data, error } = await supabase
+      .from('profiles')
+      .insert({
+        id: userId,
+        email,
+        full_name: fullName
+      })
+      .select()
+      .single()
 
-  mockProfiles.push(newProfile)
-  return { profile: newProfile, error: null }
+    if (error) {
+      return { 
+        profile: null, 
+        error: { message: error.message } 
+      }
+    }
+
+    return { 
+      profile: {
+        id: data.id,
+        email: data.email,
+        full_name: data.full_name,
+        avatar_url: data.avatar_url,
+        phone: data.phone,
+        address: data.address,
+        city: data.city,
+        state: data.state,
+        zip_code: data.zip_code,
+        country: data.country,
+        created_at: data.created_at,
+        updated_at: data.updated_at
+      }, 
+      error: null 
+    }
+  } catch (error) {
+    return { 
+      profile: null, 
+      error: { message: 'An unexpected error occurred' } 
+    }
+  }
 }
 
 export const getProfile = async (userId: string): Promise<ProfileResponse> => {
-  const profile = mockProfiles.find(p => p.id === userId)
-  if (!profile) {
+  try {
+    const supabase = createSupabaseClient()
+    
+    const { data, error } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', userId)
+      .single()
+
+    if (error) {
+      return { 
+        profile: null, 
+        error: { message: error.message } 
+      }
+    }
+
+    if (!data) {
+      return { 
+        profile: null, 
+        error: { message: 'Profile not found' } 
+      }
+    }
+
+    return { 
+      profile: {
+        id: data.id,
+        email: data.email,
+        full_name: data.full_name,
+        avatar_url: data.avatar_url,
+        phone: data.phone,
+        address: data.address,
+        city: data.city,
+        state: data.state,
+        zip_code: data.zip_code,
+        country: data.country,
+        created_at: data.created_at,
+        updated_at: data.updated_at
+      }, 
+      error: null 
+    }
+  } catch (error) {
     return { 
       profile: null, 
-      error: { message: 'Profile not found' } 
+      error: { message: 'An unexpected error occurred' } 
     }
   }
-
-  return { profile, error: null }
 }
 
 export const updateProfile = async (userId: string, updates: Partial<Profile>): Promise<ProfileResponse> => {
-  const profileIndex = mockProfiles.findIndex(p => p.id === userId)
-  if (profileIndex === -1) {
+  try {
+    const supabase = createSupabaseClient()
+    
+    const updateData: any = {}
+    if (updates.full_name !== undefined) updateData.full_name = updates.full_name
+    if (updates.avatar_url !== undefined) updateData.avatar_url = updates.avatar_url
+    if (updates.phone !== undefined) updateData.phone = updates.phone
+    if (updates.address !== undefined) updateData.address = updates.address
+    if (updates.city !== undefined) updateData.city = updates.city
+    if (updates.state !== undefined) updateData.state = updates.state
+    if (updates.zip_code !== undefined) updateData.zip_code = updates.zip_code
+    if (updates.country !== undefined) updateData.country = updates.country
+
+    const { data, error } = await supabase
+      .from('profiles')
+      .update(updateData)
+      .eq('id', userId)
+      .select()
+      .single()
+
+    if (error) {
+      return { 
+        profile: null, 
+        error: { message: error.message } 
+      }
+    }
+
+    return { 
+      profile: {
+        id: data.id,
+        email: data.email,
+        full_name: data.full_name,
+        avatar_url: data.avatar_url,
+        phone: data.phone,
+        address: data.address,
+        city: data.city,
+        state: data.state,
+        zip_code: data.zip_code,
+        country: data.country,
+        created_at: data.created_at,
+        updated_at: data.updated_at
+      }, 
+      error: null 
+    }
+  } catch (error) {
     return { 
       profile: null, 
-      error: { message: 'Profile not found' } 
+      error: { message: 'An unexpected error occurred' } 
     }
   }
-
-  mockProfiles[profileIndex] = {
-    ...mockProfiles[profileIndex],
-    ...updates,
-    updated_at: new Date().toISOString(),
-  }
-
-  return { profile: mockProfiles[profileIndex], error: null }
 }
 
 export const deleteProfile = async (userId: string): Promise<{ error: any }> => {
-  const profileIndex = mockProfiles.findIndex(p => p.id === userId)
-  if (profileIndex === -1) {
-    return { error: { message: 'Profile not found' } }
-  }
+  try {
+    const supabase = createSupabaseClient()
+    const { error } = await supabase
+      .from('profiles')
+      .delete()
+      .eq('id', userId)
 
-  mockProfiles.splice(profileIndex, 1)
-  return { error: null }
+    if (error) {
+      return { error: { message: error.message } }
+    }
+
+    return { error: null }
+  } catch (error) {
+    return { error: { message: 'An unexpected error occurred' } }
+  }
 }
 
 // Get current user
 export const getCurrentUser = async (): Promise<User | null> => {
-  return currentUser
+  try {
+    const supabase = createSupabaseClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    
+    if (!user) {
+      return null
+    }
+
+    return {
+      id: user.id,
+      email: user.email!,
+      created_at: user.created_at,
+      updated_at: user.updated_at || user.created_at
+    }
+  } catch (error) {
+    console.error('Error getting current user:', error)
+    return null
+  }
 }
 
 // Check if user is authenticated
 export const isAuthenticated = async (): Promise<boolean> => {
-  return currentUser !== null
+  try {
+    const supabase = createSupabaseClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    return !!user
+  } catch (error) {
+    console.error('Error checking authentication:', error)
+    return false
+  }
 }
 
 // Get current user's profile
 export const getCurrentUserProfile = async (): Promise<ProfileResponse> => {
-  if (!currentUser) {
-    return { profile: null, error: { message: 'User not authenticated' } }
-  }
+  try {
+    const supabase = createSupabaseClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    
+    if (!user) {
+      return { profile: null, error: { message: 'User not authenticated' } }
+    }
 
-  return await getProfile(currentUser.id)
+    return await getProfile(user.id)
+  } catch (error) {
+    return { 
+      profile: null, 
+      error: { message: 'An unexpected error occurred' } 
+    }
+  }
 }
