@@ -121,7 +121,7 @@ export function AdminLogin() {
 
         <div className="text-center">
           <p className="text-sm text-gray-600">
-            Don't have admin access?{' '}
+            Don&apos;t have admin access?{' '}
             <a href="/" className="font-medium text-blue-600 hover:text-blue-500">
               Go to main site
             </a>

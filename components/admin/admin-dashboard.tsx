@@ -89,7 +89,7 @@ export function AdminDashboard() {
           Welcome back, {user?.full_name || user?.email}!
         </h1>
         <p className="text-gray-600 mt-1">
-          Here's what's happening with your store today.
+          Here&apos;s what&apos;s happening with your store today.
         </p>
       </div>
 

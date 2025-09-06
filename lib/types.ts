@@ -21,7 +21,7 @@ export type AdminUser = {
   full_name?: string
   avatar_url?: string
   role: 'admin' | 'super_admin'
-  permissions: string[]
+  permissions: AdminPermission[]
   is_active: boolean
   last_login?: string
   created_at: string
@@ -30,9 +30,11 @@ export type AdminUser = {
 
 export type AdminSession = {
   user: AdminUser
-  permissions: string[]
+  permissions: AdminPermission[]
   expires_at: string
 }
+
+export type AdminPermission = 'users:read' | 'users:write' | 'users:delete' | 'products:read' | 'products:write' | 'products:delete' | 'orders:read' | 'orders:write' | 'orders:delete' | 'content:read' | 'content:write' | 'content:delete' | 'analytics:read' | 'settings:read' | 'settings:write'
 
 export type Product = {
   id: string
