@@ -1,6 +1,32 @@
-import { supabase } from './supabase-client'
-import { Profile, ProfileInsert, ProfileUpdate } from './types'
-import { User, AuthError } from '@supabase/supabase-js'
+// Mock authentication system (Supabase removed)
+// This will be replaced with a real authentication system later
+
+export interface User {
+  id: string
+  email: string
+  created_at: string
+  updated_at: string
+}
+
+export interface Profile {
+  id: string
+  email: string
+  full_name?: string
+  avatar_url?: string
+  phone?: string
+  address?: string
+  city?: string
+  state?: string
+  zip_code?: string
+  country?: string
+  created_at: string
+  updated_at: string
+}
+
+export interface AuthError {
+  message: string
+  status?: number
+}
 
 export interface AuthResponse {
   user: User | null
@@ -12,159 +38,151 @@ export interface ProfileResponse {
   error: any
 }
 
+// Mock user storage (in production, this would be in a database)
+let mockUsers: User[] = []
+let mockProfiles: Profile[] = []
+let currentUser: User | null = null
+
 // Authentication functions
 export const signUp = async (email: string, password: string, fullName?: string): Promise<AuthResponse> => {
-  if (!supabase) {
-    return { user: null, error: { message: 'Supabase not configured', status: 500 } as AuthError }
+  // Check if user already exists
+  const existingUser = mockUsers.find(u => u.email === email)
+  if (existingUser) {
+    return { 
+      user: null, 
+      error: { message: 'User already exists', status: 400 } 
+    }
   }
 
-  const { data, error } = await supabase.auth.signUp({
+  // Create new user
+  const newUser: User = {
+    id: Math.random().toString(36).substr(2, 9),
     email,
-    password,
-    options: {
-      data: {
-        full_name: fullName,
-      },
-    },
-  })
-
-  // Create profile if user was created successfully
-  if (data.user && !error) {
-    await createProfile(data.user.id, email, fullName)
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
   }
 
-  return { user: data.user, error }
+  mockUsers.push(newUser)
+  currentUser = newUser
+
+  // Create profile
+  await createProfile(newUser.id, email, fullName)
+
+  return { user: newUser, error: null }
 }
 
 export const signIn = async (email: string, password: string): Promise<AuthResponse> => {
-  if (!supabase) {
-    return { user: null, error: { message: 'Supabase not configured', status: 500 } as AuthError }
+  const user = mockUsers.find(u => u.email === email)
+  if (!user) {
+    return { 
+      user: null, 
+      error: { message: 'Invalid credentials', status: 401 } 
+    }
   }
 
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email,
-    password,
-  })
-
-  return { user: data.user, error }
+  currentUser = user
+  return { user, error: null }
 }
 
 export const signOut = async (): Promise<{ error: AuthError | null }> => {
-  if (!supabase) {
-    return { error: { message: 'Supabase not configured', status: 500 } as AuthError }
-  }
-
-  const { error } = await supabase.auth.signOut()
-  return { error }
+  currentUser = null
+  return { error: null }
 }
 
 export const resetPassword = async (email: string): Promise<{ error: AuthError | null }> => {
-  if (!supabase) {
-    return { error: { message: 'Supabase not configured', status: 500 } as AuthError }
+  const user = mockUsers.find(u => u.email === email)
+  if (!user) {
+    return { 
+      error: { message: 'User not found', status: 404 } 
+    }
   }
 
-  const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/account/reset-password`,
-  })
-
-  return { error }
+  // In a real app, you would send an email here
+  console.log(`Password reset email would be sent to ${email}`)
+  return { error: null }
 }
 
 export const updatePassword = async (password: string): Promise<{ error: AuthError | null }> => {
-  if (!supabase) {
-    return { error: { message: 'Supabase not configured', status: 500 } as AuthError }
+  if (!currentUser) {
+    return { 
+      error: { message: 'User not authenticated', status: 401 } 
+    }
   }
 
-  const { error } = await supabase.auth.updateUser({
-    password,
-  })
-
-  return { error }
+  // In a real app, you would update the password in the database
+  console.log(`Password updated for user ${currentUser.email}`)
+  return { error: null }
 }
 
 // Profile management functions
 export const createProfile = async (userId: string, email: string, fullName?: string): Promise<ProfileResponse> => {
-  if (!supabase) {
-    return { profile: null, error: { message: 'Supabase not configured' } }
-  }
-
-  const profileData: ProfileInsert = {
+  const newProfile: Profile = {
     id: userId,
     email,
-    full_name: fullName || null,
+    full_name: fullName || undefined,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
   }
 
-  const { data, error } = await supabase
-    .from('profiles')
-    .insert(profileData)
-    .select()
-    .single()
-
-  return { profile: data, error }
+  mockProfiles.push(newProfile)
+  return { profile: newProfile, error: null }
 }
 
 export const getProfile = async (userId: string): Promise<ProfileResponse> => {
-  if (!supabase) {
-    return { profile: null, error: { message: 'Supabase not configured' } }
+  const profile = mockProfiles.find(p => p.id === userId)
+  if (!profile) {
+    return { 
+      profile: null, 
+      error: { message: 'Profile not found' } 
+    }
   }
 
-  const { data, error } = await supabase
-    .from('profiles')
-    .select('*')
-    .eq('id', userId)
-    .single()
-
-  return { profile: data, error }
+  return { profile, error: null }
 }
 
-export const updateProfile = async (userId: string, updates: ProfileUpdate): Promise<ProfileResponse> => {
-  if (!supabase) {
-    return { profile: null, error: { message: 'Supabase not configured' } }
+export const updateProfile = async (userId: string, updates: Partial<Profile>): Promise<ProfileResponse> => {
+  const profileIndex = mockProfiles.findIndex(p => p.id === userId)
+  if (profileIndex === -1) {
+    return { 
+      profile: null, 
+      error: { message: 'Profile not found' } 
+    }
   }
 
-  const { data, error } = await supabase
-    .from('profiles')
-    .update({ ...updates, updated_at: new Date().toISOString() })
-    .eq('id', userId)
-    .select()
-    .single()
+  mockProfiles[profileIndex] = {
+    ...mockProfiles[profileIndex],
+    ...updates,
+    updated_at: new Date().toISOString(),
+  }
 
-  return { profile: data, error }
+  return { profile: mockProfiles[profileIndex], error: null }
 }
 
 export const deleteProfile = async (userId: string): Promise<{ error: any }> => {
-  if (!supabase) {
-    return { error: { message: 'Supabase not configured' } }
+  const profileIndex = mockProfiles.findIndex(p => p.id === userId)
+  if (profileIndex === -1) {
+    return { error: { message: 'Profile not found' } }
   }
 
-  const { error } = await supabase
-    .from('profiles')
-    .delete()
-    .eq('id', userId)
-
-  return { error }
+  mockProfiles.splice(profileIndex, 1)
+  return { error: null }
 }
 
 // Get current user
 export const getCurrentUser = async (): Promise<User | null> => {
-  if (!supabase) return null
-
-  const { data: { user } } = await supabase.auth.getUser()
-  return user
+  return currentUser
 }
 
 // Check if user is authenticated
 export const isAuthenticated = async (): Promise<boolean> => {
-  const user = await getCurrentUser()
-  return user !== null
+  return currentUser !== null
 }
 
 // Get current user's profile
 export const getCurrentUserProfile = async (): Promise<ProfileResponse> => {
-  const user = await getCurrentUser()
-  if (!user) {
+  if (!currentUser) {
     return { profile: null, error: { message: 'User not authenticated' } }
   }
 
-  return await getProfile(user.id)
+  return await getProfile(currentUser.id)
 }

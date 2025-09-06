@@ -1,34 +1,46 @@
-import { supabase } from './supabase-client'
+// Mock wishlist functions (Supabase removed)
+// This will be replaced with a real database system later
+
+import { addToWishlist, removeFromWishlist, isInWishlist } from './database'
 
 export async function toggleWishlist(productId: string, userId: string) {
-  if (!supabase) {
-    throw new Error('Supabase not configured')
-  }
-  
-  // naive table: wishlist (user_id text, product_id text)
-  const { data: existing } = await supabase
-    .from('wishlist')
-    .select('product_id')
-    .eq('user_id', userId)
-    .eq('product_id', productId)
-    .maybeSingle()
-
-  if (existing) {
-    await supabase.from('wishlist').delete().eq('user_id', userId).eq('product_id', productId)
-    return { wished: false }
-  } else {
-    await supabase.from('wishlist').insert({ user_id: userId, product_id: productId })
-    return { wished: true }
+  try {
+    // Check if item is already in wishlist
+    const { inWishlist } = await isInWishlist(userId, productId)
+    
+    if (inWishlist) {
+      // Remove from wishlist
+      const { error } = await removeFromWishlist(userId, productId)
+      if (error) {
+        throw new Error(error.message || 'Failed to remove from wishlist')
+      }
+      return { wished: false }
+    } else {
+      // Add to wishlist
+      const { error } = await addToWishlist(userId, productId)
+      if (error) {
+        throw new Error(error.message || 'Failed to add to wishlist')
+      }
+      return { wished: true }
+    }
+  } catch (error) {
+    console.error('Toggle wishlist error:', error)
+    throw error
   }
 }
 
 export async function fetchWishlist(userId: string): Promise<string[]> {
-  if (!supabase) {
+  try {
+    const { items } = await getWishlistItems(userId)
+    return items.map(item => item.product_id)
+  } catch (error) {
+    console.error('Fetch wishlist error:', error)
     return []
   }
-  
-  const { data } = await supabase.from('wishlist').select('product_id').eq('user_id', userId)
-  return (data ?? []).map(r => r.product_id)
 }
 
-
+// Helper function to get wishlist items
+async function getWishlistItems(userId: string) {
+  const { getWishlistItems } = await import('./database')
+  return getWishlistItems(userId)
+}

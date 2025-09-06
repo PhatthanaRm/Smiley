@@ -1,10 +1,8 @@
 "use client"
 
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react'
-import type { User } from '@supabase/supabase-js'
-import { supabase } from '@/lib/supabase-client'
-import { getCurrentUserProfile } from '@/lib/auth'
-import { Profile } from '@/lib/types'
+import { getCurrentUser, getCurrentUserProfile, signIn as authSignIn, signUp as authSignUp, signOut as authSignOut } from '@/lib/auth'
+import { User, Profile } from '@/lib/types'
 
 type AuthContextValue = {
   user: User | null
@@ -24,84 +22,92 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (!supabase) {
-      setLoading(false)
-      return
-    }
-    
     let mounted = true
-    ;(async () => {
-      const { data } = await supabase.auth.getSession()
-      if (mounted) {
-        setUser(data.session?.user ?? null)
-        if (data.session?.user) {
-          const { profile: userProfile } = await getCurrentUserProfile()
-          setProfile(userProfile)
+    
+    const initializeAuth = async () => {
+      try {
+        const currentUser = await getCurrentUser()
+        if (mounted) {
+          setUser(currentUser)
+          if (currentUser) {
+            const { profile: userProfile } = await getCurrentUserProfile()
+            setProfile(userProfile)
+          }
+          setLoading(false)
         }
-        setLoading(false)
+      } catch (error) {
+        console.error('Auth initialization error:', error)
+        if (mounted) {
+          setLoading(false)
+        }
       }
-    })()
-    const { data: sub } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      setUser(session?.user ?? null)
-      if (session?.user) {
-        const { profile: userProfile } = await getCurrentUserProfile()
-        setProfile(userProfile)
-      } else {
-        setProfile(null)
-      }
-    })
+    }
+
+    initializeAuth()
+
     return () => {
       mounted = false
-      sub.subscription.unsubscribe()
     }
   }, [])
 
   const signIn = async (email: string, password: string) => {
-    // For development: mock authentication when Supabase is not configured
-    if (!supabase) {
-      // Simple mock authentication for development
-      if (email === 'demo@smiley.com' && password === 'demo123') {
-        // Create a mock user object
-        const mockUser = {
-          id: 'demo-1',
-          email: email,
-        } as any
-        
-        setUser(mockUser)
-        return { error: undefined }
-      } else {
-        return { error: 'Invalid credentials' }
+    try {
+      const { user: authUser, error } = await authSignIn(email, password)
+      if (error) {
+        return { error: error.message }
       }
+      
+      setUser(authUser)
+      if (authUser) {
+        const { profile: userProfile } = await getCurrentUserProfile()
+        setProfile(userProfile)
+      }
+      
+      return { error: undefined }
+    } catch (error) {
+      console.error('Sign in error:', error)
+      return { error: 'An error occurred during sign in' }
     }
-    
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
-    return { error: error?.message }
   }
 
   const signUp = async (email: string, password: string, fullName?: string) => {
-    if (!supabase) return { error: 'Supabase not configured' }
-    const { error } = await supabase.auth.signUp({ 
-      email, 
-      password,
-      options: {
-        data: {
-          full_name: fullName,
-        },
-      },
-    })
-    return { error: error?.message }
+    try {
+      const { user: authUser, error } = await authSignUp(email, password, fullName)
+      if (error) {
+        return { error: error.message }
+      }
+      
+      setUser(authUser)
+      if (authUser) {
+        const { profile: userProfile } = await getCurrentUserProfile()
+        setProfile(userProfile)
+      }
+      
+      return { error: undefined }
+    } catch (error) {
+      console.error('Sign up error:', error)
+      return { error: 'An error occurred during sign up' }
+    }
   }
 
   const signOut = async () => {
-    if (!supabase) return
-    await supabase.auth.signOut()
-    setProfile(null)
+    try {
+      await authSignOut()
+      setUser(null)
+      setProfile(null)
+    } catch (error) {
+      console.error('Sign out error:', error)
+    }
   }
 
   const refreshProfile = async () => {
     if (user) {
-      const { profile: userProfile } = await getCurrentUserProfile()
-      setProfile(userProfile)
+      try {
+        const { profile: userProfile } = await getCurrentUserProfile()
+        setProfile(userProfile)
+      } catch (error) {
+        console.error('Profile refresh error:', error)
+      }
     }
   }
 
@@ -114,6 +120,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signOut, 
     refreshProfile 
   }), [user, profile, loading])
+  
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 
@@ -122,5 +129,3 @@ export function useAuth() {
   if (!ctx) throw new Error('useAuth must be used within AuthProvider')
   return ctx
 }
-
-

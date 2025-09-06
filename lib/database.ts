@@ -1,25 +1,85 @@
-import { supabase } from './supabase-client'
-import { 
-  Product, 
-  ProductInsert, 
-  ProductUpdate,
-  SupabaseCartItem,
-  CartItemInsert,
-  CartItemUpdate,
-  SupabaseOrder,
-  OrderInsert,
-  OrderUpdate,
-  SupabaseOrderItem,
-  OrderItemInsert,
-  SupabaseWishlistItem,
-  WishlistItemInsert,
-  SupabaseReview,
-  ReviewInsert,
-  ReviewUpdate,
-  SupabaseNewsletterSubscriber,
-  NewsletterSubscriberInsert,
-  NewsletterSubscriberUpdate
-} from './types'
+// Mock database system (Supabase removed)
+// This will be replaced with a real database system later
+
+import { Product, CartItem, Order, OrderItem, WishlistItem, Review, NewsletterSubscriber } from './types'
+
+// Mock data storage (in production, this would be in a database)
+let mockProducts: Product[] = [
+  {
+    id: '1',
+    name: 'Strawberry Fresh Toothpaste',
+    flavor: 'Strawberry',
+    type: 'Toothpaste',
+    description: 'Delicious strawberry-flavored toothpaste that makes brushing fun for kids and adults alike!',
+    price: 8.99,
+    originalPrice: 12.99,
+    images: ['/images/strawberry-toothpaste.jpg'],
+    category: 'Toothpaste',
+    tags: ['strawberry', 'kids', 'fruity'],
+    inStock: true,
+    reviews: 23,
+    featured: true,
+    rating: 4.5,
+    slug: 'strawberry-fresh-toothpaste',
+  },
+  {
+    id: '2',
+    name: 'Minty Fresh Toothbrush',
+    flavor: 'Mint',
+    type: 'Toothbrush',
+    description: 'Soft-bristled toothbrush with ergonomic handle for comfortable brushing',
+    price: 6.99,
+    originalPrice: 9.99,
+    images: ['/images/minty-toothbrush.jpg'],
+    category: 'Toothbrush',
+    tags: ['mint', 'soft', 'ergonomic'],
+    inStock: true,
+    reviews: 45,
+    featured: true,
+    rating: 4.8,
+    slug: 'minty-fresh-toothbrush',
+  },
+  {
+    id: '3',
+    name: 'Berry Blast Mouthwash',
+    flavor: 'Berry',
+    type: 'Mouthwash',
+    description: 'Refreshing berry-flavored mouthwash that leaves your mouth feeling clean and fresh',
+    price: 7.99,
+    originalPrice: 11.99,
+    images: ['/images/berry-mouthwash.jpg'],
+    category: 'Mouthwash',
+    tags: ['berry', 'fresh', 'refreshing'],
+    inStock: true,
+    reviews: 18,
+    featured: true,
+    rating: 4.3,
+    slug: 'berry-blast-mouthwash',
+  },
+  {
+    id: '4',
+    name: 'Complete Oral Care Bundle',
+    flavor: 'Mixed',
+    type: 'Bundle',
+    description: 'Everything you need for a complete oral care routine',
+    price: 24.99,
+    originalPrice: 34.99,
+    images: ['/images/oral-care-bundle.jpg'],
+    category: 'Bundle',
+    tags: ['bundle', 'complete', 'savings'],
+    inStock: true,
+    reviews: 67,
+    featured: true,
+    rating: 4.7,
+    slug: 'complete-oral-care-bundle',
+  },
+]
+
+let mockCartItems: CartItem[] = []
+let mockOrders: Order[] = []
+let mockWishlistItems: WishlistItem[] = []
+let mockReviews: Review[] = []
+let mockNewsletterSubscribers: NewsletterSubscriber[] = []
 
 // Product functions
 export const getProducts = async (filters?: {
@@ -29,462 +89,278 @@ export const getProducts = async (filters?: {
   limit?: number
   offset?: number
 }): Promise<{ products: Product[]; error: any }> => {
-  if (!supabase) {
-    return { products: [], error: { message: 'Supabase not configured' } }
-  }
-
-  let query = supabase
-    .from('products')
-    .select('*')
-    .order('created_at', { ascending: false })
+  let products = [...mockProducts]
 
   if (filters?.category) {
-    query = query.eq('category', filters.category)
+    products = products.filter(p => p.category === filters.category)
   }
 
   if (filters?.featured !== undefined) {
-    query = query.eq('featured', filters.featured)
+    products = products.filter(p => p.featured === filters.featured)
   }
 
   if (filters?.inStock !== undefined) {
-    query = query.eq('in_stock', filters.inStock)
-  }
-
-  if (filters?.limit) {
-    query = query.limit(filters.limit)
+    products = products.filter(p => p.inStock === filters.inStock)
   }
 
   if (filters?.offset) {
-    query = query.range(filters.offset, filters.offset + (filters.limit || 10) - 1)
+    products = products.slice(filters.offset)
   }
 
-  const { data, error } = await query
+  if (filters?.limit) {
+    products = products.slice(0, filters.limit)
+  }
 
-  return { products: data || [], error }
+  return { products, error: null }
 }
 
 export const getProduct = async (id: string): Promise<{ product: Product | null; error: any }> => {
-  if (!supabase) {
-    return { product: null, error: { message: 'Supabase not configured' } }
-  }
-
-  const { data, error } = await supabase
-    .from('products')
-    .select('*')
-    .eq('id', id)
-    .single()
-
-  return { product: data, error }
+  const product = mockProducts.find(p => p.id === id)
+  return { product: product || null, error: null }
 }
 
 export const getProductBySlug = async (slug: string): Promise<{ product: Product | null; error: any }> => {
-  if (!supabase) {
-    return { product: null, error: { message: 'Supabase not configured' } }
-  }
-
-  const { data, error } = await supabase
-    .from('products')
-    .select('*')
-    .eq('slug', slug)
-    .single()
-
-  return { product: data, error }
+  const product = mockProducts.find(p => p.slug === slug)
+  return { product: product || null, error: null }
 }
 
-export const createProduct = async (product: ProductInsert): Promise<{ product: Product | null; error: any }> => {
-  if (!supabase) {
-    return { product: null, error: { message: 'Supabase not configured' } }
+export const createProduct = async (product: Omit<Product, 'id'>): Promise<{ product: Product | null; error: any }> => {
+  const newProduct: Product = {
+    ...product,
+    id: Math.random().toString(36).substr(2, 9),
   }
 
-  const { data, error } = await supabase
-    .from('products')
-    .insert(product)
-    .select()
-    .single()
-
-  return { product: data, error }
+  mockProducts.push(newProduct)
+  return { product: newProduct, error: null }
 }
 
-export const updateProduct = async (id: string, updates: ProductUpdate): Promise<{ product: Product | null; error: any }> => {
-  if (!supabase) {
-    return { product: null, error: { message: 'Supabase not configured' } }
+export const updateProduct = async (id: string, updates: Partial<Product>): Promise<{ product: Product | null; error: any }> => {
+  const productIndex = mockProducts.findIndex(p => p.id === id)
+  if (productIndex === -1) {
+    return { product: null, error: { message: 'Product not found' } }
   }
 
-  const { data, error } = await supabase
-    .from('products')
-    .update({ ...updates, updated_at: new Date().toISOString() })
-    .eq('id', id)
-    .select()
-    .single()
+  mockProducts[productIndex] = {
+    ...mockProducts[productIndex],
+    ...updates,
+  }
 
-  return { product: data, error }
+  return { product: mockProducts[productIndex], error: null }
 }
 
 export const deleteProduct = async (id: string): Promise<{ error: any }> => {
-  if (!supabase) {
-    return { error: { message: 'Supabase not configured' } }
+  const productIndex = mockProducts.findIndex(p => p.id === id)
+  if (productIndex === -1) {
+    return { error: { message: 'Product not found' } }
   }
 
-  const { error } = await supabase
-    .from('products')
-    .delete()
-    .eq('id', id)
-
-  return { error }
+  mockProducts.splice(productIndex, 1)
+  return { error: null }
 }
 
 // Cart functions
-export const getCartItems = async (userId: string): Promise<{ items: SupabaseCartItem[]; error: any }> => {
-  if (!supabase) {
-    return { items: [], error: { message: 'Supabase not configured' } }
-  }
-
-  const { data, error } = await supabase
-    .from('cart_items')
-    .select(`
-      *,
-      products (*)
-    `)
-    .eq('user_id', userId)
-    .order('created_at', { ascending: false })
-
-  return { items: data || [], error }
+export const getCartItems = async (userId: string): Promise<{ items: CartItem[]; error: any }> => {
+  const items = mockCartItems.filter(item => item.user_id === userId)
+  return { items, error: null }
 }
 
-export const addToCart = async (userId: string, productId: string, quantity: number = 1): Promise<{ item: SupabaseCartItem | null; error: any }> => {
-  if (!supabase) {
-    return { item: null, error: { message: 'Supabase not configured' } }
-  }
-
-  // Check if item already exists in cart
-  const { data: existingItem } = await supabase
-    .from('cart_items')
-    .select('*')
-    .eq('user_id', userId)
-    .eq('product_id', productId)
-    .single()
-
+export const addToCart = async (userId: string, productId: string, quantity: number = 1): Promise<{ item: CartItem | null; error: any }> => {
+  const existingItem = mockCartItems.find(item => item.user_id === userId && item.product_id === productId)
+  
   if (existingItem) {
-    // Update quantity
-    const { data, error } = await supabase
-      .from('cart_items')
-      .update({ 
-        quantity: existingItem.quantity + quantity,
-        updated_at: new Date().toISOString()
-      })
-      .eq('id', existingItem.id)
-      .select()
-      .single()
-
-    return { item: data, error }
+    existingItem.quantity += quantity
+    existingItem.updated_at = new Date().toISOString()
+    return { item: existingItem, error: null }
   } else {
-    // Create new cart item
-    const cartItem: CartItemInsert = {
+    const newItem: CartItem = {
+      id: Math.random().toString(36).substr(2, 9),
       user_id: userId,
       product_id: productId,
       quantity,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
     }
 
-    const { data, error } = await supabase
-      .from('cart_items')
-      .insert(cartItem)
-      .select()
-      .single()
-
-    return { item: data, error }
+    mockCartItems.push(newItem)
+    return { item: newItem, error: null }
   }
 }
 
-export const updateCartItem = async (itemId: string, quantity: number): Promise<{ item: SupabaseCartItem | null; error: any }> => {
-  if (!supabase) {
-    return { item: null, error: { message: 'Supabase not configured' } }
-  }
-
+export const updateCartItem = async (itemId: string, quantity: number): Promise<{ item: CartItem | null; error: any }> => {
   if (quantity <= 0) {
-    return await removeFromCart(itemId)
+    const { error } = await removeFromCart(itemId)
+    return { item: null, error }
   }
 
-  const { data, error } = await supabase
-    .from('cart_items')
-    .update({ 
-      quantity,
-      updated_at: new Date().toISOString()
-    })
-    .eq('id', itemId)
-    .select()
-    .single()
+  const item = mockCartItems.find(item => item.id === itemId)
+  if (!item) {
+    return { item: null, error: { message: 'Cart item not found' } }
+  }
 
-  return { item: data, error }
+  item.quantity = quantity
+  item.updated_at = new Date().toISOString()
+  return { item, error: null }
 }
 
 export const removeFromCart = async (itemId: string): Promise<{ error: any }> => {
-  if (!supabase) {
-    return { error: { message: 'Supabase not configured' } }
+  const itemIndex = mockCartItems.findIndex(item => item.id === itemId)
+  if (itemIndex === -1) {
+    return { error: { message: 'Cart item not found' } }
   }
 
-  const { error } = await supabase
-    .from('cart_items')
-    .delete()
-    .eq('id', itemId)
-
-  return { error }
+  mockCartItems.splice(itemIndex, 1)
+  return { error: null }
 }
 
 export const clearCart = async (userId: string): Promise<{ error: any }> => {
-  if (!supabase) {
-    return { error: { message: 'Supabase not configured' } }
-  }
-
-  const { error } = await supabase
-    .from('cart_items')
-    .delete()
-    .eq('user_id', userId)
-
-  return { error }
+  mockCartItems = mockCartItems.filter(item => item.user_id !== userId)
+  return { error: null }
 }
 
 // Order functions
-export const createOrder = async (order: OrderInsert): Promise<{ order: SupabaseOrder | null; error: any }> => {
-  if (!supabase) {
-    return { order: null, error: { message: 'Supabase not configured' } }
+export const createOrder = async (order: Omit<Order, 'id' | 'created_at' | 'updated_at'>): Promise<{ order: Order | null; error: any }> => {
+  const newOrder: Order = {
+    ...order,
+    id: Math.random().toString(36).substr(2, 9),
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
   }
 
-  const { data, error } = await supabase
-    .from('orders')
-    .insert(order)
-    .select()
-    .single()
-
-  return { order: data, error }
+  mockOrders.push(newOrder)
+  return { order: newOrder, error: null }
 }
 
-export const getOrders = async (userId: string): Promise<{ orders: SupabaseOrder[]; error: any }> => {
-  if (!supabase) {
-    return { orders: [], error: { message: 'Supabase not configured' } }
-  }
-
-  const { data, error } = await supabase
-    .from('orders')
-    .select(`
-      *,
-      order_items (
-        *,
-        products (*)
-      )
-    `)
-    .eq('user_id', userId)
-    .order('created_at', { ascending: false })
-
-  return { orders: data || [], error }
+export const getOrders = async (userId: string): Promise<{ orders: Order[]; error: any }> => {
+  const orders = mockOrders.filter(order => order.user_id === userId)
+  return { orders, error: null }
 }
 
-export const getOrder = async (orderId: string): Promise<{ order: SupabaseOrder | null; error: any }> => {
-  if (!supabase) {
-    return { order: null, error: { message: 'Supabase not configured' } }
-  }
-
-  const { data, error } = await supabase
-    .from('orders')
-    .select(`
-      *,
-      order_items (
-        *,
-        products (*)
-      )
-    `)
-    .eq('id', orderId)
-    .single()
-
-  return { order: data, error }
+export const getOrder = async (orderId: string): Promise<{ order: Order | null; error: any }> => {
+  const order = mockOrders.find(order => order.id === orderId)
+  return { order: order || null, error: null }
 }
 
-export const updateOrderStatus = async (orderId: string, status: SupabaseOrder['status']): Promise<{ order: SupabaseOrder | null; error: any }> => {
-  if (!supabase) {
-    return { order: null, error: { message: 'Supabase not configured' } }
+export const updateOrderStatus = async (orderId: string, status: Order['status']): Promise<{ order: Order | null; error: any }> => {
+  const order = mockOrders.find(order => order.id === orderId)
+  if (!order) {
+    return { order: null, error: { message: 'Order not found' } }
   }
 
-  const { data, error } = await supabase
-    .from('orders')
-    .update({ 
-      status,
-      updated_at: new Date().toISOString()
-    })
-    .eq('id', orderId)
-    .select()
-    .single()
-
-  return { order: data, error }
+  order.status = status
+  order.updated_at = new Date().toISOString()
+  return { order, error: null }
 }
 
 // Wishlist functions
-export const getWishlistItems = async (userId: string): Promise<{ items: SupabaseWishlistItem[]; error: any }> => {
-  if (!supabase) {
-    return { items: [], error: { message: 'Supabase not configured' } }
-  }
-
-  const { data, error } = await supabase
-    .from('wishlist_items')
-    .select(`
-      *,
-      products (*)
-    `)
-    .eq('user_id', userId)
-    .order('created_at', { ascending: false })
-
-  return { items: data || [], error }
+export const getWishlistItems = async (userId: string): Promise<{ items: WishlistItem[]; error: any }> => {
+  const items = mockWishlistItems.filter(item => item.user_id === userId)
+  return { items, error: null }
 }
 
-export const addToWishlist = async (userId: string, productId: string): Promise<{ item: SupabaseWishlistItem | null; error: any }> => {
-  if (!supabase) {
-    return { item: null, error: { message: 'Supabase not configured' } }
+export const addToWishlist = async (userId: string, productId: string): Promise<{ item: WishlistItem | null; error: any }> => {
+  const existingItem = mockWishlistItems.find(item => item.user_id === userId && item.product_id === productId)
+  if (existingItem) {
+    return { item: existingItem, error: null }
   }
 
-  const wishlistItem: WishlistItemInsert = {
+  const newItem: WishlistItem = {
+    id: Math.random().toString(36).substr(2, 9),
     user_id: userId,
     product_id: productId,
+    created_at: new Date().toISOString(),
   }
 
-  const { data, error } = await supabase
-    .from('wishlist_items')
-    .insert(wishlistItem)
-    .select()
-    .single()
-
-  return { item: data, error }
+  mockWishlistItems.push(newItem)
+  return { item: newItem, error: null }
 }
 
 export const removeFromWishlist = async (userId: string, productId: string): Promise<{ error: any }> => {
-  if (!supabase) {
-    return { error: { message: 'Supabase not configured' } }
+  const itemIndex = mockWishlistItems.findIndex(item => item.user_id === userId && item.product_id === productId)
+  if (itemIndex === -1) {
+    return { error: { message: 'Wishlist item not found' } }
   }
 
-  const { error } = await supabase
-    .from('wishlist_items')
-    .delete()
-    .eq('user_id', userId)
-    .eq('product_id', productId)
-
-  return { error }
+  mockWishlistItems.splice(itemIndex, 1)
+  return { error: null }
 }
 
 export const isInWishlist = async (userId: string, productId: string): Promise<{ inWishlist: boolean; error: any }> => {
-  if (!supabase) {
-    return { inWishlist: false, error: { message: 'Supabase not configured' } }
-  }
-
-  const { data, error } = await supabase
-    .from('wishlist_items')
-    .select('id')
-    .eq('user_id', userId)
-    .eq('product_id', productId)
-    .single()
-
-  return { inWishlist: !!data, error }
+  const item = mockWishlistItems.find(item => item.user_id === userId && item.product_id === productId)
+  return { inWishlist: !!item, error: null }
 }
 
 // Review functions
-export const getProductReviews = async (productId: string): Promise<{ reviews: SupabaseReview[]; error: any }> => {
-  if (!supabase) {
-    return { reviews: [], error: { message: 'Supabase not configured' } }
-  }
-
-  const { data, error } = await supabase
-    .from('reviews')
-    .select(`
-      *,
-      profiles (full_name, avatar_url)
-    `)
-    .eq('product_id', productId)
-    .order('created_at', { ascending: false })
-
-  return { reviews: data || [], error }
+export const getProductReviews = async (productId: string): Promise<{ reviews: Review[]; error: any }> => {
+  const reviews = mockReviews.filter(review => review.product_id === productId)
+  return { reviews, error: null }
 }
 
-export const createReview = async (review: ReviewInsert): Promise<{ review: SupabaseReview | null; error: any }> => {
-  if (!supabase) {
-    return { review: null, error: { message: 'Supabase not configured' } }
+export const createReview = async (review: Omit<Review, 'id' | 'created_at' | 'updated_at'>): Promise<{ review: Review | null; error: any }> => {
+  const newReview: Review = {
+    ...review,
+    id: Math.random().toString(36).substr(2, 9),
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
   }
 
-  const { data, error } = await supabase
-    .from('reviews')
-    .insert(review)
-    .select()
-    .single()
-
-  return { review: data, error }
+  mockReviews.push(newReview)
+  return { review: newReview, error: null }
 }
 
-export const updateReview = async (reviewId: string, updates: ReviewUpdate): Promise<{ review: SupabaseReview | null; error: any }> => {
-  if (!supabase) {
-    return { review: null, error: { message: 'Supabase not configured' } }
+export const updateReview = async (reviewId: string, updates: Partial<Review>): Promise<{ review: Review | null; error: any }> => {
+  const review = mockReviews.find(review => review.id === reviewId)
+  if (!review) {
+    return { review: null, error: { message: 'Review not found' } }
   }
 
-  const { data, error } = await supabase
-    .from('reviews')
-    .update({ ...updates, updated_at: new Date().toISOString() })
-    .eq('id', reviewId)
-    .select()
-    .single()
-
-  return { review: data, error }
+  Object.assign(review, updates)
+  review.updated_at = new Date().toISOString()
+  return { review, error: null }
 }
 
 export const deleteReview = async (reviewId: string): Promise<{ error: any }> => {
-  if (!supabase) {
-    return { error: { message: 'Supabase not configured' } }
+  const reviewIndex = mockReviews.findIndex(review => review.id === reviewId)
+  if (reviewIndex === -1) {
+    return { error: { message: 'Review not found' } }
   }
 
-  const { error } = await supabase
-    .from('reviews')
-    .delete()
-    .eq('id', reviewId)
-
-  return { error }
+  mockReviews.splice(reviewIndex, 1)
+  return { error: null }
 }
 
 // Newsletter functions
-export const subscribeToNewsletter = async (email: string): Promise<{ subscriber: SupabaseNewsletterSubscriber | null; error: any }> => {
-  if (!supabase) {
-    return { subscriber: null, error: { message: 'Supabase not configured' } }
+export const subscribeToNewsletter = async (email: string): Promise<{ subscriber: NewsletterSubscriber | null; error: any }> => {
+  const existingSubscriber = mockNewsletterSubscribers.find(sub => sub.email === email)
+  if (existingSubscriber) {
+    existingSubscriber.subscribed = true
+    existingSubscriber.updated_at = new Date().toISOString()
+    return { subscriber: existingSubscriber, error: null }
   }
 
-  const subscriberData: NewsletterSubscriberInsert = {
+  const newSubscriber: NewsletterSubscriber = {
+    id: Math.random().toString(36).substr(2, 9),
     email,
     subscribed: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
   }
 
-  const { data, error } = await supabase
-    .from('newsletter_subscribers')
-    .upsert(subscriberData, { onConflict: 'email' })
-    .select()
-    .single()
-
-  return { subscriber: data, error }
+  mockNewsletterSubscribers.push(newSubscriber)
+  return { subscriber: newSubscriber, error: null }
 }
 
 export const unsubscribeFromNewsletter = async (email: string): Promise<{ error: any }> => {
-  if (!supabase) {
-    return { error: { message: 'Supabase not configured' } }
+  const subscriber = mockNewsletterSubscribers.find(sub => sub.email === email)
+  if (!subscriber) {
+    return { error: { message: 'Subscriber not found' } }
   }
 
-  const { error } = await supabase
-    .from('newsletter_subscribers')
-    .update({ subscribed: false, updated_at: new Date().toISOString() })
-    .eq('email', email)
-
-  return { error }
+  subscriber.subscribed = false
+  subscriber.updated_at = new Date().toISOString()
+  return { error: null }
 }
 
-export const getNewsletterSubscribers = async (): Promise<{ subscribers: SupabaseNewsletterSubscriber[]; error: any }> => {
-  if (!supabase) {
-    return { subscribers: [], error: { message: 'Supabase not configured' } }
-  }
-
-  const { data, error } = await supabase
-    .from('newsletter_subscribers')
-    .select('*')
-    .eq('subscribed', true)
-    .order('created_at', { ascending: false })
-
-  return { subscribers: data || [], error }
+export const getNewsletterSubscribers = async (): Promise<{ subscribers: NewsletterSubscriber[]; error: any }> => {
+  const subscribers = mockNewsletterSubscribers.filter(sub => sub.subscribed)
+  return { subscribers, error: null }
 }
