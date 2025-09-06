@@ -9,8 +9,29 @@ export type Profile = {
   state?: string
   zip_code?: string
   country?: string
+  role?: 'user' | 'admin' | 'super_admin'
+  is_active?: boolean
   created_at: string
   updated_at: string
+}
+
+export type AdminUser = {
+  id: string
+  email: string
+  full_name?: string
+  avatar_url?: string
+  role: 'admin' | 'super_admin'
+  permissions: string[]
+  is_active: boolean
+  last_login?: string
+  created_at: string
+  updated_at: string
+}
+
+export type AdminSession = {
+  user: AdminUser
+  permissions: string[]
+  expires_at: string
 }
 
 export type Product = {
