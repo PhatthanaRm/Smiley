@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createSupabaseServerClient } from './supabase'
+import { createSupabaseServerClient } from './supabase-server'
 import { AdminPermission } from './types'
 
 export interface AdminMiddlewareOptions {

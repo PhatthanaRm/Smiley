@@ -1,4 +1,5 @@
-import { createSupabaseClient, createSupabaseServerClient, createSupabaseAdminClient } from './supabase'
+import { createSupabaseClient } from './supabase-client'
+import { createSupabaseServerClient, createSupabaseAdminClient } from './supabase-server'
 import { User, Profile } from './types'
 import type { User as SupabaseUser } from '@supabase/supabase-js'
 

@@ -1,4 +1,5 @@
-import { createSupabaseClient, createSupabaseAdminClient } from './supabase'
+import { createSupabaseClient } from './supabase-client'
+import { createSupabaseAdminClient } from './supabase-server'
 import { AdminUser, AdminSession, Profile } from './types'
 
 export interface AdminAuthError {

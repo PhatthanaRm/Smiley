@@ -1,4 +1,5 @@
-import { createSupabaseClient, createSupabaseServerClient, createSupabaseAdminClient } from './supabase'
+import { createSupabaseClient } from './supabase-client'
+import { createSupabaseServerClient, createSupabaseAdminClient } from './supabase-server'
 import { Product, CartItem, Order, OrderItem, WishlistItem, Review, NewsletterSubscriber, BlogPost } from './types'
 
 // Product functions
