@@ -15,27 +15,6 @@ export type Profile = {
   updated_at: string
 }
 
-export type AdminUser = {
-  id: string
-  email: string
-  full_name?: string
-  avatar_url?: string
-  role: 'admin' | 'super_admin'
-  permissions: AdminPermission[]
-  is_active: boolean
-  last_login?: string
-  created_at: string
-  updated_at: string
-}
-
-export type AdminSession = {
-  user: AdminUser
-  permissions: AdminPermission[]
-  expires_at: string
-}
-
-export type AdminPermission = 'users:read' | 'users:write' | 'users:delete' | 'products:read' | 'products:write' | 'products:delete' | 'orders:read' | 'orders:write' | 'orders:delete' | 'content:read' | 'content:write' | 'content:delete' | 'analytics:read' | 'settings:read' | 'settings:write'
-
 export type Product = {
   id: string
   slug: string
@@ -67,59 +46,11 @@ export type Product = {
   featured?: boolean
 }
 
-export type CartItem = {
-  id: string
-  user_id: string
-  product_id: string
-  quantity: number
-  created_at: string
-  updated_at: string
-}
-
-export type Order = {
-  id: string
-  user_id: string
-  stripe_payment_intent_id?: string
-  status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled'
-  total_amount: number
-  shipping_address: Address
-  billing_address: Address
-  created_at: string
-  updated_at: string
-}
-
-export type OrderItem = {
-  id: string
-  order_id: string
-  product_id: string
-  quantity: number
-  price: number
-  created_at: string
-}
-
 export type WishlistItem = {
   id: string
   user_id: string
   product_id: string
   created_at: string
-}
-
-export type Review = {
-  id: string
-  user_id: string
-  product_id: string
-  rating: number
-  comment?: string
-  created_at: string
-  updated_at: string
-}
-
-export type NewsletterSubscriber = {
-  id: string
-  email: string
-  subscribed: boolean
-  created_at: string
-  updated_at: string
 }
 
 export type BlogPost = {
@@ -136,38 +67,10 @@ export type BlogPost = {
   readTime?: string
 }
 
-export type Address = {
-  firstName: string
-  lastName: string
-  company?: string
-  address1: string
-  address2?: string
-  city: string
-  state: string
-  zipCode: string
-  country: string
-  phone?: string
-}
-
 export type User = {
   id: string
   email: string
   created_at: string
   updated_at: string
   email_confirmed_at?: string
-}
-
-export type Subscription = {
-  id: string
-  product: Product
-  interval: 'monthly' | 'quarterly'
-  nextDelivery: string
-  status: 'active' | 'paused' | 'cancelled'
-}
-
-export type NewsletterSignup = {
-  email: string
-  firstName?: string
-  source?: string
-  preferences?: string[]
 }

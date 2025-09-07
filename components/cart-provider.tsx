@@ -31,19 +31,30 @@ const STORAGE_KEY = "smiley_cart_v1"
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])
   const [lastAddedItem, setLastAddedItem] = useState<CartItem | null>(null)
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
+    setIsClient(true)
     try {
       const raw = localStorage.getItem(STORAGE_KEY)
-      if (raw) setItems(JSON.parse(raw))
-    } catch {}
+      if (raw) {
+        const parsed = JSON.parse(raw)
+        setItems(parsed)
+      }
+    } catch (error) {
+      console.error('Error loading cart from localStorage:', error)
+    }
   }, [])
 
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(items))
-    } catch {}
-  }, [items])
+    if (isClient) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(items))
+      } catch (error) {
+        console.error('Error saving cart to localStorage:', error)
+      }
+    }
+  }, [items, isClient])
 
   const addItem = (item: CartItem) => {
     setLastAddedItem(item)

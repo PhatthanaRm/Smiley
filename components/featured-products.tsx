@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Star, ShoppingCart, Heart } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
+import { useCart } from '@/components/cart-provider'
 
 // Mock product data
 const products = [
@@ -104,12 +105,22 @@ const FeaturedProducts = () => {
   const [selectedFilter, setSelectedFilter] = useState('all')
   const [wishlist, setWishlist] = useState<number[]>([])
   const { toast } = useToast()
+  const { addItem } = useCart()
 
   const filteredProducts = selectedFilter === 'all' 
     ? products 
     : products.filter(product => product.flavor.toLowerCase() === selectedFilter)
 
   const handleAddToCart = (product: typeof products[0]) => {
+    addItem({
+      id: product.id.toString(),
+      name: product.name,
+      price: product.price,
+      quantity: 1,
+      image: product.image,
+      flavor: product.flavor
+    })
+    
     toast({
       title: "Added to Cart! 🛒",
       description: `${product.name} has been added to your cart.`,
