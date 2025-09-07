@@ -42,7 +42,10 @@ SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key_here
 3. ตั้งค่า Redirect URLs:
    - `http://localhost:3000/auth/callback`
    - `https://your-domain.com/auth/callback` (สำหรับ production)
-4. เปิดใช้งาน Email confirmations (optional)
+4. **เปิดใช้งาน Email confirmations** (แนะนำ):
+   - เปิด "Enable email confirmations"
+   - ตั้งค่า Confirm email template ตามต้องการ
+   - ตั้งค่า SMTP settings หากต้องการใช้ email service อื่น
 
 ## 5. ตั้งค่า Row Level Security (RLS)
 

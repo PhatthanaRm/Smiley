@@ -1,83 +1,79 @@
-"use client"
+'use client'
 
-import React, { createContext, useContext, useEffect, useMemo, useState, useCallback } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { createSupabaseClientComponent } from '@/lib/supabase-client'
 import { User, Profile } from '@/lib/types'
-import type { User as SupabaseUser } from '@supabase/supabase-js'
 
-type AuthContextValue = {
+interface AuthContextType {
   user: User | null
-  profile: Profile | null
   loading: boolean
   signIn: (email: string, password: string) => Promise<{ error?: string }>
-  signUp: (email: string, password: string, fullName?: string) => Promise<{ error?: string }>
+  signUp: (email: string, password: string, fullName?: string) => Promise<{ error?: string; message?: string }>
   signOut: () => Promise<void>
-  refreshProfile: () => Promise<void>
+  loadUserProfile: (userId: string) => Promise<void>
 }
 
-const AuthContext = createContext<AuthContextValue | null>(null)
+const AuthContext = createContext<AuthContextType | undefined>(undefined)
+
+export function useAuth() {
+  const context = useContext(AuthContext)
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider')
+  }
+  return context
+}
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
-  const [profile, setProfile] = useState<Profile | null>(null)
   const [loading, setLoading] = useState(true)
-  const supabase = createSupabaseClientComponent()
 
   useEffect(() => {
-    let mounted = true
-    
-    const initializeAuth = async () => {
-      try {
-        // Get initial session
-        const { data: { session } } = await supabase.auth.getSession()
-        
-        if (mounted) {
-          if (session?.user) {
-            setUser(transformSupabaseUser(session.user))
-            await loadUserProfile(session.user.id)
-          }
-          setLoading(false)
-        }
-      } catch (error) {
-        console.error('Auth initialization error:', error)
-        if (mounted) {
-          setLoading(false)
-        }
+    const supabase = createSupabaseClientComponent()
+
+    // Get initial session
+    const getInitialSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      
+      if (session?.user) {
+        setUser(transformSupabaseUser(session.user))
+        await loadUserProfile(session.user.id)
       }
+      
+      setLoading(false)
     }
 
-    initializeAuth()
+    getInitialSession()
 
     // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (mounted) {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
         if (session?.user) {
           setUser(transformSupabaseUser(session.user))
           await loadUserProfile(session.user.id)
         } else {
           setUser(null)
-          setProfile(null)
         }
         setLoading(false)
       }
-    })
+    )
 
-    return () => {
-      mounted = false
-      subscription.unsubscribe()
-    }
+    return () => subscription.unsubscribe()
   }, [])
 
-  const transformSupabaseUser = (supabaseUser: SupabaseUser): User => ({
-    id: supabaseUser.id,
-    email: supabaseUser.email!,
-    created_at: supabaseUser.created_at,
-    updated_at: supabaseUser.updated_at || supabaseUser.created_at
-  })
+  const transformSupabaseUser = (supabaseUser: any): User => {
+    return {
+      id: supabaseUser.id,
+      email: supabaseUser.email,
+      created_at: supabaseUser.created_at,
+      updated_at: supabaseUser.updated_at || supabaseUser.created_at,
+      email_confirmed_at: supabaseUser.email_confirmed_at
+    }
+  }
 
   const loadUserProfile = async (userId: string) => {
     try {
-      const { data, error } = await supabase
+      const supabase = createSupabaseClientComponent()
+      const { data: profile, error } = await supabase
         .from('profiles')
         .select('*')
         .eq('id', userId)
@@ -85,24 +81,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       if (error) {
         console.error('Error loading profile:', error)
-        return
-      }
-
-      if (data) {
-        setProfile({
-          id: data.id,
-          email: data.email,
-          full_name: data.full_name,
-          avatar_url: data.avatar_url,
-          phone: data.phone,
-          address: data.address,
-          city: data.city,
-          state: data.state,
-          zip_code: data.zip_code,
-          country: data.country,
-          created_at: data.created_at,
-          updated_at: data.updated_at
-        })
       }
     } catch (error) {
       console.error('Error loading profile:', error)
@@ -111,13 +89,28 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signIn = async (email: string, password: string) => {
     try {
+      const supabase = createSupabaseClientComponent()
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password
       })
 
       if (error) {
+        // Handle specific error types
+        if (error.message.includes('Failed to fetch') || error.message.includes('ENOTFOUND')) {
+          return { 
+            error: 'Unable to connect to authentication service. Please check your internet connection and try again.' 
+          }
+        }
+        
         return { error: error.message }
+      }
+
+      // Check if email is verified
+      if (data.user && !data.user.email_confirmed_at) {
+        // Sign out the user immediately
+        await supabase.auth.signOut()
+        return { error: 'Please verify your email before signing in. Check your inbox for a confirmation link.' }
       }
 
       if (data.user) {
@@ -128,12 +121,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       return { error: undefined }
     } catch (error) {
       console.error('Sign in error:', error)
+      
+      // Handle network/connection errors
+      if (error instanceof Error && (error.message.includes('Failed to fetch') || error.message.includes('ENOTFOUND'))) {
+        return { 
+          error: 'Unable to connect to authentication service. Please check your internet connection and try again.' 
+        }
+      }
+      
       return { error: 'An error occurred during sign in' }
     }
   }
 
   const signUp = async (email: string, password: string, fullName?: string) => {
     try {
+      const supabase = createSupabaseClientComponent()
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
@@ -141,69 +143,105 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           data: {
             full_name: fullName
           }
+          // Remove emailRedirectTo since we're using OTP now
         }
       })
 
       if (error) {
+        console.error('Supabase signup error:', error)
+        
+        // Handle specific error types
+        if (error.message.includes('Failed to fetch') || error.message.includes('ENOTFOUND')) {
+          return { 
+            error: 'Unable to connect to authentication service. Please check your internet connection and try again.' 
+          }
+        }
+        
         return { error: error.message }
       }
 
       if (data.user) {
-        // Create profile
-        const { error: profileError } = await supabase
-          .from('profiles')
-          .insert({
-            id: data.user.id,
-            email: data.user.email!,
-            full_name: fullName
+        // Send OTP after successful signup
+        try {
+          const otpResponse = await fetch('/api/send-otp', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, userId: data.user.id }),
           })
 
-        if (profileError) {
-          console.error('Error creating profile:', profileError)
-        }
+          const otpData = await otpResponse.json()
 
-        setUser(transformSupabaseUser(data.user))
-        await loadUserProfile(data.user.id)
+          if (!otpResponse.ok) {
+            console.error('Failed to send OTP:', otpData.error)
+            return { 
+              error: 'Account created but failed to send verification code. Please try again.' 
+            }
+          }
+
+          // Store email, userId, and password in localStorage for auto sign in after verification
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('pendingEmail', email)
+            localStorage.setItem('pendingUserId', data.user.id)
+            localStorage.setItem('pendingPassword', password)
+          }
+          
+          return { 
+            error: undefined, 
+            message: 'Account created! Please check your email for the verification code.' 
+          }
+        } catch (otpError) {
+          console.error('Error sending OTP:', otpError)
+          return { 
+            error: 'Account created but failed to send verification code. Please try again.' 
+          }
+        }
       }
 
       return { error: undefined }
     } catch (error) {
       console.error('Sign up error:', error)
+      
+      // Handle network/connection errors
+      if (error instanceof Error && (error.message.includes('Failed to fetch') || error.message.includes('ENOTFOUND'))) {
+        return { 
+          error: 'Unable to connect to authentication service. Please check your internet connection and try again.' 
+        }
+      }
+      
       return { error: 'An error occurred during sign up' }
     }
   }
 
   const signOut = async () => {
     try {
-      await supabase.auth.signOut()
+      // Clear local state immediately for instant UI response
       setUser(null)
-      setProfile(null)
+
+      const supabase = createSupabaseClientComponent()
+      const { error } = await supabase.auth.signOut()
+      
+      if (error) {
+        console.error('Sign out error:', error)
+      }
     } catch (error) {
       console.error('Sign out error:', error)
     }
   }
 
-  const refreshProfile = useCallback(async () => {
-    if (user) {
-      await loadUserProfile(user.id)
-    }
-  }, [user])
+  const value = {
+    user,
+    loading,
+    signIn,
+    signUp,
+    signOut,
+    loadUserProfile
+  }
 
-  const value = useMemo<AuthContextValue>(() => ({ 
-    user, 
-    profile, 
-    loading, 
-    signIn, 
-    signUp, 
-    signOut, 
-    refreshProfile 
-  }), [user, profile, loading, refreshProfile])
-  
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
-}
-
-export function useAuth() {
-  const ctx = useContext(AuthContext)
-  if (!ctx) throw new Error('useAuth must be used within AuthProvider')
-  return ctx
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  )
 }

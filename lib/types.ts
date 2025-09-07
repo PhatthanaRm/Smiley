@@ -154,6 +154,7 @@ export type User = {
   email: string
   created_at: string
   updated_at: string
+  email_confirmed_at?: string
 }
 
 export type Subscription = {

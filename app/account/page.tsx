@@ -42,10 +42,16 @@ export default function AccountPage() {
     setError(null)
     setSuccess(null)
     
-    // Simple sign up without OTP
-    const { error } = await signUp(email, password)
+    const fullName = `${firstName} ${lastName}`.trim()
+    const { error, message } = await signUp(email, password, fullName)
     if (error) {
       setError(error)
+    } else if (message) {
+      setSuccess(message)
+      // Redirect to OTP verification page after successful signup
+      setTimeout(() => {
+        router.push('/auth/verify-otp')
+      }, 2000)
     } else {
       setSuccess('Account created successfully! Welcome to SMILEY! 🎉')
     }
@@ -294,7 +300,13 @@ export default function AccountPage() {
                     <Button
                       variant="smileyOutline"
                       className="w-full justify-start"
-                      onClick={() => signOut()}
+                      onClick={async () => {
+                        try {
+                          await signOut()
+                        } catch (error) {
+                          setError('Failed to sign out. Please try again.')
+                        }
+                      }}
                     >
                       <LogOut className="w-4 h-4 mr-3" />
                       Sign Out

@@ -29,7 +29,8 @@ export const signUp = async (email: string, password: string, fullName?: string)
       options: {
         data: {
           full_name: fullName
-        }
+        },
+        emailRedirectTo: `${typeof window !== 'undefined' ? window.location.origin : process.env.NEXT_PUBLIC_APP_URL}/auth/callback`
       }
     })
 
@@ -41,17 +42,19 @@ export const signUp = async (email: string, password: string, fullName?: string)
     }
 
     if (data.user) {
-      // Create profile
-      const { error: profileError } = await supabase
-        .from('profiles')
-        .insert({
-          id: data.user.id,
-          email: data.user.email!,
-          full_name: fullName
-        })
+      // Only create profile if email is confirmed
+      if (data.user.email_confirmed_at) {
+        const { error: profileError } = await supabase
+          .from('profiles')
+          .insert({
+            id: data.user.id,
+            email: data.user.email!,
+            full_name: fullName
+          })
 
-      if (profileError) {
-        console.error('Error creating profile:', profileError)
+        if (profileError) {
+          console.error('Error creating profile:', profileError)
+        }
       }
 
       return { 
@@ -59,7 +62,8 @@ export const signUp = async (email: string, password: string, fullName?: string)
           id: data.user.id,
           email: data.user.email!,
           created_at: data.user.created_at,
-          updated_at: data.user.updated_at || data.user.created_at
+          updated_at: data.user.updated_at || data.user.created_at,
+          email_confirmed_at: data.user.email_confirmed_at
         }, 
         error: null 
       }
@@ -90,13 +94,24 @@ export const signIn = async (email: string, password: string): Promise<AuthRespo
       }
     }
 
+    // Check if email is verified
+    if (data.user && !data.user.email_confirmed_at) {
+      // Sign out the user immediately
+      await supabase.auth.signOut()
+      return { 
+        user: null, 
+        error: { message: 'Please verify your email before signing in. Check your inbox for a confirmation link.', status: 403 } 
+      }
+    }
+
     if (data.user) {
       return { 
         user: {
           id: data.user.id,
           email: data.user.email!,
           created_at: data.user.created_at,
-          updated_at: data.user.updated_at || data.user.created_at
+          updated_at: data.user.updated_at || data.user.created_at,
+          email_confirmed_at: data.user.email_confirmed_at
         }, 
         error: null 
       }
@@ -132,7 +147,32 @@ export const resetPassword = async (email: string): Promise<{ error: AuthError |
   try {
     const supabase = createSupabaseClient()
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/reset-password`
+      redirectTo: `${typeof window !== 'undefined' ? window.location.origin : process.env.NEXT_PUBLIC_APP_URL}/reset-password`
+    })
+
+    if (error) {
+      return { 
+        error: { message: error.message, status: error.status || 400 } 
+      }
+    }
+
+    return { error: null }
+  } catch (error) {
+    return { 
+      error: { message: 'An unexpected error occurred', status: 500 } 
+    }
+  }
+}
+
+export const resendConfirmationEmail = async (email: string): Promise<{ error: AuthError | null }> => {
+  try {
+    const supabase = createSupabaseClient()
+    const { error } = await supabase.auth.resend({
+      type: 'signup',
+      email: email,
+      options: {
+        emailRedirectTo: `${typeof window !== 'undefined' ? window.location.origin : process.env.NEXT_PUBLIC_APP_URL}/auth/callback`
+      }
     })
 
     if (error) {
@@ -351,7 +391,8 @@ export const getCurrentUser = async (): Promise<User | null> => {
       id: user.id,
       email: user.email!,
       created_at: user.created_at,
-      updated_at: user.updated_at || user.created_at
+      updated_at: user.updated_at || user.created_at,
+      email_confirmed_at: user.email_confirmed_at
     }
   } catch (error) {
     console.error('Error getting current user:', error)
