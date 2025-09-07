@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button'
 import { useToast } from '@/hooks/use-toast'
 import { useCart } from '@/components/cart-provider'
 import { useAuth } from '@/components/auth-provider'
-import ThemeToggle from '@/components/theme-toggle'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -74,8 +73,6 @@ const Header = () => {
               </Button>
             </Link>
 
-            {/* Theme Toggle */}
-            <ThemeToggle />
 
             {/* Cart */}
             <Button

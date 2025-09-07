@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { ThemeProvider } from '@/components/theme-provider'
 import { CartProvider } from '@/components/cart-provider'
 import { AuthProvider } from '@/components/auth-provider'
 import { Toaster } from '@/components/ui/toaster'
@@ -38,20 +37,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <AuthProvider>
-            <CartProvider>
-              {children}
-              <Toaster />
-              <NewsletterPopup />
-            </CartProvider>
-          </AuthProvider>
-        </ThemeProvider>
+        <AuthProvider>
+          <CartProvider>
+            {children}
+            <Toaster />
+            <NewsletterPopup />
+          </CartProvider>
+        </AuthProvider>
         {/* Crisp Chat */}
         {process.env.NEXT_PUBLIC_CRISP_WEBSITE_ID && (
           <script
