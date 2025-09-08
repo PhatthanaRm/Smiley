@@ -30,8 +30,8 @@ const Hero = () => {
           transition={{ delay: fruit.delay, duration: 1 }}
           className={`absolute w-20 h-20 bg-gradient-to-br ${fruit.color} rounded-full flex items-center justify-center text-4xl shadow-lg`}
           style={{
-            left: `${20 + index * 20}%`,
-            top: `${30 + (index % 2) * 20}%`,
+            left: index === 1 ? '50%' : `${20 + index * 20}%`,
+            top: index === 0 ? '15%' : index === 1 ? '65%' : `${30 + (index % 2) * 20}%`,
           }}
         >
           <motion.div
@@ -59,7 +59,8 @@ const Hero = () => {
               transition={{ delay: 0.2, duration: 0.8 }}
             >
               <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Make Brushing{' '}
+                Make Brushing
+                <br />
                 <span className="text-rainbow">
                   Fun Again!
                 </span>
