@@ -12,7 +12,7 @@ import Header from '@/components/header'
 import Footer from '@/components/footer'
 
 export default function AccountPage() {
-  const { user, loading, signIn, signUp, signOut } = useAuth()
+  const { user, loading, signingIn, signIn, signUp, signOut } = useAuth()
   const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -76,7 +76,26 @@ export default function AccountPage() {
           </p>
         </motion.div>
 
-        {!user ? (
+        {loading ? (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="max-w-md mx-auto text-center"
+          >
+            <Card className="bg-white/80 backdrop-blur-sm shadow-2xl border-0">
+              <CardContent className="p-8">
+                <div className="flex flex-col items-center space-y-4">
+                  <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-pink-500 rounded-full flex items-center justify-center">
+                    <span className="text-2xl">😊</span>
+                  </div>
+                  <h2 className="text-2xl font-bold text-gray-900">Loading...</h2>
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500"></div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ) : !user ? (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -236,12 +255,17 @@ export default function AccountPage() {
                     type="submit" 
                     variant="smiley" 
                     className="w-full py-3 text-lg font-semibold" 
-                    disabled={loading}
+                    disabled={signingIn || loading}
                   >
-                    {loading ? (
+                    {signingIn ? (
                       <div className="flex items-center">
                         <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                        {isSignUp ? 'Creating Account...' : 'Signing In...'}
+                        Signing In...
+                      </div>
+                    ) : loading ? (
+                      <div className="flex items-center">
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                        Loading...
                       </div>
                     ) : (
                       <div className="flex items-center justify-center">

@@ -1,12 +1,14 @@
 'use client'
 
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState, useRef } from 'react'
 import { createSupabaseClientComponent } from '@/lib/supabase-client'
 import { User, Profile } from '@/lib/types'
 
 interface AuthContextType {
   user: User | null
   loading: boolean
+  signingOut: boolean
+  signingIn: boolean
   signIn: (email: string, password: string) => Promise<{ error?: string }>
   signUp: (email: string, password: string, fullName?: string) => Promise<{ error?: string; message?: string }>
   signOut: () => Promise<void>
@@ -26,20 +28,46 @@ export function useAuth() {
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
+  const [signingOut, setSigningOut] = useState(false)
+  const [signingIn, setSigningIn] = useState(false)
+  const signingOutRef = useRef(false)
+  const signingInRef = useRef(false)
+  
+  // Set a maximum loading time
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false)
+    }, 1000) // Maximum 1 second loading
+    
+    return () => clearTimeout(timer)
+  }, [])
 
   useEffect(() => {
     const supabase = createSupabaseClientComponent()
 
-    // Get initial session
+    // Get initial session with timeout
     const getInitialSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession()
-      
-      if (session?.user) {
-        setUser(transformSupabaseUser(session.user))
-        await loadUserProfile(session.user.id)
+      try {
+        // Set a timeout to prevent long loading
+        const timeoutPromise = new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('Timeout')), 2000)
+        )
+        
+        const sessionPromise = supabase.auth.getSession()
+        
+        const { data: { session } } = await Promise.race([sessionPromise, timeoutPromise]) as any
+        
+        if (session?.user) {
+          setUser(transformSupabaseUser(session.user))
+          // Load profile in background, don't wait for it
+          loadUserProfile(session.user.id).catch(console.error)
+        }
+      } catch (error) {
+        console.log('Session check timeout or error, continuing...')
+      } finally {
+        // Always set loading to false quickly
+        setLoading(false)
       }
-      
-      setLoading(false)
     }
 
     getInitialSession()
@@ -47,12 +75,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
+        console.log('Auth state change:', event, session?.user?.email)
+        
+        // Don't interfere if we're manually signing out
+        if (signingOutRef.current) {
+          console.log('Auth state change: Ignoring during manual sign out')
+          return
+        }
+        
         if (session?.user) {
           setUser(transformSupabaseUser(session.user))
-          await loadUserProfile(session.user.id)
+          // Load profile in background, don't wait for it
+          loadUserProfile(session.user.id).catch(console.error)
         } else {
+          console.log('Auth state change: No session, setting user to null')
           setUser(null)
         }
+        
+        // Always set loading to false quickly
         setLoading(false)
       }
     )
@@ -89,6 +129,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signIn = async (email: string, password: string) => {
     try {
+      setSigningIn(true)
+      signingInRef.current = true
       const supabase = createSupabaseClientComponent()
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
@@ -96,6 +138,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       })
 
       if (error) {
+        setSigningIn(false)
+        signingInRef.current = false
         // Handle specific error types
         if (error.message.includes('Failed to fetch') || error.message.includes('ENOTFOUND')) {
           return { 
@@ -110,17 +154,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (data.user && !data.user.email_confirmed_at) {
         // Sign out the user immediately
         await supabase.auth.signOut()
+        setSigningIn(false)
+        signingInRef.current = false
         return { error: 'Please verify your email before signing in. Check your inbox for a confirmation link.' }
       }
 
       if (data.user) {
         setUser(transformSupabaseUser(data.user))
-        await loadUserProfile(data.user.id)
+        // Load profile in background, don't wait for it
+        loadUserProfile(data.user.id).catch(console.error)
       }
 
+      setSigningIn(false)
+      signingInRef.current = false
       return { error: undefined }
     } catch (error) {
       console.error('Sign in error:', error)
+      setSigningIn(false)
+      signingInRef.current = false
       
       // Handle network/connection errors
       if (error instanceof Error && (error.message.includes('Failed to fetch') || error.message.includes('ENOTFOUND'))) {
@@ -216,23 +267,40 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signOut = async () => {
     try {
+      console.log('Auth provider: Starting sign out...')
+      setSigningOut(true)
+      signingOutRef.current = true
+      
+      const supabase = createSupabaseClientComponent()
+      
       // Clear local state immediately for instant UI response
       setUser(null)
-
-      const supabase = createSupabaseClientComponent()
+      
       const { error } = await supabase.auth.signOut()
       
       if (error) {
         console.error('Sign out error:', error)
+        setSigningOut(false)
+        signingOutRef.current = false
+        throw error
       }
+      
+      console.log('Auth provider: Sign out successful')
+      setSigningOut(false)
+      signingOutRef.current = false
     } catch (error) {
       console.error('Sign out error:', error)
+      setSigningOut(false)
+      signingOutRef.current = false
+      throw error
     }
   }
 
   const value = {
     user,
     loading,
+    signingOut,
+    signingIn,
     signIn,
     signUp,
     signOut,
