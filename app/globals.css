@@ -35,6 +35,15 @@
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* Force light mode - prevent dark mode */
+  html {
+    color-scheme: light !important;
+  }
+  
+  html.dark {
+    color-scheme: light !important;
+  }
 }
 
 /* Custom SMILEY brand styles - Enhanced colorful theme */
