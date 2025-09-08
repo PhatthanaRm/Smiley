@@ -68,7 +68,7 @@ const Header = () => {
 
             {/* User Account */}
             <Link href="/account">
-              <Button variant="ghost" size="icon" className="hidden sm:flex">
+              <Button variant="ghost" size="icon" className="flex">
                 <User className="h-5 w-5" />
               </Button>
             </Link>

@@ -28,10 +28,15 @@ const Hero = () => {
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: fruit.delay, duration: 1 }}
-          className={`absolute w-20 h-20 bg-gradient-to-br ${fruit.color} rounded-full flex items-center justify-center text-4xl shadow-lg`}
+          className={`absolute w-20 h-20 bg-gradient-to-br ${fruit.color} rounded-full flex items-center justify-center text-4xl shadow-lg
+            ${index === 3 ? 'hidden sm:block' : ''}
+            ${index === 3 ? 'sm:opacity-100 sm:blur-0' : ''}
+            ${index === 3 ? 'md:opacity-100 md:blur-0' : ''}
+            ${index === 3 ? 'lg:opacity-100 lg:blur-0' : ''}
+          `}
           style={{
-            left: index === 1 ? '50%' : `${20 + index * 20}%`,
-            top: index === 0 ? '15%' : index === 1 ? '65%' : `${30 + (index % 2) * 20}%`,
+            left: index === 1 ? '50%' : index === 3 ? '80%' : `${20 + index * 20}%`,
+            top: index === 0 ? '15%' : index === 1 ? '65%' : index === 3 ? '50%' : `${30 + (index % 2) * 20}%`,
           }}
         >
           <motion.div
@@ -44,7 +49,8 @@ const Hero = () => {
       ))}
 
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <motion.div
@@ -118,7 +124,7 @@ const Hero = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="relative"
+            className="relative hidden lg:block"
           >
             <motion.div
               initial={{ scale: 0, rotate: -180 }}
