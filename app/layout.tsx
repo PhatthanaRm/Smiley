@@ -14,7 +14,6 @@ export const metadata: Metadata = {
   description: 'Discover our playful yet premium oral care products with fruit-inspired flavors. Dentist-approved, fun, and effective for the whole family.',
   keywords: 'oral care, toothpaste, dental hygiene, fruit flavors, premium dental products',
   authors: [{ name: 'SMILEY Team' }],
-  viewport: 'width=device-width, initial-scale=1.0',
   openGraph: {
     title: 'SMILEY - Premium Oral Care Products',
     description: 'Discover our playful yet premium oral care products with fruit-inspired flavors.',
@@ -28,6 +27,11 @@ export const metadata: Metadata = {
     title: 'SMILEY - Premium Oral Care Products',
     description: 'Discover our playful yet premium oral care products with fruit-inspired flavors.',
   },
+}
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1.0,
 }
 
 export default function RootLayout({

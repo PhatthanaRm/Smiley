@@ -262,12 +262,6 @@ export default function ShopPage() {
                   transition={{ delay: index * 0.1 }}
                   className="relative"
                 >
-                  <div className="absolute -top-2 -right-2 z-10">
-                    <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center">
-                      <Sparkles className="w-3 h-3 mr-1" />
-                      Featured
-                    </span>
-                  </div>
                   <ProductCard product={product} index={index} />
                 </motion.div>
               ))}
