@@ -173,31 +173,31 @@ export default function VerifyOTPPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 to-orange-50 p-4">
-      <Card className="w-full max-w-md p-8 text-center">
-        <div className="text-6xl mb-4">📱</div>
-        <h1 className="text-2xl font-bold text-gray-900 mb-4">
+      <Card className="w-full max-w-lg p-6 sm:p-8 text-center">
+        <div className="text-5xl sm:text-6xl mb-4">📱</div>
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">
           Verify Your Email
         </h1>
-        <p className="text-gray-600 mb-6">
-          We've sent a 6-digit code to <strong>{email}</strong>. 
+        <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 leading-relaxed">
+          We've sent a 6-digit code to <strong className="break-all">{email}</strong>. 
           Please enter the code below to verify your account.
         </p>
         
-        <div className="space-y-4">
-          <div>
+        <div className="space-y-3 sm:space-y-4">
+          <div className="space-y-3">
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email address"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent mb-4"
+              className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-200"
             />
             <input
               type="text"
               value={otp}
               onChange={handleOtpChange}
               placeholder="Enter 6-digit OTP"
-              className="w-full px-4 py-3 text-center text-2xl font-mono border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent tracking-widest"
+              className="w-full px-3 sm:px-4 py-3 sm:py-4 text-center text-xl sm:text-2xl font-mono border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent tracking-widest transition-all duration-200"
               maxLength={6}
             />
           </div>
@@ -205,7 +205,7 @@ export default function VerifyOTPPage() {
           <Button 
             onClick={handleVerifyOTP}
             disabled={loading || !email || !otp || otp.length !== 6}
-            className="w-full bg-pink-500 hover:bg-pink-600"
+            className="w-full bg-pink-500 hover:bg-pink-600 py-2 sm:py-3 text-sm sm:text-base font-semibold transition-all duration-200"
           >
             {loading ? 'Verifying...' : 'Verify OTP'}
           </Button>
@@ -214,13 +214,13 @@ export default function VerifyOTPPage() {
             onClick={handleResendOTP}
             disabled={resending || countdown > 0}
             variant="outline"
-            className="w-full"
+            className="w-full py-2 sm:py-3 text-sm sm:text-base transition-all duration-200"
           >
             {resending ? 'Sending...' : countdown > 0 ? `Resend in ${countdown}s` : 'Resend OTP'}
           </Button>
           
           {status && (
-            <div className={`p-3 rounded-md text-sm ${
+            <div className={`p-3 sm:p-4 rounded-lg text-xs sm:text-sm leading-relaxed ${
               status.includes('✅') 
                 ? 'bg-green-100 text-green-800 border border-green-200' 
                 : status.includes('❌') 
@@ -234,13 +234,13 @@ export default function VerifyOTPPage() {
           <Button 
             variant="outline" 
             onClick={() => window.location.href = '/'}
-            className="w-full"
+            className="w-full py-2 sm:py-3 text-sm sm:text-base transition-all duration-200"
           >
             Back to Home
           </Button>
         </div>
         
-        <p className="text-sm text-gray-500 mt-6">
+        <p className="text-xs sm:text-sm text-gray-500 mt-4 sm:mt-6 leading-relaxed">
           Didn't receive the code? Check your spam folder or try resending.
         </p>
       </Card>
