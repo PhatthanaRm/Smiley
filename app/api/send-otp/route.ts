@@ -19,6 +19,7 @@ export async function POST(request: NextRequest) {
     const { data, error } = await supabase.auth.admin.generateLink({
       type: 'signup',
       email: email,
+      password: 'temp_password_123', // Temporary password for OTP generation
       options: {
         redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`
       }

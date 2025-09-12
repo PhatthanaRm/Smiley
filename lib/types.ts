@@ -46,11 +46,59 @@ export type Product = {
   featured?: boolean
 }
 
+export type CartItem = {
+  id: string
+  user_id: string
+  product_id: string
+  quantity: number
+  created_at: string
+  updated_at: string
+}
+
+export type Order = {
+  id: string
+  user_id: string
+  stripe_payment_intent_id?: string
+  status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled'
+  total_amount: number
+  shipping_address: string
+  billing_address: string
+  created_at: string
+  updated_at: string
+}
+
+export type OrderItem = {
+  id: string
+  order_id: string
+  product_id: string
+  quantity: number
+  price: number
+  created_at: string
+}
+
 export type WishlistItem = {
   id: string
   user_id: string
   product_id: string
   created_at: string
+}
+
+export type Review = {
+  id: string
+  user_id: string
+  product_id: string
+  rating: number
+  comment: string
+  created_at: string
+  updated_at: string
+}
+
+export type NewsletterSubscriber = {
+  id: string
+  email: string
+  subscribed: boolean
+  created_at: string
+  updated_at: string
 }
 
 export type BlogPost = {

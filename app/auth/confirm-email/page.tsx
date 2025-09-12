@@ -86,7 +86,7 @@ export default function ConfirmEmailPage() {
         window.location.href = `/auth/verify-otp?email=${encodeURIComponent(emailToUse)}`
       }, 2000)
     } catch (error) {
-      setStatus(`❌ Error: ${error.message}`)
+      setStatus(`❌ Error: ${error instanceof Error ? error.message : 'Unknown error occurred'}`)
     }
     
     setResending(false)

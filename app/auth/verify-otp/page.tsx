@@ -114,7 +114,7 @@ export default function VerifyOTPPage() {
       }, 2000)
 
     } catch (error) {
-      setStatus(`❌ Error: ${error.message}`)
+      setStatus(`❌ Error: ${error instanceof Error ? error.message : 'Unknown error occurred'}`)
     }
 
     setLoading(false)
@@ -160,7 +160,7 @@ export default function VerifyOTPPage() {
       }, 1000)
 
     } catch (error) {
-      setStatus(`❌ Error: ${error.message}`)
+      setStatus(`❌ Error: ${error instanceof Error ? error.message : 'Unknown error occurred'}`)
     }
 
     setResending(false)

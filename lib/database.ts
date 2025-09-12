@@ -43,7 +43,7 @@ export const getProducts = async (filters?: {
     }
 
     // Transform data to match our Product type
-    const products: Product[] = (data || []).map(item => ({
+    const products: Product[] = (data || []).map((item: any) => ({
       id: item.id,
       slug: item.slug,
       name: item.name,
@@ -370,7 +370,7 @@ export const getCartItems = async (userId: string): Promise<{ items: CartItem[];
       return { items: [], error }
     }
 
-    const items: CartItem[] = (data || []).map(item => ({
+    const items: CartItem[] = (data || []).map((item: any) => ({
       id: item.id,
       user_id: item.user_id,
       product_id: item.product_id,
@@ -580,7 +580,7 @@ export const getOrders = async (userId: string): Promise<{ orders: Order[]; erro
       return { orders: [], error }
     }
 
-    const orders: Order[] = (data || []).map(item => ({
+    const orders: Order[] = (data || []).map((item: any) => ({
       id: item.id,
       user_id: item.user_id,
       stripe_payment_intent_id: item.stripe_payment_intent_id,
@@ -684,7 +684,7 @@ export const getWishlistItems = async (userId: string): Promise<{ items: Wishlis
       return { items: [], error }
     }
 
-    const items: WishlistItem[] = (data || []).map(item => ({
+    const items: WishlistItem[] = (data || []).map((item: any) => ({
       id: item.id,
       user_id: item.user_id,
       product_id: item.product_id,
@@ -793,7 +793,7 @@ export const getProductReviews = async (productId: string): Promise<{ reviews: R
       return { reviews: [], error }
     }
 
-    const reviews: Review[] = (data || []).map(item => ({
+    const reviews: Review[] = (data || []).map((item: any) => ({
       id: item.id,
       user_id: item.user_id,
       product_id: item.product_id,
@@ -1041,7 +1041,7 @@ export const getBlogPosts = async (filters?: {
       return { posts: [], error }
     }
 
-    const posts: BlogPost[] = (data || []).map(item => ({
+    const posts: BlogPost[] = (data || []).map((item: any) => ({
       id: item.id,
       slug: item.slug,
       title: item.title,
